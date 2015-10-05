@@ -5,6 +5,8 @@
  */
 package dungeonmaster;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author b.allen
@@ -15,7 +17,13 @@ public class DungeonMaster {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("THISISATEST.");
+        String[] command = inputCommand();
+    }
+
+    private static String[] inputCommand() {
+        String rawCommand = JOptionPane.showInputDialog("Enter command");
+        rawCommand.split(" ");
+        return null;
     }
     
 }
