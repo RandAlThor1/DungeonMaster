@@ -18,12 +18,15 @@ public class DungeonMaster {
      */
     public static void main(String[] args) {
         String[] command = inputCommand();
+        String foundVerb = wordStuff.checkForVerbs(command);
+        System.out.println(foundVerb);
     }
 
     private static String[] inputCommand() {
         String rawCommand = JOptionPane.showInputDialog("Enter command");
-        rawCommand.split(" ");
-        return null;
+        rawCommand = rawCommand.toLowerCase();
+        String[] command = rawCommand.split(" ");
+        return command;
     }
     
 }
