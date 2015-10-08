@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
  * @author b.allen
  */
 public class DungeonMaster {
-
     /**
      * @param args the command line arguments
      */
@@ -20,6 +19,7 @@ public class DungeonMaster {
         String[] command = inputCommand();
         String foundVerb = wordStuff.checkForVerbs(command);
         System.out.println(foundVerb);
+        textFiles.wordDocument("verbs.txt");
     }
 
     private static String[] inputCommand() {
