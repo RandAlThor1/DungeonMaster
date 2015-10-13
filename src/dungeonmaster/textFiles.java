@@ -26,7 +26,7 @@ public class textFiles {
         try (PrintWriter writer = new PrintWriter("file" +  ".txt")) {
         }
     }
-    static private String readFile( String file ) throws IOException {
+    static public String[] readFile( String file ) throws IOException {
     BufferedReader reader = new BufferedReader( new FileReader (file));
     String         line = null;
     StringBuilder  stringBuilder = new StringBuilder();
@@ -36,8 +36,11 @@ public class textFiles {
         stringBuilder.append( line );
         stringBuilder.append( ls );
     }
+    String result = stringBuilder.toString();
+    String[] array;
+    array = result.split(" ");
 
-    return stringBuilder.toString();
+    return array;//stringBuilder.toString();
     }
 }
 

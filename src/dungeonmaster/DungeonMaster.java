@@ -5,6 +5,7 @@
  */
 package dungeonmaster;
 
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,12 +15,18 @@ import javax.swing.JOptionPane;
 public class DungeonMaster {
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String[] command = inputCommand();
         String foundVerb = wordStuff.checkForVerbs(command);
         System.out.println(foundVerb);
-        textFiles.wordDocument("verbs.txt");
+        //textFiles.readFile("verbs.txt");
+        String[] test = textFiles.readFile("verbs.txt");
+        for (int i = 0; i < test.length; i++) {
+            System.out.println(test[i]);
+        }
+        //JOptionPane.showMessageDialog(null, textFiles.readFile("verbs.txt"));
     }
 
     private static String[] inputCommand() {
