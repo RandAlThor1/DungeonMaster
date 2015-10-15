@@ -21,12 +21,6 @@ public class DungeonMaster {
         String[] command = inputCommand();
         String foundVerb = wordStuff.checkForVerbs(command);
         System.out.println(foundVerb);
-        //textFiles.readFile("verbs.txt");
-        String[] test = textFiles.readFile("verbs.txt");
-        for (int i = 0; i < test.length; i++) {
-            System.out.println(test[i]);
-        }
-        //JOptionPane.showMessageDialog(null, textFiles.readFile("verbs.txt"));
     }
 
     private static String[] inputCommand() {

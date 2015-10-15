@@ -14,12 +14,9 @@ package dungeonmaster;
  */
 class wordStuff {
 
-    static String[] verbs = new String[3]; 
+    static String[] verbs = textFiles.; 
     static String foundVerb = "poop";
     static String checkForVerbs(String[] command) {
-        verbs[0] = "run";
-        verbs[1] = "eat";
-        verbs[2] = "attack";
         
         for (int i = 0; i < command.length; i++) {
             

@@ -1,17 +1,5 @@
-test
-etest
-tetsetset
-set
-setsetsetse
-ts
-et
-set
-se
-t
-se
-t
-set
-s
-et
-set
-setsetsetset
+go run move 
+attack fight kill
+eat drink
+
+
