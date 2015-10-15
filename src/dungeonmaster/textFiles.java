@@ -16,9 +16,9 @@ import java.io.PrintWriter;
  * @author b.allen
  */
 public class textFiles {
-    String[] verbs;
-    String[] nouns;
-    String[] adj;
+    public static String[] verbs;
+    public static String[] nouns;
+    public static String[] adj;
     textFiles() throws IOException{
         this.verbs = readFile("verbs.txt");
         this.nouns = readFile("nouns.txt");
