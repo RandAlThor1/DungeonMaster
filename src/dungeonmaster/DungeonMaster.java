@@ -18,6 +18,7 @@ public class DungeonMaster {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
+        new textFiles();
         String[] command = inputCommand();
         String foundVerb = wordStuff.checkForVerbs(command);
         System.out.println(foundVerb);

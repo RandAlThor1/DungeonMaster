@@ -14,14 +14,15 @@ package dungeonmaster;
  */
 class wordStuff {
 
-    static String[] verbs = textFiles.; 
-    static String foundVerb = "poop";
+    static String[] verbs = textFiles.verbs; 
+    static String[] nouns = textFiles.nouns; 
+    static String[] adj = textFiles.adj; 
+    
     static String checkForVerbs(String[] command) {
-        
+        String foundVerb = "poop";
         for (int i = 0; i < command.length; i++) {
             
             boolean present = false;
-            
             for (int j = 0; j < verbs.length; j++) {
                 if (verbs[j].compareTo(command[i]) == 0) {
                     present = true;
@@ -34,6 +35,51 @@ class wordStuff {
             }
         }
         return foundVerb;
+    }
+    
+    static String checkForNouns(String[] command) {
+        String foundNoun = "poop";
+        for (int i = 0; i < command.length; i++) {
+            
+            boolean present = false;
+            
+            for (int j = 0; j < nouns.length; j++) {
+                if (nouns[j].compareTo(command[i]) == 0) {
+                    present = true;
+                }                
+            }
+            
+            if (present) {
+                foundNoun = command[i];
+                break;
+            }
+        }
+        return foundNoun;
+    }
+    
+    static String checkForAdj(String[] command) {
+        String foundAdj = "poop";
+        for (int i = 0; i < command.length; i++) {
+            
+            boolean present = false;
+            
+            for (int j = 0; j < adj.length; j++) {
+                if (adj[j].compareTo(command[i]) == 0) {
+                    present = true;
+                }                
+            }
+            
+            if (present) {
+                foundAdj = command[i];
+                break;
+            }
+        }
+        return foundAdj;
+    }
+    static void updateArrays(){
+        verbs = textFiles.verbs; 
+        nouns = textFiles.nouns; 
+        adj = textFiles.adj; 
     }
 
 }
