@@ -16,7 +16,7 @@ class wordStuff {
 
     static String[] verbs = textFiles.verbs; 
     static String[] nouns = textFiles.nouns; 
-    static String[] adj = textFiles.adj; 
+    static String[] adj = textFiles.adj;  
     
     static String checkForVerbs(String[] command) {
         String foundVerb = "poop";

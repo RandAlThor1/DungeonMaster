@@ -19,9 +19,12 @@ public class DungeonMaster {
      */
     public static void main(String[] args) throws IOException {
         new textFiles();
+        Scene outside = new Scene();
+        Actor player = new Actor(0);
+        Actor tree = new Actor(1);
         String[] command = inputCommand();
         String foundVerb = wordStuff.checkForVerbs(command);
-        System.out.println(foundVerb);
+        wordUse.playerVerb(foundVerb);
     }
 
     private static String[] inputCommand() {
