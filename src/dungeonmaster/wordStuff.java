@@ -18,8 +18,8 @@ class wordStuff {
     static String[] nouns = textFiles.nouns; 
     static String[] adj = textFiles.adj;  
     
-    static String checkForVerbs(String[] command) {
-        String foundVerb = "poop";
+    static int checkForVerbs(String[] command) {
+        int index = -1;
         for (int i = 0; i < command.length; i++) {
             
             boolean present = false;
@@ -30,11 +30,11 @@ class wordStuff {
             }
             
             if (present) {
-                foundVerb = command[i];
+                index = i;
                 break;
             }
         }
-        return foundVerb;
+        return index;
     }
     
     static String checkForNouns(String[] command) {

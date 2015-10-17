@@ -17,21 +17,27 @@ public class DungeonMaster {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
+    static Scene outside;
+    static Actor player;
+    static Actor tree;
+    static Actor hill;
     public static void main(String[] args) throws IOException {
         new textFiles();
-        Scene outside = new Scene();
-        Actor player = new Actor(0);
-        Actor tree = new Actor(1);
-        String[] command = inputCommand();
-        String foundVerb = wordStuff.checkForVerbs(command);
-        wordUse.playerVerb(foundVerb);
+        outside = new Scene();
+        player = new Actor(0);
+        tree = new Actor(1);
+        hill = new Actor(2);
+        inputCommand();
+        
     }
-
-    private static String[] inputCommand() {
+    static void inputCommand() {
         String rawCommand = JOptionPane.showInputDialog("Enter command");
         rawCommand = rawCommand.toLowerCase();
+        if (rawCommand.compareTo("end") == 0) {
+            System.exit(0);
+        }
         String[] command = rawCommand.split(" ");
-        return command;
+        int index = wordStuff.checkForVerbs(command);
+        wordUse.playerVerb(command, index);
     }
-    
 }
