@@ -17,27 +17,11 @@ class Actor {//temp class for testing
     //Item[] inventorty //not dealing with items right now
     //Personality personality //use achitypes to make this easyer
 
-    public Actor(int temp) {//temp method for testing
-        if (temp == 0) {
-            name = "player";
-            location = new Point(0, 0);
-            scene = DungeonMaster.outside;
-            scene.addActor(this);
-        }
-        
-        if (temp == 1) {
-            name = "the tree";
-            location = new Point(1, 1);
-            scene = DungeonMaster.outside;
-            scene.addActor(this);
-        }
-        
-        if (temp == 2) {
-            name = "the hill";
-            location = new Point(5, 5);
-            scene = DungeonMaster.outside;
-            scene.addActor(this);
-        }
+    public Actor(String name, Point location, Scene scene) {//temp method for testing
+        this.name = name;
+        this.location = location;
+        this.scene = scene;
+        this.scene.addActor(this);
     }
 
     public boolean equals(Actor actor) {

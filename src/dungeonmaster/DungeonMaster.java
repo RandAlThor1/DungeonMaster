@@ -5,6 +5,7 @@
  */
 package dungeonmaster;
 
+import java.awt.Point;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
@@ -19,14 +20,13 @@ public class DungeonMaster {
      */
     static Scene outside;
     static Actor player;
-    static Actor tree;
-    static Actor hill;
     public static void main(String[] args) throws IOException {
         new textFiles();
         outside = new Scene();
-        player = new Actor(0);
-        tree = new Actor(1);
-        hill = new Actor(2);
+        player = new Actor("player", new Point(0, 0), outside);
+        Actor theTree = new Actor("the tree", new Point(1, 1), outside);
+        Actor theHill = new Actor("the hill", new Point(5, 5), outside);
+        Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
         inputCommand();
         
     }

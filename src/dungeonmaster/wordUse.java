@@ -28,11 +28,27 @@ class wordUse {
                 JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
             }
             else JOptionPane.showMessageDialog(null, "Location not found");
-            DungeonMaster.inputCommand();
-            
-            
+            DungeonMaster.inputCommand();  
         }
+        
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * compareTo is a pain, so this makes it easier.
      * @param word1: first word
