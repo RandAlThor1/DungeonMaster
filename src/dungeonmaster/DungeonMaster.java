@@ -22,12 +22,13 @@ public class DungeonMaster {
     static Actor player;
     public static void main(String[] args) throws IOException {
         new textFiles();
-        outside = new Scene();
-        player = new Actor("player", new Point(0, 0), outside);
-        Actor theTree = new Actor("the tree", new Point(1, 1), outside);
-        Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
-        inputCommand();
+        new CommandProcessing();
+//        outside = new Scene();
+//        player = new Actor("player", new Point(0, 0), outside);
+//        Actor theTree = new Actor("the tree", new Point(1, 1), outside);
+//        Actor theHill = new Actor("the hill", new Point(5, 5), outside);
+//        Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
+//        inputCommand();
         
     }
     static void inputCommand() {
