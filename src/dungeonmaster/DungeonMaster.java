@@ -24,12 +24,12 @@ public class DungeonMaster {
     public static void main(String[] args) throws IOException {
         new textFiles();
         new CommandProcessing();
-        inputCommand();
         outside = new Scene();
         player = new Actor("player", new Point(0, 0), outside);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
         Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
+        inputCommand();
         
     }
        static public void inputCommand(){
@@ -50,6 +50,7 @@ public class DungeonMaster {
                     wordUse.playerVerb(Words[0][i],command, j);
                     break;
                 }
+                System.out.println("poop");
             } 
         }
         if(!temp){

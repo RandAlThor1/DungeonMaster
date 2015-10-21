@@ -1,8 +1,1 @@
-go
-run 
-move 
-attack 
-fight 
-kill 
-eat 
-drink
+go attack eat talk
