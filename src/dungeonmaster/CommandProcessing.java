@@ -46,7 +46,9 @@ public class CommandProcessing {
         System.out.println("STARTING ");
         checkForsynonym(Words);
         for (int i = 0; i < Words.length ; i++) {
+            //best for loop
         }
+        checkForsynonym(Words);
     }
 
     private void checkForsynonym(String[][] Words) {// this is what we would do for words that come up very often with the chekcing it makes it simpler to find what we are looking for.[in most case]
@@ -54,49 +56,7 @@ public class CommandProcessing {
             if ("go".equals(Words[0][i]) || "move".equals(Words[0][i]) || "walk".equals(Words[0][i])) {// add syonyms of the words, only doing the one for now as a example. will add more at school
                 this.Words[1][i] = "go";
             }
+            else this.Words[1][i] = "";
         }
     }
-    /**
-     * Example method
-     * no idea how you are dealing with X,Y so ill just return a string for now that is "x , y"
-     * this is all temp below this.
-     * @param actor
-     * @return "x , y"
-     */
-    public Actor Move(Actor actor, int newX, int newY){
-        actor.location.x = newX;
-        actor.location.y = newY;
-        return actor;
-    }
-    public void tempInputCommand(){
-        String rawCommand = JOptionPane.showInputDialog("Enter command");
-        rawCommand = rawCommand.toLowerCase();
-        if (rawCommand.compareTo("end") == 0) {
-            System.exit(0);
-        }
-        String[] command = rawCommand.split(" ");
-        //t index = wordStuff.checkForVerbs(command);
-        //wordUse.playerVerb(command, index);
-        boolean temp = false;
-        for (int i = 0; i < Words.length; i++) {
-            for (int j = 0; j < command.length; j++) {
-                if (Words[1][i].equalsIgnoreCase(command[j])){
-                    temp = true;
-                    break;
-            }
-            }
-            
-        }
-        if(temp){
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (Words[0][i].equalsIgnoreCase(command[j])) {
-                    temp = true;
-                    break;
-                }
-            }
-        }
-        }
-    }
-    
 }

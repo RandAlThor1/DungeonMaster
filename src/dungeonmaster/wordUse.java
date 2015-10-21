@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
  */
 class wordUse {
 
-    static void playerVerb(String[] command, int index) {
-        if (compareWords(command[index], "go")&& compareWords(command[index+1], "to")) {
+    static void playerVerb(String stuff, String[] command, int index) {
+        if (compareWords(stuff, "go")&& compareWords(command[index+1], "to")) {
             Scene curScene = DungeonMaster.player.scene;
             int actorIndex = -1;
             String place = "";
@@ -30,8 +30,7 @@ class wordUse {
             else JOptionPane.showMessageDialog(null, "Location not found");
             DungeonMaster.inputCommand();  
         }
-        
-        
+                   
     }
     
     
