@@ -8,6 +8,7 @@ package dungeonmaster;
 import static dungeonmaster.CommandProcessing.Words;
 import java.awt.Point;
 import java.io.IOException;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,11 +30,16 @@ public class DungeonMaster {
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
         Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
+        Actor juliansMomsHouse = new Actor("julian's mom's house", new Point(100, 100), outside);
+        Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
+        Actor arena = new Actor("the arena", new Point(32, 16), outside);
+        Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         inputCommand();
         
     }
        static public void inputCommand(){
-        String rawCommand = JOptionPane.showInputDialog("Enter command");
+        Scanner s = new Scanner(System.in);
+        String rawCommand = s.nextLine();//JOptionPane.showInputDialog("Enter command");
         rawCommand = rawCommand.toLowerCase();
         if (rawCommand.compareTo("end") == 0) {
             System.exit(0);
@@ -50,7 +56,6 @@ public class DungeonMaster {
                     wordUse.playerVerb(Words[0][i],command, j);
                     break;
                 }
-                System.out.println("poop");
             } 
         }
         if(!temp){

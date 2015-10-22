@@ -34,16 +34,11 @@ public class CommandProcessing {
         for (int i = 0; i < textFiles.adj.length; i++) {
             temp[textFiles.verbs.length + textFiles.nouns.length - 1] = textFiles.adj[i];
         }
-        System.out.println(Arrays.toString(temp)); //Testing to see if the temp array is correct filled.
         for (int r = 0; r < 2; r++) {
             for (int c = 0; c < temp.length; c++) {
                 Words[0][c] = temp[c];
             }
         }
-        System.out.println(temp.length + " temp"); // all for testing
-        System.out.println(allWords + " allwords");
-        System.out.println(Words.length + " words length"); // all souts for testing
-        System.out.println("STARTING ");
         checkForsynonym(Words);
         for (int i = 0; i < Words.length ; i++) {
             //best for loop

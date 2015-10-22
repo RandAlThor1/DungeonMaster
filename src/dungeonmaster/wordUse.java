@@ -25,9 +25,9 @@ class wordUse {
             }
             if (found) {
                 DungeonMaster.player.location = curScene.actors[actorIndex].location;
-                JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
+                System.out.println("You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
             }
-            else JOptionPane.showMessageDialog(null, "Location not found");
+            else System.out.println("Location not found");//JOptionPane.showMessageDialog(null, "Location not found");
             DungeonMaster.inputCommand();  
         }
                    
