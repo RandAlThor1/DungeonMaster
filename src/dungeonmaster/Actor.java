@@ -14,7 +14,7 @@ class Actor {//temp class for testing
     String name;
     Point location;
     Scene scene;
-    //Item[] inventorty //not dealing with items right now
+    //Item[] inventorty; //not dealing with items right now
     //Personality personality //use achitypes to make this easyer
 
     public Actor(String name, Point location, Scene scene) {//temp method for testing
