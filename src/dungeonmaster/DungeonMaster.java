@@ -35,7 +35,7 @@ public class DungeonMaster {
         Actor arena = new Actor("the arena", new Point(32, 16), outside);
         Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         
-        Food 
+        Food theBread = new Food("the bread");
         
         inputCommand();
     }

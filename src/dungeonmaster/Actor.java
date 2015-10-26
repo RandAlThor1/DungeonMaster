@@ -14,7 +14,8 @@ class Actor {//temp class for testing
     String name;
     Point location;
     Scene scene;
-    //Item[] inventorty; //not dealing with items right now
+    Food[] invenFood = new Food[20];
+    //Wepon[] inventoryWep;
     //Personality personality //use achitypes to make this easyer
 
     public Actor(String name, Point location, Scene scene) {//temp method for testing
@@ -26,6 +27,30 @@ class Actor {//temp class for testing
 
     public boolean equals(Actor actor) {
         return this.name.equals(actor.name) && this.location == actor.location;
+    }
+  
+    public boolean invenAdd(Food item){//return didComplete
+        int counter = 0;
+        for (int i = 0; i < this.invenFood.length ; i++) {
+            if (this.invenFood[i] == null) {this.invenFood[i] = item; break;}
+            else counter++;
+        }
+        if (counter == this.invenFood.length) return false;
+        else return true;
+    }
+    
+    public boolean invenRemov(Food item){
+        int counter = 0;
+        for (int i = 0; i < this.invenFood.length ; i++) {
+            if (this.invenFood[i] == item) {this.invenFood[i] = null; break;}
+            else counter++;
+        }
+        if (counter == this.invenFood.length) return false;
+        else return true;
+    }
+    
+    public void invenCheck(Item item){
+    
     }
     
     

@@ -13,12 +13,9 @@ package dungeonmaster;
  * Teacher: Mr. Wachs 
  */
 interface Item {
-
-    @Override
-    public boolean equals(Object obj);
-    
+      
     public void eat(Actor actor);
     public void equip(Actor actor);
     public void drop();
-    public void take(Actor actor); 
+    public void take(Actor actor);
 }

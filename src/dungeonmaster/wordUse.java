@@ -30,6 +30,24 @@ class wordUse {
             else System.out.println("Location not found");//JOptionPane.showMessageDialog(null, "Location not found");
             DungeonMaster.inputCommand();  
         }
+        if (compareWords(stuff, "drop")) {
+            Scene curScene = DungeonMaster.player.scene;
+            int invIndex = -1;
+            String item = "";
+            boolean found = false;
+            for (int i = 1; i < 4 && i < command.length-index-1; i++) {
+                item += command[index + 1 + i];
+                found = 
+                if (found) break;
+                else item += " ";
+            }
+            if (found) {
+                DungeonMaster.player. = curScene.actors[invIndex].location;
+                System.out.println("You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
+            }
+            else System.out.println("Location not found");//JOptionPane.showMessageDialog(null, "Location not found");
+            DungeonMaster.inputCommand();
+        }
                    
     }
     
