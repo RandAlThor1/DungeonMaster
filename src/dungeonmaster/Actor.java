@@ -14,8 +14,8 @@ class Actor {//temp class for testing
     String name;
     Point location;
     Scene scene;
-    Food[] invenFood = new Food[20];
-    //Wepon[] inventoryWep;
+    Item[] inventory = new Item[20];
+    //Wepon[] invenWep;
     //Personality personality //use achitypes to make this easyer
 
     public Actor(String name, Point location, Scene scene) {//temp method for testing
@@ -23,34 +23,40 @@ class Actor {//temp class for testing
         this.location = location;
         this.scene = scene;
         this.scene.addActor(this);
+        for (int i = 0; i < inventory.length; i++) {
+            inventory[i] = new Item("empty");
+            
+        }
     }
 
     public boolean equals(Actor actor) {
         return this.name.equals(actor.name) && this.location == actor.location;
     }
   
-    public boolean invenAdd(Food item){//return didComplete
-        int counter = 0;
-        for (int i = 0; i < this.invenFood.length ; i++) {
-            if (this.invenFood[i] == null) {this.invenFood[i] = item; break;}
-            else counter++;
+    public void invenAdd(Item item){
+        for (int i = 0; i < this.inventory.length ; i++) {
+            if (this.inventory[i].name.equals("empty")) {
+                this.inventory[i] = item;
+                break;
+            }
         }
-        if (counter == this.invenFood.length) return false;
-        else return true;
     }
     
-    public boolean invenRemov(Food item){
-        int counter = 0;
-        for (int i = 0; i < this.invenFood.length ; i++) {
-            if (this.invenFood[i] == item) {this.invenFood[i] = null; break;}
-            else counter++;
-        }
-        if (counter == this.invenFood.length) return false;
-        else return true;
+    public void invenRemov(Item item){
+        for (int i = 0; i < this.inventory.length ; i++) {
+            if (this.inventory[i] == item){
+                this.inventory[i] = new Food("empty");
+                break;}
+            } 
     }
     
-    public void invenCheck(Item item){
-    
+    public Item invenFind(String name){
+        Item item = null;
+        boolean found = false;
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].name.equals(name)) item = inventory[i];
+        }
+        return item;
     }
     
     

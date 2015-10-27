@@ -25,30 +25,48 @@ class wordUse {
             }
             if (found) {
                 DungeonMaster.player.location = curScene.actors[actorIndex].location;
-                System.out.println("You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
+                System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
             }
-            else System.out.println("Location not found");//JOptionPane.showMessageDialog(null, "Location not found");
-            DungeonMaster.inputCommand();  
+            else System.out.println("System: Location not found");//JOptionPane.showMessageDialog(null, "Location not found");  
         }
-        if (compareWords(stuff, "drop")) {
-            Scene curScene = DungeonMaster.player.scene;
-            int invIndex = -1;
-            String item = "";
-            boolean found = false;
-            for (int i = 1; i < 4 && i < command.length-index-1; i++) {
-                item += command[index + 1 + i];
-                found = 
-                if (found) break;
-                else item += " ";
+        
+        else if (compareWords(stuff, "drop")) {
+            String itemName = "";
+            Item item = null;
+            for (int i = 1; i < 4 && i < command.length-index; i++) {
+                itemName += command[index + i];
+                item = DungeonMaster.player.invenFind(itemName);
+                if (item != null) {
+                    DungeonMaster.player.invenRemov(item);
+                    DungeonMaster.player.scene.invenAdd(item);
+                    System.out.println("System: Item droped");
+                    break;
+                }
+                else itemName += " ";
+                if((i == 3 || i == command.length-index-1) && item == null) System.out.println("System: Item not found");
             }
-            if (found) {
-                DungeonMaster.player. = curScene.actors[invIndex].location;
-                System.out.println("You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
-            }
-            else System.out.println("Location not found");//JOptionPane.showMessageDialog(null, "Location not found");
-            DungeonMaster.inputCommand();
+            
         }
-                   
+        
+        else if (compareWords(stuff, "take")) {
+            String itemName = "";
+            Item item = null;
+            for (int i = 1; i < 4 && i < command.length-index; i++) {
+                itemName += command[index + i];
+                item = DungeonMaster.player.scene.invenFind(itemName);
+                if (item != null) {
+                    DungeonMaster.player.invenAdd(item);
+                    DungeonMaster.player.scene.invenRemov(item);
+                    System.out.println("System: Item taken");
+                    break;
+                }
+                else itemName += " ";
+                if((i == 3 || i == command.length-index-1) && item == null) System.out.println("System: Item not found");
+            }
+            
+        }
+        else System.out.println("System: No command code found");
+        DungeonMaster.inputCommand();        
     }
     
     

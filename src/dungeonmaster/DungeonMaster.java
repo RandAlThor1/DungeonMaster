@@ -36,7 +36,9 @@ public class DungeonMaster {
         Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         
         Food theBread = new Food("the bread");
+        player.invenAdd(theBread);
         
+        System.out.println("System: Enter a command below");
         inputCommand();
     }
        static public void inputCommand(){
@@ -70,6 +72,10 @@ public class DungeonMaster {
                     }
                 }
             }
+        }
+        if (!temp) {
+            System.out.println("System: No command found");
+            inputCommand();
         }
         
     }

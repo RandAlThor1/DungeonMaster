@@ -12,10 +12,15 @@ package dungeonmaster;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-interface Item {
-      
-    public void eat(Actor actor);
-    public void equip(Actor actor);
-    public void drop();
-    public void take(Actor actor);
+class Item {
+
+    String name;
+    public Item(String name) {
+        this.name = name;
+    }
+    
+    public void eat(Actor actor){}
+    public void equip(Actor actor){}
+    public void drop(){}
+    public void take(Actor actor){}
 }

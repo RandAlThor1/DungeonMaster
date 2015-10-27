@@ -9,6 +9,13 @@ package dungeonmaster;
 class Scene {//temp class for testing
     
     Actor[] actors = new Actor[0];
+    Item[] inventory = new Item[20];
+
+    public Scene() {
+        for (int i = 0; i < inventory.length; i++) {
+            inventory[i] = new Item("empty");
+        }
+    }
     
     public void addActor(Actor actor){
         Actor[] temp = new Actor[actors.length+1];
@@ -39,6 +46,31 @@ class Scene {//temp class for testing
             
         }
         return index;
-    } 
-
+    }
+    
+    public void invenAdd(Item item){
+        for (int i = 0; i < this.inventory.length ; i++) {
+            if (this.inventory[i].name.equals("empty")) {
+                this.inventory[i] = item;
+                break;
+            }
+        }
+    }
+    
+    public void invenRemov(Item item){
+        for (int i = 0; i < this.inventory.length ; i++) {
+            if (this.inventory[i] == item){
+                this.inventory[i] = new Food("empty");
+                break;}
+            } 
+    }
+    
+    public Item invenFind(String name){
+        Item item = null;
+        boolean found = false;
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i].name.equals(name)) item = inventory[i];
+        }
+        return item; 
+    }
 }

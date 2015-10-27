@@ -4,12 +4,10 @@ package dungeonmaster;
  *
  * @author Davin
  */
-class Food implements Item{
-    
-    String name;
-    
+class Food extends Item{
+
     public Food(String name) {
-        this.name = name;
+        super(name);
     }
     
     @Override
