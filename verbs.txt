@@ -1,1 +1,1 @@
-go attack eat talk drop take equip
+go attack eat talk drop take equip check

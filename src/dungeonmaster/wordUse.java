@@ -1,5 +1,6 @@
 package dungeonmaster;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,8 +64,29 @@ class wordUse {
                 else itemName += " ";
                 if((i == 3 || i == command.length-index-1) && item == null) System.out.println("System: Item not found");
             }
-            
         }
+        
+        else if (compareWords(stuff, "check")) {
+            if (command[index+1].equals("inventory")) {
+                System.out.println("System: "+Arrays.toString(DungeonMaster.player.inventory));
+            }
+            else{
+                Scene curScene = DungeonMaster.player.scene;
+                String invenName = "";
+                Item[] inventory = null;
+                for (int i = 1; i < 4 && i < command.length-index; i++) {
+                    invenName += command[index + i];
+                    inventory = curScene.actors[curScene.findActor(invenName)].inventory;
+                    if (inventory != null) {
+                        System.out.println("System: "+Arrays.toString(inventory));
+                        break;
+                    }
+                    else invenName += " ";
+                    if((i == 3 || i == command.length-index-1) && inventory == null) System.out.println("System: Inventory not found");
+                }
+            }
+        }
+        
         else System.out.println("System: No command code found");
         DungeonMaster.inputCommand();        
     }

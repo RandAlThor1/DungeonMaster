@@ -73,7 +73,7 @@ public class DungeonMaster {
                 }
             }
         }
-        if (!temp) {
+        else if (!temp) {
             System.out.println("System: No command found");
             inputCommand();
         }
