@@ -34,6 +34,23 @@ public class textFiles {
         try (PrintWriter writer = new PrintWriter("file" +  ".txt")) {
         }
     }
+
+    /**
+     *  
+     * @param String to be added to log
+     * @throws FileNotFoundException
+     */
+    static public void addToLog(String String) throws FileNotFoundException{
+        PrintWriter writer = new PrintWriter("log.txt");
+        writer.println(String);
+    }
+
+    /**
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     static public String[] readFile(String file) throws IOException{
     BufferedReader reader = new BufferedReader( new FileReader (file));
     String         line = null;
