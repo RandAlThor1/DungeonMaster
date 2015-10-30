@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 /**
  *
@@ -31,8 +32,9 @@ public class textFiles {
      * @throws FileNotFoundException
      */
     static public void editWordDocument(String file) throws FileNotFoundException{
-        try (PrintWriter writer = new PrintWriter("file" +  ".txt")) {
+        try (PrintWriter writer = new PrintWriter(file +  ".txt")) {   
         }
+        
     }
 
     /**
@@ -40,11 +42,14 @@ public class textFiles {
      * @param String to be added to log
      * @throws FileNotFoundException
      */
-    static public void addToLog(String String) throws FileNotFoundException{
-        PrintWriter writer = new PrintWriter("log.txt");
-        writer.println(String);
+    static public void addToLog(String String) throws FileNotFoundException, IOException{
+        String[] array = null;
+        array = readFile("log.txt");
+        array[array.length + 1] = String;
+        try (PrintWriter writer = new PrintWriter("log.txt")) {
+            writer.println(Arrays.toString(array));
+        }
     }
-
     /**
      *
      * @param file
