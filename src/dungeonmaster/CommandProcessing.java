@@ -40,11 +40,6 @@ public class CommandProcessing {
             }
         }
         checkForsynonym(Words);
-        for (int i = 0; i < Words.length ; i++) {
-            //best for loop
-            //Why this still here? I joked abou this like, 5 patches ago.
-        }
-        checkForsynonym(Words);
     }
 
     private void checkForsynonym(String[][] Words) {// this is what we would do for words that come up very often with the chekcing it makes it simpler to find what we are looking for.[in most case]

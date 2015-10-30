@@ -1,5 +1,6 @@
-package dungeonmaster;
+ package dungeonmaster;
 
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,8 +64,40 @@ class wordUse {
                 else itemName += " ";
                 if((i == 3 || i == command.length-index-1) && item == null) System.out.println("System: Item not found");
             }
-            
         }
+        
+        else if (compareWords(stuff, "check")) {
+            if (command[index+1].equals("inventory")) {
+                System.out.print("System: ");
+                        for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
+                            if (!DungeonMaster.player.inventory[j].name.equals("empty")) {
+                                System.out.print(DungeonMaster.player.inventory[j].name+" ");    
+                            }  
+                        }
+            }
+            else{
+                Scene curScene = DungeonMaster.player.scene;
+                String invenName = "";
+                Item[] inventory = null;
+                for (int i = 1; i < 4 && i < command.length-index; i++) {
+                    invenName += command[index + i];
+                    inventory = curScene.actors[curScene.findActor(invenName)].inventory;
+                    if (inventory != null) {
+                        System.out.print("System: ");
+                        for (int j = 0; j < inventory.length; j++) {
+                            if (!inventory[j].name.equals("empty")) {
+                                System.out.print(inventory[j].name+" ");    
+                            } 
+                        }
+                        break;
+                    }
+                    else invenName += " ";
+                    if((i == 3 || i == command.length-index-1) && inventory == null) System.out.println("System: Inventory not found");
+                }
+            }
+            DungeonMaster.inputCommand();
+        }
+        
         else System.out.println("System: No command code found");
         DungeonMaster.inputCommand();        
     }
