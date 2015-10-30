@@ -7,8 +7,11 @@ package dungeonmaster;
 
 import static dungeonmaster.CommandProcessing.Words;
 import java.awt.Point;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,15 +32,16 @@ public class DungeonMaster {
         player = new Actor("player", new Point(0, 0), outside);    
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
-        Actor juliansMomsHouse = new Actor("julian's mom's house", new Point(100, 100), outside);
-        Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
-        Actor arena = new Actor("the arena", new Point(32, 16), outside);
-        Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
+        Actor theShack = new Actor("the hill", new Point(12, 7), outside); 
+        //Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
+        //Actor juliansMomsHouse = new Actor("julian's mom's house", new Point(100, 100), outside);
+        //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
+        //Actor arena = new Actor("the arena", new Point(32, 16), outside);
+        //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         
-        outside.invenAdd(new Food("the bread"));
-        outside.invenAdd(new Food("the apple"));
-        outside.invenAdd(new Food("john's cookie"));
+        player.invenAdd(new Food("the bread"));
+        player.invenAdd(new Food("the apple"));
+        player.invenAdd(new Food("john's cookie"));
         
         System.out.println("System: Enter a command below");
         inputCommand();
@@ -76,6 +80,11 @@ public class DungeonMaster {
         }
         if (!temp) {
             System.out.println("System: No command found");
+            try {
+                textFiles.addToLog(rawCommand);
+            } catch (FileNotFoundException ex) {
+                System.out.println("error");
+            }
             inputCommand();
         }
         

@@ -67,19 +67,24 @@ class wordUse {
         }
         
         else if (compareWords(stuff, "check")) {
+            Item[] inventory = null;
             if (command[index+1].equals("inventory")) {
+                inventory = DungeonMaster.player.inventory;
                 System.out.print("System: ");
-                        for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
-                            if (!DungeonMaster.player.inventory[j].name.equals("empty")) {
-                                System.out.print(DungeonMaster.player.inventory[j].name+" ");    
-                            }  
+                        for (int j = 0; j < inventory.length; j++) {
+                            if (!inventory[j].name.equals("empty")) {
+                                if (inventory[j+1] != null) {
+                                    if (!inventory[j+1].equals("empty")) System.out.print(DungeonMaster.player.inventory[j].name+", "); 
+                                    else System.out.println(DungeonMaster.player.inventory[j].name); 
+                                }
+                                else System.out.println(DungeonMaster.player.inventory[j].name); 
+                            }   
                         }
             }
             else{
                 Scene curScene = DungeonMaster.player.scene;
                 String invenName = "";
-                Item[] inventory = null;
-                for (int i = 1; i < 4 && i < command.length-index; i++) {
+                                for (int i = 1; i < 4 && i < command.length-index; i++) {
                     invenName += command[index + i];
                     inventory = curScene.actors[curScene.findActor(invenName)].inventory;
                     if (inventory != null) {
