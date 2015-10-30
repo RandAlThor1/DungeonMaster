@@ -27,10 +27,8 @@ public class Stats {
     public int Health;
     public int Speed;
     public int DodgeChance;
-    
-    public String CharacterName;
 
-    public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma, String CharacterName) {
+    public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma) {
         this.Strength = Strength;
         this.Constitution = Constitution;
         this.Strength = Strength;
@@ -48,9 +46,6 @@ public class Stats {
         this.Health = (int) 200 + ((Constitution - 10) / 2) * 50;
         this.Speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
         this.DodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
-        
-        this.CharacterName = CharacterName;
-    }
-    
-    
+
+    }    
 }

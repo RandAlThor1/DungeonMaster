@@ -15,6 +15,7 @@ class Actor {//temp class for testing
     Point location;
     Scene scene;
     Item[] inventory = new Item[20];
+    Stats stats;
     //Wepon[] invenWep;
     //Personality personality //use achitypes to make this easyer
 
@@ -23,9 +24,9 @@ class Actor {//temp class for testing
         this.location = location;
         this.scene = scene;
         this.scene.addActor(this);
+        stats = new Stats(10, 10, 10, 10, 10, 10);//I hate Ben.
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
-            
         }
     }
 

@@ -35,8 +35,9 @@ public class DungeonMaster {
         Actor arena = new Actor("the arena", new Point(32, 16), outside);
         Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         
-        Food theBread = new Food("the bread");
-        player.invenAdd(theBread);
+        outside.invenAdd(new Food("the bread"));
+        outside.invenAdd(new Food("the apple"));
+        outside.invenAdd(new Food("john's cookie"));
         
         System.out.println("System: Enter a command below");
         inputCommand();
