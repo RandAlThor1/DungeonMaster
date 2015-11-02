@@ -39,9 +39,9 @@ public class DungeonMaster {
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);
         //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         
-        player.invenAdd(new Food("the bread"));
-        player.invenAdd(new Food("the apple"));
-        player.invenAdd(new Food("john's cookie"));
+        theShack.invenAdd(new Food("the bread"));
+        theShack.invenAdd(new Food("the apple"));
+        theShack.invenAdd(new Food("john's cookie"));
         
         System.out.println("System: Enter a command below");
         inputCommand();
@@ -82,9 +82,10 @@ public class DungeonMaster {
             System.out.println("System: No command found");
             try {
                 textFiles.addToLog(rawCommand);
-            } catch (FileNotFoundException ex) {
-                System.out.println("error");
+            } catch (IOException ex) {
+                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println("error");
             inputCommand();
         }
         

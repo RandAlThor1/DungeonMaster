@@ -1,8 +1,5 @@
  package dungeonmaster;
 
-import java.util.Arrays;
-import javax.swing.JOptionPane;
-
 /**
  * Project:
  * @author Davin
@@ -74,8 +71,8 @@ class wordUse {
                         for (int j = 0; j < inventory.length; j++) {
                             if (!inventory[j].name.equals("empty")) {
                                 if (inventory[j+1] != null) {
-                                    if (!inventory[j+1].equals("empty")) System.out.print(DungeonMaster.player.inventory[j].name+", "); 
-                                    else System.out.println(DungeonMaster.player.inventory[j].name); 
+                                    if (!inventory[j+1].name.equals("empty")) System.out.print(DungeonMaster.player.inventory[j].name+", "); 
+                                    else System.out.println(DungeonMaster.player.inventory[j].name+". ☺"); 
                                 }
                                 else System.out.println(DungeonMaster.player.inventory[j].name); 
                             }   
@@ -101,6 +98,33 @@ class wordUse {
                 }
             }
             DungeonMaster.inputCommand();
+        }
+        
+        else if (compareWords(stuff, "loot")) {
+            String actorName = "";
+            Actor actor = null;
+            for (int i = 1; i < 4 && i < command.length-index; i++) {
+                actorName += command[index + i];
+                actor = DungeonMaster.player.scene.actors[DungeonMaster.player.scene.findActor(actorName)];//best code
+                if (actor != null) {
+                    for (int j = 0; j < actor.inventory.length; j++) {
+                        if (!actor.inventory[j].name.equals("empty")) {
+                            if (actor.inventory[j+1] != null) {
+                                if (!actor.inventory[j+1].name.equals("empty")) System.out.print(actor.inventory[j].name+", "); 
+                                else System.out.println(DungeonMaster.player.inventory[j].name+"."); 
+                            }
+                            else System.out.println(DungeonMaster.player.inventory[j].name); 
+
+                        }
+                        DungeonMaster.player.invenAdd(actor.inventory[j]);
+                        actor.invenRemov(actor.inventory[j]);
+                        break;
+                    }
+                    
+                }
+                else actorName += " ";
+                if((i == 3 || i == command.length-index-1) && actor == null) System.out.println("System: Actor not found");
+            }
         }
         
         else System.out.println("System: No command code found");
