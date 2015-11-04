@@ -105,22 +105,24 @@ class wordUse {
             Actor actor = null;
             for (int i = 1; i < 4 && i < command.length-index; i++) {
                 actorName += command[index + i];
-                actor = DungeonMaster.player.scene.actors[DungeonMaster.player.scene.findActor(actorName)];//best code
+                int poop = DungeonMaster.player.scene.findActor(actorName);
+                if (!(poop == -1)) actor = DungeonMaster.player.scene.actors[poop];//best code
                 if (actor != null) {
-                    for (int j = 0; j < actor.inventory.length; j++) {
-                        if (!actor.inventory[j].name.equals("empty")) {
-                            if (actor.inventory[j+1] != null) {
-                                if (!actor.inventory[j+1].name.equals("empty")) System.out.print(actor.inventory[j].name+", "); 
-                                else System.out.println(DungeonMaster.player.inventory[j].name+"."); 
+                    if (actor.isLootable){
+                        System.out.print("System: You looted ");
+                        for (int j = 0; j < actor.inventory.length; j++) {
+                            if (!actor.inventory[j].name.equals("empty")) {
+                                if (actor.inventory[j+1] != null) {
+                                    if (!actor.inventory[j+1].name.equals("empty")) System.out.print(actor.inventory[j].name+", "); 
+                                    else {
+                                        System.out.println(actor.inventory[j].name+"."); 
+                                        break;
+                                    }
+                                }  
+                                else System.out.println(DungeonMaster.player.inventory[j].name); 
                             }
-                            else System.out.println(DungeonMaster.player.inventory[j].name); 
-
                         }
-                        DungeonMaster.player.invenAdd(actor.inventory[j]);
-                        actor.invenRemov(actor.inventory[j]);
-                        break;
                     }
-                    
                 }
                 else actorName += " ";
                 if((i == 3 || i == command.length-index-1) && actor == null) System.out.println("System: Actor not found");

@@ -18,12 +18,13 @@ class Actor {//temp class for testing
     Stats stats;
     //Wepon[] invenWep;
     //Personality personality //use achitypes to make this easyer
-
+    boolean isLootable;
     public Actor(String name, Point location, Scene scene) {//temp method for testing
         this.name = name;
         this.location = location;
         this.scene = scene;
         this.scene.addActor(this);
+        isLootable = true; 
         stats = new Stats(10, 10, 10, 10, 10, 10);//I hate Ben.
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");

@@ -29,19 +29,20 @@ public class DungeonMaster {
         new textFiles();
         new CommandProcessing();
         outside = new Scene();
-        player = new Actor("player", new Point(0, 0), outside);    
+        player = new Actor("player", new Point(0, 0), outside);
+        player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        Actor theShack = new Actor("the hill", new Point(12, 7), outside); 
+        //Actor theShack = new Actor("the shack", new Point(12, 7), outside); 
         //Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
-        //Actor juliansMomsHouse = new Actor("julian's mom's house", new Point(100, 100), outside);
+        Actor juliansMomsHouse = new Actor("julian's mom's house", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);
         //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         
-        theShack.invenAdd(new Food("the bread"));
-        theShack.invenAdd(new Food("the apple"));
-        theShack.invenAdd(new Food("john's cookie"));
+        juliansMomsHouse.invenAdd(new Food("the bread"));
+        juliansMomsHouse.invenAdd(new Food("the apple"));
+        juliansMomsHouse.invenAdd(new Food("john's cookie"));
         
         System.out.println("System: Enter a command below");
         inputCommand();

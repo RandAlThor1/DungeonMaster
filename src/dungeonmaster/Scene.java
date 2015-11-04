@@ -39,7 +39,7 @@ class Scene {//temp class for testing
     public int findActor(String actor){
         int index = -1;
         for (int i = 0; i < actors.length; i++) {
-            if (actors[i].name.compareTo(actor) == 0) {
+            if (actors[i].name.equals(actor)) {
                 index = i;
                 break;
             }
