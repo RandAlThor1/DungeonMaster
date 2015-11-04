@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package dungeonmaster;
+package Interactable;
 
 /**
  * Project:
@@ -12,9 +12,9 @@ package dungeonmaster;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-class Item {
+public class Item {
 
-    String name;
+    public String name;
     public Item(String name) {
         this.name = name;
     }

@@ -1,4 +1,4 @@
-package dungeonmaster;
+package Interactable;
 
 /**
  * Project:
@@ -6,10 +6,10 @@ package dungeonmaster;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-class Scene {//temp class for testing
+public class Scene {//temp class for testing
     
-    Actor[] actors = new Actor[0];
-    Item[] inventory = new Item[20];
+    public Actor[] actors = new Actor[0];//i really should make methods for this
+    public Item[] inventory = new Item[20];
 
     public Scene() {
         for (int i = 0; i < inventory.length; i++) {

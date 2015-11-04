@@ -5,14 +5,16 @@
  */
 package dungeonmaster;
 
+import Interactable.Stats;
+import Interactable.Actor;
+import Interactable.Food;
+import Interactable.Scene;
 import static dungeonmaster.CommandProcessing.Words;
 import java.awt.Point;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,7 +37,7 @@ public class DungeonMaster {
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
         //Actor theShack = new Actor("the shack", new Point(12, 7), outside); 
         //Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
-        Actor juliansMomsHouse = new Actor("julian's mom's house", new Point(100, 100), outside);
+        Actor juliansMomsHouse = new Actor("mom's house", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);
         //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);

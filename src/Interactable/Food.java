@@ -1,10 +1,12 @@
-package dungeonmaster;
+package Interactable;
+
+import dungeonmaster.DungeonMaster;
 
 /**
  *
  * @author Davin
  */
-class Food extends Item{
+public class Food extends Item{
 
     public Food(String name) {
         super(name);

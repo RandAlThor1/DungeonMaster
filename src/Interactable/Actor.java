@@ -1,4 +1,4 @@
-package dungeonmaster;
+package Interactable;
 
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
@@ -9,22 +9,22 @@ import java.awt.datatransfer.DataFlavor;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-class Actor {//temp class for testing
+public class Actor {//temp class for testing
 
-    String name;
-    Point location;
-    Scene scene;
-    Item[] inventory = new Item[20];
-    Stats stats;
-    //Wepon[] invenWep;
-    //Personality personality //use achitypes to make this easyer
-    boolean isLootable;
+    public String name;
+    public Point location;
+    public Scene scene;
+    public Item[] inventory = new Item[20];
+    public Stats stats;
+    //public Wepon[] invenWep;
+    //public Personality personality //use achitypes to make this easyer
+    public boolean isLootable;
     public Actor(String name, Point location, Scene scene) {//temp method for testing
         this.name = name;
         this.location = location;
         this.scene = scene;
         this.scene.addActor(this);
-        isLootable = true; 
+        isLootable = false; 
         stats = new Stats(10, 10, 10, 10, 10, 10);//I hate Ben.
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
@@ -61,6 +61,12 @@ class Actor {//temp class for testing
         return item;
     }
     
-    
+    public void fight(Actor actor){//we need to figure out how combat works; 
+        actor.stats.Health = 0;//instakill
+        actor.isLootable = true;
+        int xp = 10;
+        //this.stats.xp += xp; why xp not a thing?
+        System.out.println("Fight won! Gained " + xp + "XP.");
+    }
     
 }
