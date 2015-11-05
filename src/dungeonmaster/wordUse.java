@@ -4,6 +4,7 @@ import Interactable.Item;
 import Interactable.Actor;
 import Interactable.Food;
 import Interactable.Scene;
+import java.awt.Point;
 
 /**
  * Project:
@@ -14,7 +15,8 @@ import Interactable.Scene;
 class wordUse {
 
     static void playerVerb(String stuff, String[] command, int index) {
-        if (compareWords(stuff, "go")&& compareWords(command[index+1], "to")) {
+        
+        if (stuff.equals("go")&& command[index+1].equals("to")) {
             Scene curScene = DungeonMaster.player.scene;
             int actorIndex = -1;
             String place = "";
@@ -29,11 +31,19 @@ class wordUse {
             if (found) {
                 DungeonMaster.player.location = curScene.actors[actorIndex].location;
                 System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
+                for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            }
+            else if(command.length-index-1 >= 2){
+                if(isNum(command[index+2]) && isNum(command[index+3])){
+                    DungeonMaster.player.location = new Point(Integer.parseInt(command[index+2]), Integer.parseInt(command[index+3]));
+                    System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
+                    for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+                }
             }
             else System.out.println("System: Location not found");//JOptionPane.showMessageDialog(null, "Location not found");  
         }
         
-        else if (compareWords(stuff, "drop")) {
+        else if (stuff.equals("drop")) {
             String itemName = "";
             Item item = null;
             for (int i = 1; i < 4 && i < command.length-index; i++) {
@@ -51,16 +61,19 @@ class wordUse {
             
         }
         
-        else if (compareWords(stuff, "take")) {
+        else if (stuff.equals("take")) {
             String itemName = "";
             Item item = null;
             for (int i = 1; i < 4 && i < command.length-index; i++) {
                 itemName += command[index + i];
                 item = DungeonMaster.player.scene.invenFind(itemName);
                 if (item != null) {
-                    DungeonMaster.player.invenAdd(item);
-                    DungeonMaster.player.scene.invenRemov(item);
-                    System.out.println("System: Item taken");
+                    if (item.location.equals(DungeonMaster.player.location)) {
+                        DungeonMaster.player.invenAdd(item);
+                        DungeonMaster.player.scene.invenRemov(item);
+                        System.out.println("System: Item taken"); 
+                    }
+                    else System.out.println("System: Can't pick that up from here");
                     break;
                 }
                 else itemName += " ";
@@ -68,9 +81,10 @@ class wordUse {
             }
         }
         
-        else if (compareWords(stuff, "check")) {
+        else if (stuff.equals("check")) {
             String output = "";
             Item[] inventory = null;
+            boolean possible = true;
             if (command[index+1].equals("inventory")) {
                 inventory = DungeonMaster.player.inventory;
                 output = "System: You have ";
@@ -82,11 +96,15 @@ class wordUse {
                     invenName += command[index + i];
                     int actorIndex = curScene.findActor(invenName);
                     if (actorIndex != -1) inventory = curScene.actors[actorIndex].inventory;
-                    if (inventory != null) {output = "System: You found "; break;}
+                    if (inventory != null) {
+                        if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) output = "System: You found ";
+                        else {System.out.println("System: You can't check that form here"); possible = false;}
+                        break;
+                    }
                     else invenName += " ";
                 }
             }
-            if (inventory != null) {
+            if (inventory != null && possible ) {
                 boolean empty = true;
                 for (int i = 0; i < inventory.length; i++) {
                     if (!inventory[i].name.equals("empty")) {
@@ -100,19 +118,23 @@ class wordUse {
                     System.out.println(output += ".");
                 }
             }
-            DungeonMaster.inputCommand();
+            if(inventory == null && possible) System.out.println("System: Actor not found");
         }
         
-        else if (compareWords(stuff, "loot")) {
+        else if (stuff.equals("loot")) {
             String actorName = "";
             Actor actor = null;
+            boolean possible = true;
             for (int i = 1; i < 4 && i < command.length-index; i++) {
                 actorName += command[index + i];
                 int actorIndex = DungeonMaster.player.scene.findActor(actorName);
-                if (actorIndex != -1) actor = DungeonMaster.player.scene.actors[actorIndex];
+                if (actorIndex != -1){
+                    actor = DungeonMaster.player.scene.actors[actorIndex];
+                    if (!actor.location.equals(DungeonMaster.player.location)){possible = false; System.out.println("System: You can't loot that from here");}
+                }
                 else actorName += " ";
             }
-            if (actor != null) {
+            if (actor != null && possible) {
                 if (actor.isLootable){
                     String output = "System: You looted ";
                     boolean empty = true;
@@ -135,26 +157,28 @@ class wordUse {
                     DungeonMaster.player.fight(actor);
                 }
             }
-            else System.out.println("System: Actor not found");
-            DungeonMaster.inputCommand();      
+            if(actor == null && possible) System.out.println("System: Actor not found");     
         }
         
         else if (stuff.equals("attack")) {
+            Scene curScene = DungeonMaster.player.scene;
             String actorName = "";
             for (int i = 1; i < 4 && i < command.length-index; i++) {
                 actorName += command[index + i];
-                int actorIndex = DungeonMaster.player.scene.findActor(actorName);
-                if (actorIndex != -1) DungeonMaster.player.fight(DungeonMaster.player.scene.actors[actorIndex]);
+                int actorIndex = curScene.findActor(actorName);
+                if (actorIndex != -1) {
+                    if (curScene.actors[actorIndex].location == DungeonMaster.player.location) DungeonMaster.player.fight(curScene.actors[actorIndex]);
+                    else System.out.println("You can't attack that from here");
+                }
                 else actorName += " ";
                 if((i == 3 || i == command.length-index-1) && actorIndex == -1) System.out.println("System: Actor not found");
-            }
-            DungeonMaster.inputCommand();      
+            }   
         }
         
         else if (stuff.equals("eat")) {
             String foodName = "";
-            Item food = new Food(foodName, index);
-            Food testFood = new Food("", 0);
+            Item food;
+            Food testFood = new Food("", 0, new Point(-10000, -10000));
             for (int i = 1; i < 4 && i < command.length-index; i++) {
                 foodName += command[index + i];
                 food = DungeonMaster.player.invenFind(foodName);
@@ -169,7 +193,7 @@ class wordUse {
                 else foodName += " ";
                 if((i == 3 || i == command.length-index-1) && food == null) System.out.println("System: Item not found");
             }
-            DungeonMaster.inputCommand();
+            testFood = null;//distroy the evidence
         }
         
         else System.out.println("System: No command code found");
@@ -191,14 +215,15 @@ class wordUse {
     
     
     
-    /**
-     * compareTo is a pain, so this makes it easier.
-     * @param word1: first word
-     * @param word2: second word
-     * @return if the words are the same;
-     */
-    static boolean compareWords(String word1, String word2){
-        return word1.compareTo(word2) == 0;
+    public static boolean isNum(String string) {
+    boolean ret = true;
+    try {
+        Integer.parseInt(string);
+
+    }catch (NumberFormatException e) {
+        ret = false;
     }
+    return ret;
+}
 
 }

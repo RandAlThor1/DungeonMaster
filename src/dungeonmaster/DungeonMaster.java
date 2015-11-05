@@ -46,9 +46,9 @@ public class DungeonMaster {
         //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
         Actor actualEnemy = new Actor("boar", player.location, outside);
         
-        juliansMomsHouse.invenAdd(new Food("the bread", 10));
-        juliansMomsHouse.invenAdd(new Food("the apple", 5));
-        juliansMomsHouse.invenAdd(new Food("john's cookie", -20, -20, -20, 20));//john's a dick
+        juliansMomsHouse.invenAdd(new Food("the bread", 10, juliansMomsHouse));
+        juliansMomsHouse.invenAdd(new Food("the apple", 5, juliansMomsHouse));
+        juliansMomsHouse.invenAdd(new Food("john's cookie", -20, -20, -20, 20, juliansMomsHouse));//john's a dick
         
         System.out.println("System: Enter a command below");
         inputCommand();
@@ -57,8 +57,11 @@ public class DungeonMaster {
         Scanner s = new Scanner(System.in);
         String rawCommand = s.nextLine();//JOptionPane.showInputDialog("Enter command");
         rawCommand = rawCommand.toLowerCase();
-        if (rawCommand.compareTo("end") == 0) {
+        if (rawCommand.equals("end")) {
             System.exit(0);
+        }
+        if (rawCommand.equals("")) {
+            inputCommand();
         }
         String[] command = rawCommand.split(" ");
         //t index = wordStuff.checkForVerbs(command);

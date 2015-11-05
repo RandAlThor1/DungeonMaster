@@ -62,11 +62,14 @@ public class Actor {//temp class for testing
     }
     
     public void fight(Actor actor){//we need to figure out how combat works; 
-        actor.stats.Health = 0;//instakill
-        actor.isLootable = true;
-        int xp = 10;
-        //this.stats.xp += xp; why xp not a thing?
-        System.out.println("Fight won! Gained " + xp + "XP.");
+        if (this.location.equals(actor.location)) {
+            actor.stats.Health = 0;//instakill
+            actor.isLootable = true;
+            int xp = 10;
+            //this.stats.xp += xp; why xp not a thing?
+            System.out.println("System: Fight won! Gained " + xp + "XP.");
+        }
+        else System.out.println("System: You can't attack that from here.");
     }
 
     public void eat(Food food) {

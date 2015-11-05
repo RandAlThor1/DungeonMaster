@@ -6,6 +6,8 @@
 
 package Interactable;
 
+import java.awt.Point;
+
 /**
  * Project:
  * @author Davin
@@ -15,6 +17,7 @@ package Interactable;
 public class Item {
 
     public String name;
+    public Point location;
     public Item(String name) {
         this.name = name;
     }
