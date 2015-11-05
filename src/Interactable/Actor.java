@@ -47,7 +47,7 @@ public class Actor {//temp class for testing
     public void invenRemov(Item item){
         for (int i = 0; i < this.inventory.length ; i++) {
             if (this.inventory[i] == item){
-                this.inventory[i] = new Food("empty");
+                this.inventory[i] = new Item("empty");
                 break;}
             } 
     }
@@ -67,6 +67,12 @@ public class Actor {//temp class for testing
         int xp = 10;
         //this.stats.xp += xp; why xp not a thing?
         System.out.println("Fight won! Gained " + xp + "XP.");
+    }
+
+    public void eat(Food food) {
+        this.stats.Health += food.heal;//need maximum
+        if (food.heal > 0)System.out.println("System: You recovered "+food.heal+"HP.");
+        if (food.heal < 0)System.out.println("System: You lost "+food.heal+"HP.");
     }
     
 }

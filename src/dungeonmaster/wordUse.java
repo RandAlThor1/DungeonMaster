@@ -2,6 +2,7 @@
 
 import Interactable.Item;
 import Interactable.Actor;
+import Interactable.Food;
 import Interactable.Scene;
 
 /**
@@ -68,48 +69,35 @@ class wordUse {
         }
         
         else if (compareWords(stuff, "check")) {
+            String output = "";
             Item[] inventory = null;
             if (command[index+1].equals("inventory")) {
                 inventory = DungeonMaster.player.inventory;
-                System.out.print("System: You have ");
+                output = "System: You have ";
             }
             else{
                 String invenName = "";
                 Scene curScene = DungeonMaster.player.scene;
                 for (int i = 1; i < 4 && i < command.length-index; i++) {
                     invenName += command[index + i];
-                    inventory = curScene.actors[curScene.findActor(invenName)].inventory;
-                }
-            }
-                boolean empty = true;
-                for (int j = 0; j < inventory.length; j++) {
-                    if (!inventory[j].name.equals("empty")) {
-                        empty = false;
-                        if (inventory[j+1] != null) {
-                            if (!inventory[j+1].name.equals("empty")) System.out.print(inventory[j].name+", "); 
-                            else System.out.println(inventory[j].name+". ☺"); 
-                        }
-                        else System.out.println(inventory[j].name); 
-                    }   
-                }
-                if (empty) System.out.println("nothing.");
-            else{
-                Scene curScene = DungeonMaster.player.scene;
-                String invenName = "";
-                for (int i = 1; i < 4 && i < command.length-index; i++) {
-                    invenName += command[index + i];
-                    inventory = curScene.actors[curScene.findActor(invenName)].inventory;
-                    if (inventory != null) {
-                        System.out.print("System: You have");
-                        for (int j = 0; j < inventory.length; j++) {
-                            if (!inventory[j].name.equals("empty")) {
-                                System.out.print(inventory[j].name+" ");    
-                            } 
-                        }
-                        break;
-                    }
+                    int actorIndex = curScene.findActor(invenName);
+                    if (actorIndex != -1) inventory = curScene.actors[actorIndex].inventory;
+                    if (inventory != null) {output = "System: You found "; break;}
                     else invenName += " ";
-                    if((i == 3 || i == command.length-index-1) && inventory == null) System.out.println("System: Inventory not found");
+                }
+            }
+            if (inventory != null) {
+                boolean empty = true;
+                for (int i = 0; i < inventory.length; i++) {
+                    if (!inventory[i].name.equals("empty")) {
+                        empty = false;
+                        output += inventory[i].name+", "; 
+                    }
+                }
+                if (empty) System.out.println(output += "nothing.");
+                else {
+                    output = output.substring(0, output.length() - 2);
+                    System.out.println(output += ".");
                 }
             }
             DungeonMaster.inputCommand();
@@ -120,39 +108,68 @@ class wordUse {
             Actor actor = null;
             for (int i = 1; i < 4 && i < command.length-index; i++) {
                 actorName += command[index + i];
-                int poop = DungeonMaster.player.scene.findActor(actorName);
-                if (!(poop == -1)) actor = DungeonMaster.player.scene.actors[poop];//best code
-                if (actor != null) {
-                    if (actor.isLootable){
-                        System.out.print("System: You looted ");
-                        boolean empty = true;
-                        for (int j = 0; j < actor.inventory.length; j++) {
-                            if (!actor.inventory[j].name.equals("empty")) {
-                                empty = false;
-                                if (actor.inventory[j+1] != null) {
-                                    if (!actor.inventory[j+1].name.equals("empty")){
-                                        System.out.print(actor.inventory[j].name+", ");
-                                    } 
-                                    else {
-                                        System.out.println(actor.inventory[j].name+"."); 
-                                        break;
-                                    }
-                                    DungeonMaster.player.invenAdd(actor.inventory[j]);
-                                    actor.invenRemov(actor.inventory[j]);
-                                }  
-                                else System.out.println(DungeonMaster.player.inventory[j].name); 
-                            }
+                int actorIndex = DungeonMaster.player.scene.findActor(actorName);
+                if (actorIndex != -1) actor = DungeonMaster.player.scene.actors[actorIndex];
+                else actorName += " ";
+            }
+            if (actor != null) {
+                if (actor.isLootable){
+                    String output = "System: You looted ";
+                    boolean empty = true;
+                    for (int i = 0; i < actor.inventory.length; i++) {
+                        if (!actor.inventory[i].name.equals("empty")) {
+                            empty = false;
+                            output += actor.inventory[i].name+", ";
+                            DungeonMaster.player.invenAdd(actor.inventory[i]);
+                            actor.invenRemov(actor.inventory[i]);
                         }
-                        if (empty) System.out.println("nothing.");
                     }
-                    else{
-                        System.out.println("System: It's still alive, you'll have to fight it!");
-                        DungeonMaster.player.fight(actor);
+                    if (empty) System.out.println(output += "nothing.");
+                    else {
+                        output = output.substring(0, output.length() - 2);
+                        System.out.println(output += ".");
                     }
                 }
-                else actorName += " ";
-                if((i == 3 || i == command.length-index-1) && actor == null) System.out.println("System: Actor not found");
+                else {
+                    System.out.println("System: It's still alive, you'll have to fight it!");
+                    DungeonMaster.player.fight(actor);
+                }
             }
+            else System.out.println("System: Actor not found");
+            DungeonMaster.inputCommand();      
+        }
+        
+        else if (stuff.equals("attack")) {
+            String actorName = "";
+            for (int i = 1; i < 4 && i < command.length-index; i++) {
+                actorName += command[index + i];
+                int actorIndex = DungeonMaster.player.scene.findActor(actorName);
+                if (actorIndex != -1) DungeonMaster.player.fight(DungeonMaster.player.scene.actors[actorIndex]);
+                else actorName += " ";
+                if((i == 3 || i == command.length-index-1) && actorIndex == -1) System.out.println("System: Actor not found");
+            }
+            DungeonMaster.inputCommand();      
+        }
+        
+        else if (stuff.equals("eat")) {
+            String foodName = "";
+            Item food = new Food(foodName, index);
+            Food testFood = new Food("", 0);
+            for (int i = 1; i < 4 && i < command.length-index; i++) {
+                foodName += command[index + i];
+                food = DungeonMaster.player.invenFind(foodName);
+                if (food != null){
+                    if (food.getClass().equals(testFood.getClass())) {
+                        System.out.println("System: You ate "+ food.name);
+                        DungeonMaster.player.eat((Food) food); 
+                        DungeonMaster.player.invenRemov(food);
+                    }
+                    else System.out.println("System: You can't eat that");
+                }
+                else foodName += " ";
+                if((i == 3 || i == command.length-index-1) && food == null) System.out.println("System: Item not found");
+            }
+            DungeonMaster.inputCommand();
         }
         
         else System.out.println("System: No command code found");

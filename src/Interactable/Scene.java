@@ -60,7 +60,7 @@ public class Scene {//temp class for testing
     public void invenRemov(Item item){
         for (int i = 0; i < this.inventory.length ; i++) {
             if (this.inventory[i] == item){
-                this.inventory[i] = new Food("empty");
+                this.inventory[i] = new Item("empty");
                 break;}
             } 
     }

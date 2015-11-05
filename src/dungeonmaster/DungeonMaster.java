@@ -31,20 +31,24 @@ public class DungeonMaster {
         new textFiles();
         new CommandProcessing();
         outside = new Scene();
-        player = new Actor("player", new Point(0, 0), outside);
+        System.out.println("System: Enter your name");
+        Scanner s = new Scanner(System.in);
+        String playerName = s.nextLine();
+        player = new Actor(playerName, new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        //Actor theShack = new Actor("the shack", new Point(12, 7), outside); 
+        //Actor theShack = new Actor("the shack", new Point(12, 7), outside); Davin needs to make scenes/locations useful 
         //Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
         Actor juliansMomsHouse = new Actor("mom's house", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);
         //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
+        Actor actualEnemy = new Actor("boar", player.location, outside);
         
-        juliansMomsHouse.invenAdd(new Food("the bread"));
-        juliansMomsHouse.invenAdd(new Food("the apple"));
-        juliansMomsHouse.invenAdd(new Food("john's cookie"));
+        juliansMomsHouse.invenAdd(new Food("the bread", 10));
+        juliansMomsHouse.invenAdd(new Food("the apple", 5));
+        juliansMomsHouse.invenAdd(new Food("john's cookie", -20, -20, -20, 20));//john's a dick
         
         System.out.println("System: Enter a command below");
         inputCommand();
@@ -83,12 +87,12 @@ public class DungeonMaster {
         }
         if (!temp) {
             System.out.println("System: No command found");
-            try {
-                textFiles.addToLog(rawCommand);
-            } catch (IOException ex) {
-                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println("error");
+//            try {
+//                textFiles.addToLog(rawCommand);
+//            } catch (IOException ex) {
+//                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);      //This is breaking everything
+//            }
+//           System.out.println("error");
             inputCommand();
         }
         

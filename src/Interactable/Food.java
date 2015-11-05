@@ -8,9 +8,24 @@ import dungeonmaster.DungeonMaster;
  */
 public class Food extends Item{
 
-    public Food(String name) {
+    int heal = 0;
+    int stamina = 0;
+    int mana = 0;
+    int poison = 0;
+    
+    public Food(String name, int heal) {
         super(name);
+        this.heal = heal;
+    }    
+
+    public Food(String name, int heal, int stamina, int mana, int poison) {
+        super(name);
+        this.heal = heal;
+        this.stamina = stamina;
+        this.mana = mana;
+        this.poison = poison;
     }
+      
     
     @Override
     public void eat(Actor actor) {
