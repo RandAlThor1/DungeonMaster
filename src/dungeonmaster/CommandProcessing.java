@@ -47,8 +47,11 @@ public class CommandProcessing {
             if ("go".equals(Words[0][i]) || "move".equals(Words[0][i]) || "walk".equals(Words[0][i])) {// add syonyms of the words, only doing the one for now as a example. will add more at school
                 this.Words[1][i] = "go";
             }
-            if ("check".equals(Words[0][i]) || "search".equals(Words[0][i])){ //search tries to run 'go', Ben fix plz.
+            else if ("check".equals(Words[0][i]) || "search".equals(Words[0][i])){
                 this.Words[1][i] = "check";
+            }
+            else if (/*"check".equals(Words[0][i])*/ false){//make this into more sysnonpmkjndsas
+                this.Words[1][i] = "things";
             }
             else this.Words[1][i] = "";
         }

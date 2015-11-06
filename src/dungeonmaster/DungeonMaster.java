@@ -9,7 +9,6 @@ import Interactable.Stats;
 import Interactable.Actor;
 import Interactable.Food;
 import Interactable.Scene;
-import static dungeonmaster.CommandProcessing.Words;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.Scanner;
@@ -31,10 +30,10 @@ public class DungeonMaster {
         new textFiles();
         new CommandProcessing();
         outside = new Scene();
-        System.out.println("System: Enter your name");
-        Scanner s = new Scanner(System.in);
-        String playerName = s.nextLine();
-        player = new Actor(playerName, new Point(0, 0), outside);
+        //System.out.println("System: Enter your name");
+        //Scanner s = new Scanner(System.in);
+        //String playerName = s.nextLine();
+        player = new Actor("go ffuck yourself", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
@@ -68,21 +67,21 @@ public class DungeonMaster {
         
         boolean temp = false;
         int index = -1;
-        for (int i = 0; i < Words.length; i++) {
+        for (int i = 0; i < CommandProcessing.Words.length; i++) {
             for (int j = 0; j < command.length; j++) {
-                if (Words[1][i].equalsIgnoreCase(command[j])){
+                if (CommandProcessing.Words[0][i].equalsIgnoreCase(command[j])){
                     temp = true;
-                    wordUse.playerVerb(Words[0][i],command, j);
+                    wordUse.playerVerb(CommandProcessing.Words[1][i],command, j);
                     break;
                 }
             } 
         }
         if(!temp){
-            for (int i = 0; i < Words.length; i++) {
+            for (int i = 0; i < CommandProcessing.Words.length; i++) {
                 for (int j = 0; j < command.length; j++) {
-                    if (Words[0][i].equalsIgnoreCase(command[j])) {
+                    if (CommandProcessing.Words[0][i].equalsIgnoreCase(command[j])) {
                         temp = true;
-                        wordUse.playerVerb(Words[0][i],command, j);
+                        wordUse.playerVerb(CommandProcessing.Words[0][i],command, j);
                         break;
                     }
                 }
