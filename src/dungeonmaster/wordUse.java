@@ -14,7 +14,7 @@ import java.awt.Point;
  */
 class wordUse {
 
-    static void playerVerb(String stuff, String[] command, int index) {
+    static void checkVerbs(String stuff, String[] command, int index) {
         
         if (stuff.equals("go")&& command[index+1].equals("to")) {
             Scene curScene = DungeonMaster.player.scene;
@@ -30,7 +30,7 @@ class wordUse {
             }
             if (found) {
                 DungeonMaster.player.location = curScene.actors[actorIndex].location;
-                System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);//JOptionPane.showMessageDialog(null, "You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);     
+                System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
                 for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
             }
             else if(command.length-index-1 >= 2){
@@ -40,7 +40,7 @@ class wordUse {
                     for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
                 }
             }
-            else System.out.println("System: Location not found");//JOptionPane.showMessageDialog(null, "Location not found");  
+            else System.out.println("System: Location not found");  
         }
         
         else if (stuff.equals("drop")) {
@@ -193,22 +193,13 @@ class wordUse {
                 else foodName += " ";
                 if((i == 3 || i == command.length-index-1) && food == null) System.out.println("System: Item not found");
             }
-            testFood = null;//distroy the evidence
+            testFood = null;
         }
         
         else System.out.println("System: No command code found");
         DungeonMaster.inputCommand();        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
     
     
     

@@ -1,5 +1,8 @@
 package Interactable;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 /**
  * Project:
  * @author Davin
@@ -10,11 +13,19 @@ public class Scene {//temp class for testing
     
     public Actor[] actors = new Actor[0];//i really should make methods for this
     public Item[] inventory = new Item[20];
+    ArrayList<Scene> connectingScene = new ArrayList<>();
+    public Point location;
 
-    public Scene() {
+    public Scene(Point location) {
+        this.location = location;
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
         }
+    }
+    
+    public void addScene( scene){
+        this.connectingScene[this.connectingScene.length] = scene; 
+        scene.connectingScene[scene.connectingScene.length] = this;
     }
     
     public void addActor(Actor actor){

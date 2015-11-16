@@ -29,15 +29,15 @@ public class DungeonMaster {
     public static void main(String[] args) throws IOException {
         new textFiles();
         new CommandProcessing();
-        outside = new Scene();
+        outside = new Scene(null);
         //System.out.println("System: Enter your name");
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
-        player = new Actor("go ffuck yourself", new Point(0, 0), outside);
+        player = new Actor("go fuck yourself", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        //Actor theShack = new Actor("the shack", new Point(12, 7), outside); Davin needs to make scenes/locations useful 
+        Scene theShack = new Scene(new Point(12, 7)); theShack.addScene(outside);
         //Actor maxsBar = new Actor("max's bar", new Point(3, 0), outside);
         Actor juliansMomsHouse = new Actor("mom's house", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
@@ -54,7 +54,7 @@ public class DungeonMaster {
     }
        static public void inputCommand(){
         Scanner s = new Scanner(System.in);
-        String rawCommand = s.nextLine();//JOptionPane.showInputDialog("Enter command");
+        String rawCommand = s.nextLine();
         rawCommand = rawCommand.toLowerCase();
         if (rawCommand.equals("end")) {
             System.exit(0);
@@ -63,7 +63,6 @@ public class DungeonMaster {
             inputCommand();
         }
         String[] command = rawCommand.split(" ");
-        //t index = wordStuff.checkForVerbs(command);
         
         boolean temp = false;
         int index = -1;
@@ -71,21 +70,11 @@ public class DungeonMaster {
             for (int j = 0; j < command.length; j++) {
                 if (CommandProcessing.Words[0][i].equalsIgnoreCase(command[j])){
                     temp = true;
-                    wordUse.playerVerb(CommandProcessing.Words[1][i],command, j);
+                    if(command.length != 1) wordUse.checkVerbs(CommandProcessing.Words[1][i],command, j);
+                    else temp = false;
                     break;
                 }
             } 
-        }
-        if(!temp){
-            for (int i = 0; i < CommandProcessing.Words.length; i++) {
-                for (int j = 0; j < command.length; j++) {
-                    if (CommandProcessing.Words[0][i].equalsIgnoreCase(command[j])) {
-                        temp = true;
-                        wordUse.playerVerb(CommandProcessing.Words[0][i],command, j);
-                        break;
-                    }
-                }
-            }
         }
         if (!temp) {
             System.out.println("System: No command found");
@@ -99,14 +88,4 @@ public class DungeonMaster {
         }
         
     }
-//    static void inputCommand() {
-//        String rawCommand = JOptionPane.showInputDialog("Enter command");
-//        rawCommand = rawCommand.toLowerCase();
-//        if (rawCommand.compareTo("end") == 0) {
-//            System.exit(0);
-//        }
-//        String[] command = rawCommand.split(" ");
-//        int index = wordStuff.checkForVerbs(command);
-//        wordUse.playerVerb(command, index);
-//    }
 }
