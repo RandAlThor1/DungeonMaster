@@ -32,14 +32,34 @@ class wordUse {
                 DungeonMaster.player.location = curScene.actors[actorIndex].location;
                 System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
                 for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+                DungeonMaster.inputCommand();
             }
-            else if(command.length-index-1 >= 2){
-                if(isNum(command[index+2]) && isNum(command[index+3])){
-                    DungeonMaster.player.location = new Point(Integer.parseInt(command[index+2]), Integer.parseInt(command[index+3]));
-                    System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
-                    for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            if (!found) {
+                place = "";
+                for (int i = 1; i < 4 && i < command.length-index-1; i++) {
+                    place += command[index + 1 + i];
+                    for (int j = 0; j < curScene.connectingScene.size(); j++) {
+                        if (curScene.connectingScene.get(j).name.equals(place)) {
+                            actorIndex = j;
+                            found = true;
+                        }
+                    }
+                    if (found) break;
+                    else place += " ";
                 }
             }
+            if (found){
+                DungeonMaster.player.location = curScene.connectingScene.get(actorIndex).location;
+                System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
+                for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+                DungeonMaster.inputCommand();
+            }
+            else if(isNum(command[index+2]) && isNum(command[index+3])){
+                DungeonMaster.player.location = new Point(Integer.parseInt(command[index+2]), Integer.parseInt(command[index+3]));
+                System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
+                for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            }
+            
             else System.out.println("System: Location not found");  
         }
         
