@@ -216,6 +216,16 @@ class wordUse {
             testFood = null;
         }
         
+        else if(stuff.equals("enter")){
+            Point player = DungeonMaster.player.location;
+            Scene curScene = DungeonMaster.player.scene;
+            for (int i = 0; i < curScene.connectingScene.size(); i++) {
+                if (curScene.connectingScene.get(i).location == player) {
+                    DungeonMaster.player.scene = curScene.connectingScene.get(i);
+                }
+            }
+        }
+        
         else System.out.println("System: No command code found");
         DungeonMaster.inputCommand();        
     }

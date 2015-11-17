@@ -15,19 +15,17 @@ public class Scene {//temp class for testing
     public Actor[] actors = new Actor[0];//i really should make methods for this
     public Item[] inventory = new Item[20];
     public ArrayList<Scene> connectingScene = new ArrayList<>();
-    public Point location;
 
-    public Scene(String name, Point location) {
+
+    public Scene(String name) {
         this.name = name;
-        this.location = location;
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
         }
     }
     
-    public void addScene(Scene scene){ 
-        this.connectingScene.add(scene);
-        scene.connectingScene.add(this);
+    public void addDoor(Scene scene, Point location){ 
+        Door door = new Door(scene, location);
     }
     
     public void addActor(Actor actor){
