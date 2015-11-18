@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interactable;
+package npcs;
 
 /**
  *
  * @author b.allen
  */
 public class Stats {
+    public int UnitIndex;
+    
     public int Strength;
     public int Constitution;
     public int Dexterity;
@@ -25,10 +27,11 @@ public class Stats {
     public int CharismaMod;
     
     public int Health;
+    public int maxHealth;
     public int Speed;
     public int DodgeChance;
 
-    public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma) {
+    public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma, int UnitIndex) {
         this.Strength = Strength;
         this.Constitution = Constitution;
         this.Strength = Strength;
@@ -44,6 +47,7 @@ public class Stats {
         this.CharismaMod =      (int) ((Charisma - 10) / 2);
         
         this.Health = (int) 200 + ((Constitution - 10) / 2) * 50;
+        this.maxHealth = Health;
         this.Speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
         this.DodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
 
