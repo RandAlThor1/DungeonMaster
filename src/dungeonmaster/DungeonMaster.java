@@ -29,7 +29,7 @@ public class DungeonMaster {
     public static void main(String[] args) throws IOException {
         new textFiles();
         new CommandProcessing();
-        outside = new Scene("outside");
+        outside = new Scene();
         //System.out.println("System: Enter your name");
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
@@ -37,8 +37,8 @@ public class DungeonMaster {
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        Scene theShack = new Scene("the shack"); outside.addDoor(theShack,new Point(12, 7));
-        Scene maxsBar = new Scene("max's bar"); outside.addDoor(maxsBar, new Point(3, 0));
+        Scene theShack = new Scene(); outside.addDoor(theShack,new Point(12, 7), "the shack");
+        Scene maxsBar = new Scene(); outside.addDoor(maxsBar, new Point(3, 0), "max's bar");
         Actor juliansMomsHouse = new Actor("mom's house", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);

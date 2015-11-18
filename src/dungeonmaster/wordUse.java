@@ -4,6 +4,7 @@ import Interactable.Item;
 import Interactable.Actor;
 import Interactable.Food;
 import Interactable.Scene;
+import Interactable.Door;
 import java.awt.Point;
 
 /**
@@ -38,10 +39,10 @@ class wordUse {
                 place = "";
                 for (int i = 1; i < 4 && i < command.length-index-1; i++) {
                     place += command[index + 1 + i];
-                    for (int j = 0; j < curScene.connectingScene.size(); j++) {
-                        if (curScene.connectingScene.get(j).name.equals(place)) {
+                    for (int j = 0; j < curScene.doors.size(); j++) {
+                        if (curScene.doors.get(j).name.equals(place)) {
                             actorIndex = j;
-                            found = true;
+                            found = true;;
                         }
                     }
                     if (found) break;
@@ -49,7 +50,7 @@ class wordUse {
                 }
             }
             if (found){
-                DungeonMaster.player.location = curScene.connectingScene.get(actorIndex).location;
+                DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
                 System.out.println("System: You're new loctaion is: "+DungeonMaster.player.location.x+", "+DungeonMaster.player.location.y);
                 for (int i = 0; i < DungeonMaster.player.inventory.length; i++)  DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
                 DungeonMaster.inputCommand();
@@ -217,13 +218,18 @@ class wordUse {
         }
         
         else if(stuff.equals("enter")){
-            Point player = DungeonMaster.player.location;
+            Point players = DungeonMaster.player.location;
             Scene curScene = DungeonMaster.player.scene;
-            for (int i = 0; i < curScene.connectingScene.size(); i++) {
-                if (curScene.connectingScene.get(i).location == player) {
-                    DungeonMaster.player.scene = curScene.connectingScene.get(i);
+            boolean found = false;
+            for (int i = 0; i < curScene.doors.size(); i++) {
+                if (curScene.doors.get(i).location == players) {
+                    found = true;
+                    DungeonMaster.player.scene = curScene.doors.get(i).connectScene;
+                    System.out.println("System: You`re now in "+ curScene.doors.get(i).name);
                 }
             }
+            if(!found) System.out.println("System: No door here");
+            
         }
         
         else System.out.println("System: No command code found");

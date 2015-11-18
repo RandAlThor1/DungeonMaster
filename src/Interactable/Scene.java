@@ -11,21 +11,20 @@ import java.util.ArrayList;
  */
 public class Scene {//temp class for testing
     
-    public String name;
     public Actor[] actors = new Actor[0];//i really should make methods for this
     public Item[] inventory = new Item[20];
-    public ArrayList<Scene> connectingScene = new ArrayList<>();
+    public ArrayList<Door> doors = new ArrayList<>();
 
 
-    public Scene(String name) {
-        this.name = name;
+    public Scene() {
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
         }
     }
     
-    public void addDoor(Scene scene, Point location){ 
-        Door door = new Door(scene, location);
+    public void addDoor(Scene scene, Point location, String name){ 
+        Door door = new Door(location, scene, name);
+        doors.add(door);
     }
     
     public void addActor(Actor actor){

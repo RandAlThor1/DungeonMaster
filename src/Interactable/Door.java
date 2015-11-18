@@ -14,9 +14,18 @@ import java.awt.Point;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-class Door {
+public class Door {
 
-    public Door(Scene scene, Point location) {
+    public boolean locked;
+    public Point location; 
+    public Scene connectScene;
+    public String name;
+
+    public Door(Point location, Scene connectScene, String name) {
+        this.location = location;
+        this.connectScene = connectScene;
+        this.name = name;
     }
+    
 
 }

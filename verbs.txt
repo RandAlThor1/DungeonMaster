@@ -1,1 +1,1 @@
-go attack eat talk drop take loot equip check search walk move 
+go attack eat talk drop take loot equip check search walk move enter 

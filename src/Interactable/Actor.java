@@ -73,9 +73,22 @@ public class Actor {//temp class for testing
     }
 
     public void eat(Food food) {
-        this.stats.Health += food.heal;//need maximum
-        if (food.heal > 0)System.out.println("System: You recovered "+food.heal+"HP.");
+       
+        if (food.heal > 0 && this.stats.Health != this.stats.maxHealth){
+            System.out.println("System: You recovered "+food.heal+"HP.");
+            if (this.stats.Health != this.stats.maxHealth) {
+                this.stats.Health += food.heal;//need maximum
+            }
+        }
+        if (food.heal < 0){
+            System.out.println("System: You recovered "+food.heal+"HP.");
+            if (this.stats.Health != this.stats.maxHealth) {
+                this.stats.Health += food.heal;//need maximum
+            }
+        }
+        
         if (food.heal < 0)System.out.println("System: You lost "+food.heal+"HP.");
+        
     }
     
 }
