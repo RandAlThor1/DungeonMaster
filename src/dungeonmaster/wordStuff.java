@@ -13,6 +13,8 @@ package dungeonmaster;
  * Teacher: Mr. Wachs 
  */
 class wordStuff {
+    
+    Boolean help = true;
 
     static String[] verbs = textFiles.verbs; 
     static String[] nouns = textFiles.nouns; 
