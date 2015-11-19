@@ -14,9 +14,10 @@ import java.util.ArrayList;
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
     public static ArrayList<Stats> NPCstats = new ArrayList<>();
-            
+            get
     public static void addNPC(){
         allNPCs.add(new NPC("help"));
+        
         
     }
     /**
@@ -38,10 +39,18 @@ public class NpcOperations {
         }
         return -2;
     }
+    /**
+     * 
+     * @param name
+     * @return 
+     */
     public static int getNPCStatIndex(String name){
         int result = -1;
         if (!(NPCstats.isEmpty())) {
             return result;
+        }
+        else {
+            
         }
         int unitIndex = getNPCIndex(name);
         return -2;

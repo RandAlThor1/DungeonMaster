@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,14 +44,20 @@ public class textFiles {
      * @param String to be added to log
      * @throws FileNotFoundException
      */
-    static public void addToLog(String String) throws FileNotFoundException, IOException{
+    static public void addToLog(String String)throws IOException{
         String[] array = null;
         array = readFile("log.txt");
-        array[array.length + 1] = String;
-        try (PrintWriter writer = new PrintWriter("log.txt")) {
+        array[array.length] = String;
+        
+        try {
+            PrintWriter writer = new PrintWriter("log.txt");
             writer.println(Arrays.toString(array));
-        }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Yo dog there was an error adding that to the log!!!!!!");
+            //Logger.getLogger(textFiles.class.getName()).log(Level.SEVERE, null, ex);
+        }    
     }
+
     /**
      *
      * @param file
