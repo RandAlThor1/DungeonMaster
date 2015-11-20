@@ -37,8 +37,8 @@ public class DungeonMaster {
         player.stats = new Stats(20, 20, 20, 20, 20, 20, outside.actors.length);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        Scene theShack = new Scene(); outside.addDoor(theShack,new Point(12, 7), "the shack");
-        Scene maxsBar = new Scene(); outside.addDoor(maxsBar, new Point(3, 0), "max's bar");
+        Scene theShack = new Scene(); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), "the shack");
+        Scene maxsBar = new Scene(); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), "max's bar");
         Actor juliansMomsHouse = new Actor("mom's house", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);
@@ -56,9 +56,6 @@ public class DungeonMaster {
         Scanner s = new Scanner(System.in);
         String rawCommand = s.nextLine();
         rawCommand = rawCommand.toLowerCase();
-        if (rawCommand.equals("end")) {
-            System.exit(0);
-        }
         if (rawCommand.equals("")) {
             inputCommand();
         }
@@ -77,12 +74,12 @@ public class DungeonMaster {
         }
         if (!temp) {
             System.out.println("System: No command found");
-//            try {
-//                textFiles.addToLog(rawCommand);
-//            } catch (IOException ex) {
-//                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);      //This is breaking everything
-//            }
-//           System.out.println("error");
+            try {
+                textFiles.addToLog(rawCommand);
+            } catch (IOException ex) {
+                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);      //This is breaking everything
+            }
+           System.out.println("error");
             inputCommand();
         }
         
