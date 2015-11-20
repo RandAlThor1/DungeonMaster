@@ -10,7 +10,6 @@ package npcs;
  * @author b.allen
  */
 public class Stats {
-    public int UnitIndex;
     
     public int Strength;
     public int Constitution;
@@ -31,7 +30,7 @@ public class Stats {
     public int Speed;
     public int DodgeChance;
 
-    public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma, int UnitIndex) {
+    public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma) {
         this.Strength = Strength;
         this.Constitution = Constitution;
         this.Strength = Strength;

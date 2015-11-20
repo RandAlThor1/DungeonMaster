@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
-    public static ArrayList<Stats> NPCstats = new ArrayList<>();
-            get
+    //public static ArrayList<Stats> npcStats = new ArrayList<>(); //might remove
     public static void addNPC(){
-        allNPCs.add(new NPC("help"));
+        int temp = 15; //temp number for stats of a npc
+        allNPCs.add(new NPC("help",temp, temp, temp, temp, temp, temp, allNPCs.size())); // 
         
         
     }
@@ -43,16 +43,28 @@ public class NpcOperations {
      * 
      * @param name
      * @return 
+     * might just remove this method.
      */
-    public static int getNPCStatIndex(String name){
-        int result = -1;
-        if (!(NPCstats.isEmpty())) {
-            return result;
-        }
-        else {
-            
-        }
-        int unitIndex = getNPCIndex(name);
-        return -2;
+//    public static int getNPCStatIndex(String name){
+//        int result = -1;
+//        if (!(NPCstats.isEmpty())) {
+//            return result;
+//        }
+//        else {
+//            for (int i = 0; i < 10; i++) {
+//                
+//            }
+//        }
+//        int unitIndex = getNPCIndex(name);
+//        return -2;
+//    }
+    /**
+     * 
+     * @param string text for them to say
+     * @param npcName name of NPC in string
+     */
+    public static void npcTalk(String string, String npcName){
+        System.out.println(npcName + ": " + string);
     }
+    
 }

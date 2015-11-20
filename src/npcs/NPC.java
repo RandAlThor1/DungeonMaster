@@ -12,6 +12,7 @@ package npcs;
 public class NPC {
     String name;
     Stats stats;
+    PersonalityType personType;
     /**
      * 
      * @param name
@@ -29,5 +30,11 @@ public class NPC {
         this.name = name;
         this.stats = new Stats(strength, con, dex, intelli, wis, cha, unitIndex);
     }
+
+    public NPC(String name, Stats stats) {
+        this.name = name;
+        this.stats = stats;
+    }
+    
     
 }

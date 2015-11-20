@@ -10,7 +10,7 @@ package npcs;
  *
  * @author b.allen
  */
-public class PersonalityTypes {
+public class PersonalityType {
     boolean isExtroverted;
     boolean isIntuitive;
     boolean isThinking;
@@ -22,14 +22,17 @@ public class PersonalityTypes {
     final int SENTINEL = 3;
     final int EXPLORER= 4;
     
+    String type;
+    
 
-    public PersonalityTypes(int type) {
+    public PersonalityType(int type) {
              if (type == ANALYST) {
             isExtroverted = false;
             isIntuitive = true;
             isThinking = true;
             isJudging = true;
             isAssertive = true;
+            this.type = "ANALYST";
         }
         else if (type == DIPLOMAT) {
             isExtroverted = false;
@@ -37,6 +40,7 @@ public class PersonalityTypes {
             isThinking = false;
             isJudging = false;
             isAssertive = false;
+            this.type = "DIPLOMAT";
         }
         else if (type == SENTINEL) {
             isExtroverted = false;
@@ -44,6 +48,7 @@ public class PersonalityTypes {
             isThinking = true;
             isJudging = true;
             isAssertive = true;
+            this.type = "SETINEL";
         }
         else if (type == EXPLORER) {
             isExtroverted = false;
@@ -51,6 +56,7 @@ public class PersonalityTypes {
             isThinking = false;
             isJudging = false;
             isAssertive = false;
+            this.type = "EXPLORER";
         }
         else{
             System.out.println("you are a square");

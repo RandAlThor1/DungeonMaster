@@ -46,12 +46,13 @@ public class textFiles {
      */
     static public void addToLog(String String)throws IOException{
         String[] array = null;
+        String temp;
         array = readFile("log.txt");
-        array[array.length] = String;
-        
+        temp = Arrays.toString(array);
+        temp += String + " ";
         try {
             PrintWriter writer = new PrintWriter("log.txt");
-            writer.println(Arrays.toString(array));
+            writer.println(temp);
         } catch (FileNotFoundException ex) {
             System.out.println("Yo dog there was an error adding that to the log!!!!!!");
             //Logger.getLogger(textFiles.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,7 +61,7 @@ public class textFiles {
 
     /**
      *
-     * @param file
+     * @param file to be read
      * @return
      * @throws IOException
      */
