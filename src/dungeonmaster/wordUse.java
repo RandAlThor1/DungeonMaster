@@ -324,14 +324,67 @@ class wordUse {
                     }
                 }
                 
-            } 
+            }
+            else if (verb.equals("look")) {
+                String output = "";
+                Scene scene = null;
+                boolean possible = true;
+                if (command[index + 1].equals("around")) {
+                    scene = DungeonMaster.player.scene;
+                    System.out.println("System: You see :");
+                }
+                if (command[index + 2].equals("for")){
+                    if (command[index + 3].equals("items")){
+                        output += " Items: "; 
+                        for (int i = 0; i < scene.inventory.length; i++) {
+                            output += scene.inventory[i].name + ", ";
+                        }
+                        output = output.substring(0, output.length()-2)+".\n";
+                        System.out.println(output);
+                    }
+                    if (command[index + 3].equals("actors")){
+                        output += " Actors: "; 
+                        for (int i = 0; i < scene.actors.length; i++) {
+                            output += scene.actors[i].name + ", ";
+                        }
+                        output = output.substring(0, output.length()-2)+".\n";
+                        System.out.println(output);
+                    }
+                    if (command[index + 3].equals("places")){
+                        output += " Places: "; 
+                        for (int i = 0; i < scene.doors.size(); i++) {
+                            output += scene.doors.get(i).name + ", ";
+                        }
+                        output = output.substring(0, output.length()-2)+".";
+                        System.out.println(output);
+                    }
+                }
+                else{
+                    output += "Items: "; 
+                    for (int i = 0; i < scene.inventory.length; i++) {
+                        output += scene.inventory[i].name + ", ";
+                    }
+                    output = output.substring(0, output.length()-2)+".\n";
+                    output += "Actors: "; 
+                    for (int i = 0; i < scene.actors.length; i++) {
+                        output += scene.actors[i].name + ", ";
+                    }
+                    output = output.substring(0, output.length()-2)+".\n";
+                    output += "Places: "; 
+                    for (int i = 0; i < scene.doors.size(); i++) {
+                        output += scene.doors.get(i).name + ", ";
+                    }
+                    output = output.substring(0, output.length()-2)+".";
+                    System.out.println(output);
+                }
+            }
             else {
                 System.out.println("System: No command code found");
             }
         }
         DungeonMaster.inputCommand();
     }
-
+   
     public static boolean isNum(String string) {
         boolean ret = true;
         try {
