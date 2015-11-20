@@ -13,17 +13,10 @@ import java.util.ArrayList;
  */
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
-<<<<<<< HEAD
     //public static ArrayList<Stats> npcStats = new ArrayList<>(); //might remove
     public static void addNPC(){
         int temp = 15; //temp number for stats of a npc
-        allNPCs.add(new NPC("help",temp, temp, temp, temp, temp, temp, allNPCs.size())); // 
-=======
-    public static ArrayList<Stats> NPCstats = new ArrayList<>();
-            //get
-    public static void addNPC(){
-        //allNPCs.add(new NPC("help"));
->>>>>>> b02bde4c806ec5310c196d7428dc08de8fc00c80
+        allNPCs.add(new NPC("help",temp, temp, temp, temp, temp, temp)); // 
         
         
     }

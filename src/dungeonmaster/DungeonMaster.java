@@ -34,7 +34,7 @@ public class DungeonMaster {
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
         player = new Actor("go fuck yourself", new Point(0, 0), outside);
-        player.stats = new Stats(20, 20, 20, 20, 20, 20, outside.actors.length);
+        player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
         Scene theShack = new Scene(); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), "the shack");
