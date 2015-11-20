@@ -15,7 +15,7 @@ import java.awt.Point;
  */
 class wordUse {
 
-    static void checkVerbs(String stuff, String[] command, int index) {
+    static void checkVerbs(String stuff, String[] command, int index) throws IndexOutOfBoundsException{
         
         if (stuff.equals("go")&& command[index+1].equals("to")) {
             Scene curScene = DungeonMaster.player.scene;

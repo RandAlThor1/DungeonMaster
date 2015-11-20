@@ -5,7 +5,7 @@
  */
 package dungeonmaster;
 
-import Interactable.Stats;
+import npcs.Stats;
 import Interactable.Actor;
 import Interactable.Food;
 import Interactable.Scene;
@@ -34,7 +34,7 @@ public class DungeonMaster {
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
         player = new Actor("go fuck yourself", new Point(0, 0), outside);
-        player.stats = new Stats(20, 20, 20, 20, 20, 20);
+        player.stats = new Stats(20, 20, 20, 20, 20, 20, outside.actors.length);
         Actor theTree = new Actor("the tree", new Point(1, 1), outside);
         Actor theHill = new Actor("the hill", new Point(5, 5), outside);
         Scene theShack = new Scene(); outside.addDoor(theShack,new Point(12, 7), "the shack");
@@ -70,8 +70,7 @@ public class DungeonMaster {
             for (int j = 0; j < command.length; j++) {
                 if (CommandProcessing.Words[0][i].equalsIgnoreCase(command[j])){
                     temp = true;
-                    if(command.length != 1) wordUse.checkVerbs(CommandProcessing.Words[1][i],command, j);
-                    else temp = false;
+                    wordUse.checkVerbs(CommandProcessing.Words[1][i],command, j);
                     break;
                 }
             } 

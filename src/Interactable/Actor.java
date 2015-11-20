@@ -1,7 +1,7 @@
 package Interactable;
 
 import java.awt.Point;
-import java.awt.datatransfer.DataFlavor;
+import npcs.Stats;
 
 /**
  * Project:
@@ -25,7 +25,7 @@ public class Actor {//temp class for testing
         this.scene = scene;
         this.scene.addActor(this);
         isLootable = false; 
-        stats = new Stats(10, 10, 10, 10, 10, 10);//I hate Ben.
+        stats = new Stats(10, 10, 10, 10, 10, 10,this.scene.actors.length);//Ben, how is unitIndex ment to work?
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
         }
