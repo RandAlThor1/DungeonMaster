@@ -21,12 +21,14 @@ public class Door {
     public Point connectPoint; 
     public Scene connectScene;
     public String name;
+    public String niceName;
 
     public Door(Point location,Point connectPoint , Scene connectScene, String name) {
         this.location = location;
         this.connectScene = connectScene;
         this.connectPoint = connectPoint;
-        this.name = name;
+        this.niceName = name;
+        this.name = name.toLowerCase();
     }
     
 

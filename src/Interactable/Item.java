@@ -17,9 +17,11 @@ import java.awt.Point;
 public class Item {
 
     public String name;
+    public String niceName;
     public Point location;
     public Item(String name) {
-        this.name = name;
+        this.niceName = name;
+        this.name = name.toLowerCase();
     }
     
     public void eat(Actor actor){}

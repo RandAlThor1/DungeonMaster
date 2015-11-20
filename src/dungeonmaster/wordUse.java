@@ -34,7 +34,7 @@ class wordUse {
                     if (curScene.doors.get(i).location == players) {
                         found = true;
                         DungeonMaster.player.scene = curScene.doors.get(i).connectScene;
-                        System.out.println("System: You`re now in " + curScene.doors.get(i).name);
+                        System.out.println("System: You`re now in " + curScene.doors.get(i).niceName);
                     }
                 }
                 if (!found) {
@@ -193,7 +193,7 @@ class wordUse {
                     for (int i = 0; i < inventory.length; i++) {
                         if (!inventory[i].name.equals("empty")) {
                             empty = false;
-                            output += inventory[i].name + ", ";
+                            output += inventory[i].niceName + ", ";
                         }
                     }
                     if (empty) {
@@ -233,7 +233,7 @@ class wordUse {
                         for (int i = 0; i < actor.inventory.length; i++) {
                             if (!actor.inventory[i].name.equals("empty")) {
                                 empty = false;
-                                output += actor.inventory[i].name + ", ";
+                                output += actor.inventory[i].niceName + ", ";
                                 DungeonMaster.player.invenAdd(actor.inventory[i]);
                                 actor.invenRemov(actor.inventory[i]);
                             }
@@ -286,7 +286,7 @@ class wordUse {
                     food = DungeonMaster.player.invenFind(foodName);
                     if (food != null) {
                         if (food.getClass().equals(testFood.getClass())) {
-                            System.out.println("System: You ate " + food.name);
+                            System.out.println("System: You ate " + food.niceName);
                             DungeonMaster.player.eat((Food) food);
                             DungeonMaster.player.invenRemov(food);
                         } 
@@ -327,53 +327,76 @@ class wordUse {
             }
             else if (verb.equals("look")) {
                 String output = "";
-                Scene scene = null;
-                boolean possible = true;
-                if (command[index + 1].equals("around")) {
-                    scene = DungeonMaster.player.scene;
-                    System.out.println("System: You see :");
-                }
-                if (command[index + 2].equals("for")){
-                    if (command[index + 3].equals("items")){
+                Scene scene = DungeonMaster.player.scene;
+                boolean nothing = true;
+                if (command.length-index >= 2 && command[index + 1].equals("for")){
+                    if (command[index + 2].equals("items")){
+                        System.out.println("System: You see: ");
                         output += " Items: "; 
                         for (int i = 0; i < scene.inventory.length; i++) {
-                            output += scene.inventory[i].name + ", ";
+                            if (!scene.inventory[i].name.equals("empty")) {
+                                output += scene.inventory[i].niceName + ", ";
+                                nothing = false;
+                            }     
                         }
-                        output = output.substring(0, output.length()-2)+".\n";
+                        if (nothing) output += "nothing  ";
+                        output = output.substring(0, output.length()-2)+".";
                         System.out.println(output);
+                        nothing = true;
                     }
-                    if (command[index + 3].equals("actors")){
+                    if (command[index + 2].equals("actors")){
+                        System.out.println("System: You see: ");
                         output += " Actors: "; 
                         for (int i = 0; i < scene.actors.length; i++) {
-                            output += scene.actors[i].name + ", ";
+                            if(scene.actors[i] != DungeonMaster.player){
+                                output += scene.actors[i].niceName + ", ";
+                                nothing = false;
+                            }
                         }
-                        output = output.substring(0, output.length()-2)+".\n";
+                        if (nothing) output += "nothing  ";
+                        output = output.substring(0, output.length()-2)+".";
                         System.out.println(output);
                     }
-                    if (command[index + 3].equals("places")){
+                    if (command[index + 2].equals("places")){
+                        System.out.println("System: You see: ");
                         output += " Places: "; 
                         for (int i = 0; i < scene.doors.size(); i++) {
-                            output += scene.doors.get(i).name + ", ";
+                            output += scene.doors.get(i).niceName + ", ";
+                            nothing = false;
                         }
+                        if (nothing) output += "nothing  ";
                         output = output.substring(0, output.length()-2)+".";
                         System.out.println(output);
                     }
                 }
-                else{
-                    output += "Items: "; 
+                else if(command[index + 1].equals("around")){
+                    System.out.println("System: You see: ");
+                    output += " Items: "; 
                     for (int i = 0; i < scene.inventory.length; i++) {
-                        output += scene.inventory[i].name + ", ";
+                        if (!scene.inventory[i].name.equals("empty")) {
+                            output += scene.inventory[i].niceName + ", ";
+                            nothing = false;
+                        }     
                     }
+                    if (nothing) output += "nothing  ";
                     output = output.substring(0, output.length()-2)+".\n";
-                    output += "Actors: "; 
+                    nothing = true;
+                    output += " Actors: "; 
                     for (int i = 0; i < scene.actors.length; i++) {
-                        output += scene.actors[i].name + ", ";
+                        if(scene.actors[i] != DungeonMaster.player){
+                            output += scene.actors[i].niceName + ", ";
+                            nothing = false;
+                        }
                     }
+                    if (nothing) output += "nothing  ";
                     output = output.substring(0, output.length()-2)+".\n";
-                    output += "Places: "; 
+                    nothing = true;
+                    output += " Places: "; 
                     for (int i = 0; i < scene.doors.size(); i++) {
-                        output += scene.doors.get(i).name + ", ";
+                        output += scene.doors.get(i).niceName + ", ";
+                        nothing = false;
                     }
+                    if (nothing) output += "nothing  ";
                     output = output.substring(0, output.length()-2)+".";
                     System.out.println(output);
                 }

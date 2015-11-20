@@ -12,6 +12,7 @@ import npcs.Stats;
 public class Actor {//temp class for testing
 
     public String name;
+    public String niceName;
     public Point location;
     public Scene scene;
     public Item[] inventory = new Item[20];
@@ -20,7 +21,8 @@ public class Actor {//temp class for testing
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
     public Actor(String name, Point location, Scene scene) {//temp method for testing
-        this.name = name;
+        this.niceName = name;
+        this.name = name.toLowerCase();
         this.location = location;
         this.scene = scene;
         this.scene.addActor(this);

@@ -35,19 +35,19 @@ public class DungeonMaster {
         //String playerName = s.nextLine();
         player = new Actor("go fuck yourself", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
-        Actor theTree = new Actor("the tree", new Point(1, 1), outside);
-        Actor theHill = new Actor("the hill", new Point(5, 5), outside);
-        Scene theShack = new Scene(); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), "the shack");
-        Scene maxsBar = new Scene(); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), "max's bar");
-        Actor juliansMomsHouse = new Actor("mom's house", new Point(100, 100), outside);
+        Actor theTree = new Actor("The Tree", new Point(1, 1), outside);
+        Actor theHill = new Actor("The Hill", new Point(5, 5), outside);
+        Scene theShack = new Scene(); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), "The Shack");
+        Scene maxsBar = new Scene(); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), "Max's Bar");
+        Actor juliansMomsHouse = new Actor("Mom's House", new Point(100, 100), outside);
         //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
         //Actor arena = new Actor("the arena", new Point(32, 16), outside);
         //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
-        Actor actualEnemy = new Actor("boar", player.location, outside);
+        Actor actualEnemy = new Actor("The Boar", player.location, maxsBar);
         
-        juliansMomsHouse.invenAdd(new Food("the bread", 10, juliansMomsHouse));
-        juliansMomsHouse.invenAdd(new Food("the apple", 5, juliansMomsHouse));
-        juliansMomsHouse.invenAdd(new Food("john's cookie", -20, -20, -20, 20, juliansMomsHouse));//john's a dick
+        juliansMomsHouse.invenAdd(new Food("The Bread", 10, juliansMomsHouse));
+        juliansMomsHouse.invenAdd(new Food("The Apple", 5, juliansMomsHouse));
+        juliansMomsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, juliansMomsHouse));//john's a dick
         
         System.out.println("System: Enter a command below");
         inputCommand();
