@@ -18,12 +18,14 @@ public class Door {
 
     public boolean locked;
     public Point location; 
+    public Point connectPoint; 
     public Scene connectScene;
     public String name;
 
-    public Door(Point location, Scene connectScene, String name) {
+    public Door(Point location,Point connectPoint , Scene connectScene, String name) {
         this.location = location;
         this.connectScene = connectScene;
+        this.connectPoint = connectPoint;
         this.name = name;
     }
     

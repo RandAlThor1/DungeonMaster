@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
     public static ArrayList<Stats> NPCstats = new ArrayList<>();
-            get
+            //get
     public static void addNPC(){
-        allNPCs.add(new NPC("help"));
+        //allNPCs.add(new NPC("help"));
         
         
     }

@@ -22,8 +22,8 @@ public class Scene {//temp class for testing
         }
     }
     
-    public void addDoor(Scene scene, Point location, String name){ 
-        Door door = new Door(location, scene, name);
+    public void addDoor(Scene scene, Point connectPoint, Point location, String name){ 
+        Door door = new Door(location, connectPoint, scene, name);
         doors.add(door);
     }
     
