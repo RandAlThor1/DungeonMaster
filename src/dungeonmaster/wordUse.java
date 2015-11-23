@@ -34,6 +34,7 @@ class wordUse {
                     if (curScene.doors.get(i).location == players) {
                         found = true;
                         DungeonMaster.player.scene = curScene.doors.get(i).connectScene;
+                        DungeonMaster.player.location = curScene.doors.get(i).connectPoint;
                         System.out.println("System: You`re now in " + curScene.doors.get(i).niceName);
                     }
                 }
@@ -64,18 +65,32 @@ class wordUse {
                 for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
                     place += command[index + 1 + i];
                     actorIndex = curScene.findActor(place);
-                    if (actorIndex != -1) {
-                        found = true;
-                    }
-                    if (found) {
-                        break;
-                    } 
-                    else {
-                        place += " ";
-                    }
+                    if (actorIndex != -1) {found = true; break;}
+                    else place += " ";
                 }
                 if (found) {
                     DungeonMaster.player.location = curScene.actors[actorIndex].location;
+                    System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+                    for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
+                        DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+                    }
+                    DungeonMaster.inputCommand();
+                }
+                int itemIndex = -1;
+                if (!found){
+                    
+                    String item = "";
+                    for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
+                        item += command[index + 1 + i];
+                        for (int j = 0; j < curScene.inventory.length; j++) {
+                            if (curScene.inventory[i].name.equals(item)) {itemIndex = i; break;}
+                        }
+                        if (itemIndex != -1) {found = true; break;}
+                        else item += " ";
+                    }
+                }
+                if (found) {
+                    DungeonMaster.player.location = curScene.inventory[itemIndex].location;
                     System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
                     for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
                         DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
@@ -92,12 +107,8 @@ class wordUse {
                                 found = true;;
                             }
                         }
-                        if (found) {
-                            break;
-                        } 
-                        else {
-                            place += " ";
-                        }
+                        if (found) break;
+                        else place += " ";
                     }
                 }
                 if (found) {
