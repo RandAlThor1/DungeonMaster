@@ -47,6 +47,15 @@ class wordUse {
             }
         } 
         else {
+            if (verb.equals("go") && command[index + 1].equals("in")) {
+                String[] temp = new String[command.length-1];
+                for (int i = 0; i < temp.length; i++) { 
+                    if (i == index) temp[i] = "enter";
+                    else if (i < index+1) temp[i] = command[i];
+                    else temp[i] = command[i+1];
+                }
+                checkVerbs("enter", temp, index);
+            }
             if (verb.equals("go") && command[index + 1].equals("to")) {
                 Scene curScene = DungeonMaster.player.scene;
                 int actorIndex = -1;
