@@ -27,7 +27,7 @@ public class Scene {//temp class for testing
     }
     
     public void addDoor(Scene scene, Point connectPoint, Point location, boolean moreDoors){ 
-        Door door = new Door(location, connectPoint, scene, scene.name);
+        Door door = new Door(location, connectPoint, scene, scene.niceName);
         doors.add(door);
         if (moreDoors) scene.addDoor(this, location, connectPoint, false);
     }

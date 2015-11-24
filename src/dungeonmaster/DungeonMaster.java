@@ -26,10 +26,17 @@ public class DungeonMaster {
      */
     static Scene outside;
     static Actor player;
+    static boolean help;
     public static void main(String[] args) throws IOException {
         new textFiles();
         new CommandProcessing();
         outside = new Scene("Outside");
+        System.out.println("System: Help Mode?(Y/N)");
+        Scanner s = new Scanner(System.in);
+        String helpMode = s.nextLine();
+        if(helpMode.equals("Y")||helpMode.equals("Yes")) help = true;
+        else if(helpMode.equals("N")||helpMode.equals("No")) help = false;
+        else System.out.println("System: Invalid input, continuing");
         //System.out.println("System: Enter your name");
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
