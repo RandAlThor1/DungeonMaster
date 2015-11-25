@@ -81,5 +81,26 @@ public class textFiles {
 
     return array;
     }
+    static public String[] readFile(String file, boolean temp) throws IOException{
+    BufferedReader reader = new BufferedReader( new FileReader (file));
+    String         line = null;
+    StringBuilder  stringBuilder = new StringBuilder();
+    String         ls = System.getProperty("line.separator");
+
+    while((line = reader.readLine())!= null){
+        stringBuilder.append(line);
+        stringBuilder.append(ls);
+    }
+    String result = stringBuilder.toString();
+    String[] array;
+    array = result.split("\n");
+
+    return array;
+    }
+    static public void displayHelp() throws IOException{
+        String[] array;
+        array = readFile("help.txt", true);
+        System.out.println(Arrays.toString(array));
+    }
 }
 
