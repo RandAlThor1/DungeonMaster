@@ -26,7 +26,7 @@ public class DungeonMaster {
      */
     static Scene outside;
     static Actor player;
-    static boolean help;
+    static boolean help = false;
     public static void main(String[] args) throws IOException {
         new textFiles();
         new CommandProcessing();
@@ -34,24 +34,19 @@ public class DungeonMaster {
         System.out.println("System: Help Mode?(Y/N)");
         Scanner s = new Scanner(System.in);
         String helpMode = s.nextLine();
-        if(helpMode.equals("Y")||helpMode.equals("Yes")) help = true;
-        else if(helpMode.equals("N")||helpMode.equals("No")) help = false;
-        else System.out.println("System: Invalid input, continuing");
+        if(helpMode.equalsIgnoreCase("y")||helpMode.equalsIgnoreCase("yes")) help = true;
+        else if(helpMode.equalsIgnoreCase("n")||helpMode.equalsIgnoreCase("no")) help = false;
+        else System.out.println("System: Invalid input, defulting to No");
         //System.out.println("System: Enter your name");
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
         player = new Actor("player", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
-        Actor theTree = new Actor("The Tree", new Point(1, 1), outside);
-        Actor theHill = new Actor("The Hill", new Point(5, 5), outside);
         Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
         Scene maxsBar = new Scene("Max's Bar"); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), true);
         Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
-        Actor juliansMomsHouse = new Actor("Mom's House", new Point(100, 100), outside);
-        //Actor thePetShop = new Actor("the pet shop", new Point(7, 4), outside);
-        //Actor arena = new Actor("the arena", new Point(32, 16), outside);
-        //Actor potionsShop = new Actor("the potion shop", new Point(23, 14), outside);
-        Actor actualEnemy = new Actor("The Boar", player.location, maxsBar);
+        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
+        Actor actualEnemy = new Actor("Boar", player.location, outside);
         
         actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
         actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
@@ -59,9 +54,9 @@ public class DungeonMaster {
         
         for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));           
         
-        
         System.out.println("System: Enter a command below");
-        inputCommand();
+        String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
+        wordUse.checkVerbs("look",temp, 0);
     }
        static public void inputCommand(){
         Scanner s = new Scanner(System.in);
@@ -85,12 +80,13 @@ public class DungeonMaster {
         }
         if (!temp) {
             System.out.println("System: No command found");
+            if (DungeonMaster.help)System.out.println("Help: No action found in input");
             try {
                 textFiles.addToLog(rawCommand);
             } catch (IOException ex) {
-                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);      //This is breaking everything
+                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("error");
             }
-           System.out.println("error");
             inputCommand();
         }
         

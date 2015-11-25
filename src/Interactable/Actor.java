@@ -9,7 +9,7 @@ import npcs.Stats;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-public class Actor {//temp class for testing
+public class Actor {
 
     public String name;
     public String niceName;
@@ -20,7 +20,7 @@ public class Actor {//temp class for testing
     //public Wepon[] invenWep;
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
-    public Actor(String name, Point location, Scene scene) {//temp method for testing
+    public Actor(String name, Point location, Scene scene) {
         this.niceName = name;
         this.name = name.toLowerCase();
         this.location = location;
@@ -33,9 +33,6 @@ public class Actor {//temp class for testing
         }
     }
 
-    public boolean equals(Actor actor) {
-        return this.name.equals(actor.name) && this.location == actor.location;
-    }
   
     public void invenAdd(Item item){
         for (int i = 0; i < this.inventory.length ; i++) {

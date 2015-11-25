@@ -171,6 +171,7 @@ class wordUse {
                 } 
                 else {
                     System.out.println("System: Location not found");
+                    if (DungeonMaster.help)System.out.println("Help: Try Look Around");
                 }
             } 
             else if (verb.equals("drop")) {
@@ -190,6 +191,7 @@ class wordUse {
                     }
                     if ((i == 3 || i == command.length - index - 1) && item == null) {
                         System.out.println("System: Item not found");
+                        if (DungeonMaster.help)System.out.println("Help: Given item isn't in your inventory");
                     }
                 }
 
@@ -208,6 +210,7 @@ class wordUse {
                         } 
                         else {
                             System.out.println("System: Can't pick that up from here");
+                            if (DungeonMaster.help)System.out.println("Help: Try Go To-");
                         }
                         break;
                     } 
@@ -242,6 +245,7 @@ class wordUse {
                             } 
                             else {
                                 System.out.println("System: You can't check that form here");
+                                if (DungeonMaster.help)System.out.println("Help: Try Go To-");
                                 possible = false;
                             }
                             break;
@@ -269,6 +273,7 @@ class wordUse {
                 }
                 if (inventory == null && possible) {
                     System.out.println("System: Actor not found");
+                    if (DungeonMaster.help)System.out.println("Help: Given actor isn't in your current scene");
                 }
             } 
             else if (verb.equals("loot")) {
@@ -283,6 +288,7 @@ class wordUse {
                         if (!actor.location.equals(DungeonMaster.player.location)) {
                             possible = false;
                             System.out.println("System: You can't loot that from here");
+                            if (DungeonMaster.help)System.out.println("Help: Try Go To-");
                         }
                     } 
                     else {
@@ -311,6 +317,7 @@ class wordUse {
                     } 
                     else {
                         System.out.println("System: It's still alive, you'll have to fight it!");
+                        if (DungeonMaster.help)System.out.println("Help: Try attack- first");
                         DungeonMaster.player.fight(actor);
                     }
                 }
@@ -330,6 +337,7 @@ class wordUse {
                         } 
                         else {
                             System.out.println("You can't attack that from here");
+                            if (DungeonMaster.help)System.out.println("Help: Try Go To-");
                         }
                     } 
                     else {
@@ -337,6 +345,7 @@ class wordUse {
                     }
                     if ((i == 3 || i == command.length - index - 1) && actorIndex == -1) {
                         System.out.println("System: Actor not found");
+                        if (DungeonMaster.help)System.out.println("Help: Given actor not found in current scene");
                     }
                 }
             } 
@@ -355,6 +364,7 @@ class wordUse {
                         } 
                         else {
                             System.out.println("System: You can't eat that");
+                            if (DungeonMaster.help)System.out.println("Help: That item isn't food");
                         }
                     } 
                     else {
@@ -362,6 +372,7 @@ class wordUse {
                     }
                     if ((i == 3 || i == command.length - index - 1) && food == null) {
                         System.out.println("System: Item not found");
+                        if (DungeonMaster.help)System.out.println("Help: Given item not found in your inventory");
                     }
                 }
                 testFood = null;
@@ -383,7 +394,8 @@ class wordUse {
                         DungeonMaster.player.location = door.connectPoint;
                     } 
                     if ((i == 3 || i == command.length - index - 1) && !found) {
-                        System.out.println("System: Item not found");
+                        System.out.println("System: Door not found");
+                        if (DungeonMaster.help)System.out.println("Help: Given door not found in current scene");
                     }
                 }
                 
@@ -466,6 +478,7 @@ class wordUse {
             }
             else {
                 System.out.println("System: No command code found");
+                if (DungeonMaster.help)System.out.println("Help: Code error");
             }
         }
         DungeonMaster.inputCommand();
