@@ -25,56 +25,65 @@ public class DungeonMaster {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    static Scene outside;
-    static Actor player;
-    static boolean help = false;
-    static String intro = "Your king recived reports that the town of Rickton has been taken over by unknown forces.\n"
-            + " Your mission is to find this force and romove them from the town.";
+    public static String textFolder = "";
+    public static Scene outside;
+    public static Actor player;
+    public static boolean help = false;
+    public static String intro = "";
     public static void main(String[] args) throws IOException {
-        new textFiles();
-        new CommandProcessing();
+        startGame();
+        //System.out.println("System: Enter your name");
+        //Scanner s = new Scanner(System.in);
+        //String playerName = s.nextLine();
         outside = new Scene("Outside");
+        player = new Actor("player", new Point(0, 0), outside);
+        player.stats = new Stats(20, 20, 20, 20, 20, 20);
+//        Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
+//        Scene maxsBar = new Scene("Max's Bar"); 
+//        Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
+//        outside.addDoor(maxsBarDoor, true);
+//        
+//        Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
+//        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
+//        kingBoar.death = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                System.out.println("Story: You win!");
+//                System.exit(0);
+//            }
+//        };
+//        Actor actualEnemy = new Actor("Boar", player.location, outside);
+//        actualEnemy.addKey(maxsBarDoor);
+//        
+//        actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
+//        actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
+//        actualEnemy.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, actualEnemy));//john's a dick
+//        
+//        for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));           
+//        
+        System.out.println("Story: "+intro);
+        System.out.println("System: Enter a command below");
+        String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
+        wordUse.checkVerbs("look",temp, 0);
+    }
+    static public void startGame(){
+        try {
+            new textFiles(textFolder);
+            new CommandProcessing();
+        } catch (IOException ex) {
+            System.out.println("Error reading text files");
+            System.exit(0);
+        }
         System.out.println("System: Help Mode?(Y/N)");
         Scanner s = new Scanner(System.in);
         String helpMode = s.nextLine();
         if(helpMode.equalsIgnoreCase("y")||helpMode.equalsIgnoreCase("yes")) help = true;
         else if(helpMode.equalsIgnoreCase("n")||helpMode.equalsIgnoreCase("no")) help = false;
         else System.out.println("System: Invalid input, defulting to No");
-        //System.out.println("System: Enter your name");
-        //Scanner s = new Scanner(System.in);
-        //String playerName = s.nextLine();
-        player = new Actor("player", new Point(0, 0), outside);
-        player.stats = new Stats(20, 20, 20, 20, 20, 20);
-        Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
-        Scene maxsBar = new Scene("Max's Bar"); 
-        Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
-        outside.addDoor(maxsBarDoor, true);
-        
-        Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
-        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
-        kingBoar.death = new Runnable() {
-
-            @Override
-            public void run() {
-                System.out.println("Story: You win!");
-                System.exit(0);
-            }
-        };
-        Actor actualEnemy = new Actor("Boar", player.location, outside);
-        actualEnemy.addKey(maxsBarDoor);
-        
-        actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
-        actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
-        actualEnemy.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, actualEnemy));//john's a dick
-        
-        for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));           
-        
-        System.out.println("Story: "+intro);
-        System.out.println("System: Enter a command below");
-        String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
-        wordUse.checkVerbs("look",temp, 0);
     }
-       static public void inputCommand(){
+    
+    static public void inputCommand(){
         Scanner s = new Scanner(System.in);
         String rawCommand = s.nextLine();
         rawCommand = rawCommand.toLowerCase();

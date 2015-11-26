@@ -22,10 +22,10 @@ public class textFiles {
     public static String[] verbs;
     public static String[] nouns;
     public static String[] adj;
-    textFiles() throws IOException{
-        this.verbs = readFile("verbs.txt");
-        this.nouns = readFile("nouns.txt");
-        this.adj = readFile("adj.txt");
+    textFiles(String folder) throws IOException{
+        this.verbs = readFile(folder+"verbs.txt");
+        this.nouns = readFile(folder+"nouns.txt");
+        this.adj = readFile(folder+"adj.txt");
     }
 
     /**
