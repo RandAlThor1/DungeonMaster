@@ -27,6 +27,8 @@ public class DungeonMaster {
     static Scene outside;
     static Actor player;
     static boolean help = false;
+    static String intro = "Your king recived reports that the town of Rickton has been taken over by unknown forces.\n"
+            + " Your mission is to find this force and romove them from the town.";
     public static void main(String[] args) throws IOException {
         new textFiles();
         new CommandProcessing();
@@ -43,9 +45,17 @@ public class DungeonMaster {
         player = new Actor("player", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
-        Scene maxsBar = new Scene("Max's Bar"); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), true);
+        Scene maxsBar = new Scene("Max's Bar"); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), true, true);
         Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
         Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
+        kingBoar.death = new Runnable() {
+
+            @Override
+            public void run() {
+                System.out.println("Story: You win!");
+                System.exit(0);
+            }
+        };
         Actor actualEnemy = new Actor("Boar", player.location, outside);
         
         actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
@@ -54,6 +64,7 @@ public class DungeonMaster {
         
         for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));           
         
+        System.out.println("Story: "+intro);
         System.out.println("System: Enter a command below");
         String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
         wordUse.checkVerbs("look",temp, 0);

@@ -1,6 +1,9 @@
 package Interactable;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Action;
 import npcs.Stats;
 
 /**
@@ -17,6 +20,14 @@ public class Actor {
     public Scene scene;
     public Item[] inventory = new Item[20];
     public Stats stats;
+    public Runnable death = new Runnable() {
+
+        @Override
+        public void run() {
+            isLootable = true;
+            niceName += "(dead)";
+        }
+    };
     //public Wepon[] invenWep;
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
@@ -62,11 +73,15 @@ public class Actor {
     
     public void fight(Actor actor){//we need to figure out how combat works; 
         if (this.location.equals(actor.location)) {
+            if (actor.stats.Health > 0) {
             actor.stats.Health = 0;//instakill
-            actor.isLootable = true;
+            actor.death.run();
             int xp = 10;
             //this.stats.xp += xp; why xp not a thing?
-            System.out.println("System: Fight won! Gained " + xp + "XP.");
+            System.out.println("System: Fight won! Gained " + xp + "XP.");    
+            }
+            else System.out.println("System: Your target is dead");   
+            
         }
         else System.out.println("System: You can't attack that from here.");
     }
@@ -83,7 +98,7 @@ public class Actor {
             System.out.println("System: You lost "+food.heal*-1+"HP.");
             this.stats.Health += food.heal;
         }
-        
     }
+
     
 }

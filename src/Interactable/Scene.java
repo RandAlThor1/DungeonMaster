@@ -31,6 +31,16 @@ public class Scene {//temp class for testing
         doors.add(door);
         if (moreDoors) scene.addDoor(this, location, connectPoint, false);
     }
+    public void addDoor(Scene scene, Point connectPoint, Point location, boolean moreDoors, boolean locked){ 
+        Door door = new Door(location, connectPoint, scene, scene.niceName);
+        door.locked = true;
+        doors.add(door);
+        if (moreDoors) scene.addDoor(this, location, connectPoint, false);
+    }
+    public void addKey(String name, Door door, Point location){
+        Key key = new Key(name, door, location);
+        this.invenAdd(key);
+    } 
     
     public void addActor(Actor actor){
         Actor[] temp = new Actor[actors.length+1];
