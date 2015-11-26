@@ -30,10 +30,9 @@ public class Door {
         this.niceName = name;
         this.name = name.toLowerCase();
     }
-        public void addKey(Actor actor){
-        Key key = new Key(this.name, this);
-        actor.invenAdd(key);
-    } 
+    
+
+
     
 
 }

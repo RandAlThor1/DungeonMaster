@@ -44,6 +44,11 @@ public class Actor {
         }
     }
 
+    public void addKey(Door door){
+        Key key = new Key(door.niceName, door);
+        this.invenAdd(key);
+        key.location = this.location;
+    } 
   
     public void invenAdd(Item item){
         for (int i = 0; i < this.inventory.length ; i++) {

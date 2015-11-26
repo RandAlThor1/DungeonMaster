@@ -7,6 +7,7 @@ package dungeonmaster;
 
 import npcs.Stats;
 import Interactable.Actor;
+import Interactable.Door;
 import Interactable.Food;
 import Interactable.Scene;
 import java.awt.Point;
@@ -45,7 +46,10 @@ public class DungeonMaster {
         player = new Actor("player", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
-        Scene maxsBar = new Scene("Max's Bar"); outside.addDoor(maxsBar, new Point(0, 0),new Point(3, 0), true, true);
+        Scene maxsBar = new Scene("Max's Bar"); 
+        Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
+        outside.addDoor(maxsBarDoor, true);
+        
         Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
         Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
         kingBoar.death = new Runnable() {
@@ -57,6 +61,7 @@ public class DungeonMaster {
             }
         };
         Actor actualEnemy = new Actor("Boar", player.location, outside);
+        actualEnemy.addKey(maxsBarDoor);
         
         actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
         actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));

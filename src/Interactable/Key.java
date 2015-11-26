@@ -12,14 +12,13 @@ public class Key extends Item{
     public Door door;
     
     public Key(String name, Door door, Point location) {
-        super(name);
+        super(name + " Key");
         this.location = location;
         this.door = door;
     }    
     
     public Key(String name, Door door) {
-        super(name);
-        this.location = actor.location;
+        super(name + " Key");
         this.door = door;
     }    
       
