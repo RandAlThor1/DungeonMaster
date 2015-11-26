@@ -15,7 +15,7 @@ import java.util.Arrays;
  *
  * @author Davin Date: 02/10/2015 Teacher: Mr. Wachs
  */
-class wordUse {
+public class wordUse {
 
     /**
      * Checks if the given verb and command are valid and runs the code.  
@@ -23,7 +23,7 @@ class wordUse {
      * @param command the full command entered
      * @param index the index of the verb in the command
      */
-    static void checkVerbs(String verb, String[] command, int index){
+    public static void checkVerbs(String verb, String[] command, int index){
 
         if (command.length == 1) {
             if (verb.equals("end")) {
