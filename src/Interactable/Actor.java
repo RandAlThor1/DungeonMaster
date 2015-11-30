@@ -20,6 +20,7 @@ public class Actor {
     public Scene scene;
     public Item[] inventory = new Item[20];
     public Stats stats;
+    public int gold; 
     public Runnable death = new Runnable() {
 
         @Override

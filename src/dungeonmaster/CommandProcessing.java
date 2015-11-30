@@ -50,7 +50,7 @@ public class CommandProcessing {
             else if ("search".equals(Words[0][i])){
                 CommandProcessing.Words[1][i] = "check";
             }
-            else if ("kill".equals(Words[0][i])){
+            else if ("kill".equals(Words[0][i]) || "fight".equals(Words[0][i])){
                 CommandProcessing.Words[1][i] = "attack";
             }
             else if ("exit".equals(Words[0][i])){
