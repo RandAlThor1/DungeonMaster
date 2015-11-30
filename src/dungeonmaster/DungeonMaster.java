@@ -31,13 +31,11 @@ public class DungeonMaster {
     public static boolean help = false;
     public static String intro = "";
     public static void main(String[] args) throws IOException {
-        startGame();
         //System.out.println("System: Enter your name");
         //Scanner s = new Scanner(System.in);
         //String playerName = s.nextLine();
-        outside = new Scene("Outside");
-        player = new Actor("player", new Point(0, 0), outside);
-        player.stats = new Stats(20, 20, 20, 20, 20, 20);
+        makeBasics();
+        startGame();
 //        Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
 //        Scene maxsBar = new Scene("Max's Bar"); 
 //        Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
@@ -62,11 +60,13 @@ public class DungeonMaster {
 //        
 //        for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));           
 //        
-        System.out.println("Story: "+intro);
-        System.out.println("System: Enter a command below");
-        String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
-        wordUse.checkVerbs("look",temp, 0);
     }
+    static public void makeBasics(){
+        outside = new Scene("Outside");
+        player = new Actor("player", new Point(0, 0), outside);
+        player.stats = new Stats(20, 20, 20, 20, 20, 20);
+    }
+    
     static public void startGame(){
         try {
             new textFiles(textFolder);
@@ -80,7 +80,11 @@ public class DungeonMaster {
         String helpMode = s.nextLine();
         if(helpMode.equalsIgnoreCase("y")||helpMode.equalsIgnoreCase("yes")) help = true;
         else if(helpMode.equalsIgnoreCase("n")||helpMode.equalsIgnoreCase("no")) help = false;
-        else System.out.println("System: Invalid input, defulting to No");
+        else System.out.println("System: Invalid input, defulting to No");System.out.println("Story: "+intro);
+        System.out.println("System: Enter a command below");
+        String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
+        wordUse.checkVerbs("look",temp, 0);
+        
     }
     
     static public void inputCommand(){
@@ -105,13 +109,8 @@ public class DungeonMaster {
         }
         if (!temp) {
             System.out.println("System: No command found");
-            if (DungeonMaster.help)System.out.println("Help: No action found in input");
-            try {
-                textFiles.addToLog(rawCommand);
-            } catch (IOException ex) {
-                Logger.getLogger(DungeonMaster.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("error");
-            }
+            if (DungeonMaster.help) System.out.println("Help: No action found in input");
+            //textFiles.addToLog(rawCommand);
             inputCommand();
         }
         
