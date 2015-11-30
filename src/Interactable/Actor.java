@@ -44,6 +44,16 @@ public class Actor {
         }
     }
 
+    public Actor(String name, String niceName, Point location, Scene scene, Stats stats) {
+        this.name = name;
+        this.niceName = niceName;
+        this.location = location;
+        this.scene = scene;
+        this.stats = stats;
+        this.isLootable = false;
+    }
+    
+
     public void addKey(Door door){
         Key key = new Key(door.niceName, door);
         this.invenAdd(key);

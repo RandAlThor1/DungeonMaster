@@ -5,6 +5,8 @@
  */
 package npcs;
 
+import Interactable.Scene;
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +16,7 @@ import java.util.ArrayList;
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
     //public static ArrayList<Stats> npcStats = new ArrayList<>(); //might remove
-    public static void addNPC(){
-        allNPCs.add(new NPC(, , ));
+    public static void addNPC(String name, Point point, Scene scene){
         int temp = 15; //temp number for stats of a npc
          
         

@@ -11,8 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -44,18 +42,21 @@ public class textFiles {
      * @param String to be added to log
      * @throws FileNotFoundException
      */
-    static public void addToLog(String String)throws IOException{
+    static public void addToLog(String String){
         String[] array = null;
         String temp;
-        array = readFile("log.txt");
+        try {
+            array = readFile("log.txt");
+        } catch (IOException e){
+            System.out.println("AddToLog IOexception");
+        }
         temp = Arrays.toString(array);
         temp += String + " ";
         try {
             PrintWriter writer = new PrintWriter("log.txt");
             writer.println(temp);
-        } catch (FileNotFoundException ex) {
-            System.out.println("Yo dog there was an error adding that to the log!!!!!!");
-            //Logger.getLogger(textFiles.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException e) {
+            System.out.println("Yo dog there was an error finding log.txt!!!!!!");
         }    
     }
 
@@ -78,9 +79,16 @@ public class textFiles {
     String result = stringBuilder.toString();
     String[] array;
     array = result.split(" ");
-
+    
     return array;
     }
+    /**
+     * 
+     * @param file to be read
+     * @param temp read horizontally if temp is provided true or false
+     * @return
+     * @throws IOException 
+     */
     static public String[] readFile(String file, boolean temp) throws IOException{
     BufferedReader reader = new BufferedReader( new FileReader (file));
     String         line = null;
