@@ -15,8 +15,9 @@ public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
     //public static ArrayList<Stats> npcStats = new ArrayList<>(); //might remove
     public static void addNPC(){
+        allNPCs.add(new NPC(, , ));
         int temp = 15; //temp number for stats of a npc
-        allNPCs.add(new NPC("help",temp, temp, temp, temp, temp, temp)); // 
+         
         
         
     }
@@ -33,6 +34,7 @@ public class NpcOperations {
             for (int i = 0; i < allNPCs.size(); i++) {
                 NPC temp = allNPCs.get(i);
                 if (temp.name.equalsIgnoreCase(name)) {
+                    
                     return i;
                 }
             }
