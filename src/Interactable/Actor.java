@@ -22,16 +22,22 @@ public class Actor {
     public Stats stats;
     public int gold; 
     public Runnable death = new Runnable() {
-
         @Override
         public void run() {
             isLootable = true;
             niceName += "(dead)";
         }
     };
-    //public Wepon[] invenWep;
+    public Runnable use = new Runnable() {
+
+        @Override
+        public void run() {
+            System.out.println("System: You can't use that");
+        }
+    };
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
+    
     public Actor(String name, Point location, Scene scene) {
         this.niceName = name;
         this.name = name.toLowerCase();

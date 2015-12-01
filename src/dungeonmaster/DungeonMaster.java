@@ -41,15 +41,15 @@ public class DungeonMaster {
         outside.addDoor(maxsBarDoor, true);
         
         Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
-        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
-        kingBoar.death = new Runnable() {
-
-            @Override
-            public void run() {
-                System.out.println("Story: You win!");
-                System.exit(0);
-            }
-        };
+//        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
+//        kingBoar.death = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                System.out.println("Story: You win!");
+//                System.exit(0);
+//            }
+//        };
         Actor actualEnemy = new Actor("Boar", player.location, outside);
         actualEnemy.addKey(maxsBarDoor);
         

@@ -30,28 +30,7 @@ public class wordUse {
                 System.exit(0);
             }
             else if (verb.equals("enter")) {
-                Point players = DungeonMaster.player.location;
-                Scene curScene = DungeonMaster.player.scene;
-                boolean found = false;
-                for (int i = 0; i < curScene.doors.size(); i++) {
-                    if (curScene.doors.get(i).location == players) {
-                        found = true;
-                        DungeonMaster.player.scene = curScene.doors.get(i).connectScene;
-                        DungeonMaster.player.location = curScene.doors.get(i).connectPoint;
-                        System.out.println("System: You`re now in " + curScene.doors.get(i).niceName);
-                        System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
-                        for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
-                            DungeonMaster.player.inventory[j].location = DungeonMaster.player.location;
-                        }
-                        String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
-                        checkVerbs("look", temp, 0);
-                    }
-                }
-                if (!found) {
-                    System.out.println("System: No door here");
-                    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                }
-
+                enter();
             }
             else {
                 System.out.println("System: No command code found");
@@ -60,198 +39,19 @@ public class wordUse {
         } 
         else {
             if (verb.equals("go") && command[index + 1].equals("in")) {
-                String[] temp = new String[command.length-1];
-                for (int i = 0; i < temp.length; i++) { 
-                    if (i == index) temp[i] = "enter";
-                    else if (i < index+1) temp[i] = command[i];
-                    else temp[i] = command[i+1];
-                }
-                checkVerbs("enter", temp, index);
+                enter();
             }
             else if(verb.equals("enter")){
-                Scene curScene = DungeonMaster.player.scene;
-                int doorIndex = -1;
-                String door = "";
-                for (int i = 1; i < 4 && i < command.length - index; i++) {
-                    door += command[index + i];
-                    for (int j = 0; j < curScene.doors.size(); j++) {
-                        if(curScene.doors.get(j).name.equals(door)){doorIndex = j; break;}
-                    }
-                    if (doorIndex != -1) break;
-                    else door += " ";
-                }
-                if (doorIndex != -1) {
-                    if(curScene.doors.get(doorIndex).location.equals(DungeonMaster.player.location)){
-                        if (!curScene.doors.get(doorIndex).locked) {
-                            DungeonMaster.player.scene = curScene.doors.get(doorIndex).connectScene;
-                            DungeonMaster.player.location = curScene.doors.get(doorIndex).connectPoint;
-                            System.out.println("System: You`re now in " + DungeonMaster.player.scene.niceName);
-                            System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
-                            for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
-                                DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
-                            }
-                            String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
-                            checkVerbs("look", temp, 0);
-                            DungeonMaster.inputCommand();
-                        }
-                        else {
-                            Key testKey = new Key(null, null, null);
-                            for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
-                                if(DungeonMaster.player.inventory[i].getClass().equals(testKey.getClass())){
-                                    Key key = (Key)DungeonMaster.player.inventory[i];
-                                    if(key.door == curScene.doors.get(doorIndex)){
-                                        curScene.doors.get(doorIndex).locked = false;
-                                        System.out.println("System: Door unlocked");
-                                        checkVerbs(verb, command, index);
-                                    }
-                                    else System.out.println("System: This door is locked");
-                                }
-                            }
-                        } 
-                    }
-                    else{ 
-                        System.out.println("System: Can't enter that from here");
-                        if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                    }
-                }
-                else System.out.println("System: Door not found");
-
+                enter();
             }
             else if (verb.equals("go") && command[index + 1].equals("to")) {
-                Scene curScene = DungeonMaster.player.scene;//look for actors
-                int actorIndex = -1;
-                String place = "";
-                boolean found = false;
-                for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
-                    place += command[index + 1 + i];
-                    actorIndex = curScene.findActor(place);
-                    if (actorIndex != -1) {found = true; break;}
-                    else place += " ";
-                }
-                if (found) {
-                    DungeonMaster.player.location = curScene.actors[actorIndex].location;
-                    System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
-                    for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
-                        DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
-                    }
-                    DungeonMaster.inputCommand();
-                }
-                int itemIndex = -1;
-                if (!found){
-                    
-                    String item = "";//look for items
-                    for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
-                        item += command[index + 1 + i];
-                        for (int j = 0; j < curScene.inventory.length; j++) {
-                            if (curScene.inventory[i].name.equals(item)) {itemIndex = i; break;}
-                        }
-                        if (itemIndex != -1) {found = true; break;}
-                        else item += " ";
-                    }
-                }
-                if (found) {
-                    DungeonMaster.player.location = curScene.inventory[itemIndex].location;
-                    System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
-                    for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
-                        DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
-                    }
-                    DungeonMaster.inputCommand();
-                }
-                if (!found) {
-                    place = "";//look for doors
-                    for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
-                        place += command[index + 1 + i];
-                        for (int j = 0; j < curScene.doors.size(); j++) {
-                            if (curScene.doors.get(j).name.equals(place)) {
-                                actorIndex = j;
-                                found = true;;
-                            }
-                        }
-                        if (found) break;
-                        else place += " ";
-                    }
-                }
-                if (found) {
-                    if (!curScene.doors.get(actorIndex).locked) {
-                        DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
-                        String[] temp = new String[1];temp[0] = "enter";
-                        checkVerbs("enter", temp, 0);
-                        DungeonMaster.inputCommand();    
-                    }
-                    else{
-                        System.out.println("System: It's locked");
-                        for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
-                            if(DungeonMaster.player.inventory[i].name.equals(curScene.doors.get(actorIndex).name+" key")){
-                                System.out.println("System: Key used");
-                                DungeonMaster.player.invenRemov(DungeonMaster.player.inventory[i]);
-                                curScene.doors.get(actorIndex).locked = false;
-                                DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
-                                String[] temp = new String[1];temp[0] = "enter";
-                                checkVerbs("enter", temp, 0);
-                            }
-                        }
-                    }
-                    
-                } 
-                else if (isNum(command[index + 2]) && isNum(command[index + 3])) {//check if it's a location
-                    DungeonMaster.player.location = new Point(Integer.parseInt(command[index + 2]), Integer.parseInt(command[index + 3]));
-                    System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
-                    for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
-                        DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
-                    }
-                } 
-                else {
-                    System.out.println("System: Location not found");
-                    if (DungeonMaster.help)System.out.println("Help: Try Look Around");
-                }
+                go(command,index);
             } 
             else if (verb.equals("drop")) {
-                String itemName = "";
-                Item item = null;
-                for (int i = 1; i < 4 && i < command.length - index; i++) {
-                    itemName += command[index + i];
-                    item = DungeonMaster.player.invenFind(itemName);
-                    if (item != null) {
-                        DungeonMaster.player.invenRemov(item);
-                        DungeonMaster.player.scene.invenAdd(item);
-                        System.out.println("System: Item droped");
-                        break;
-                    } 
-                    else {
-                        itemName += " ";
-                    }
-                    if ((i == 3 || i == command.length - index - 1) && item == null) {
-                        System.out.println("System: Item not found");
-                        if (DungeonMaster.help)System.out.println("Help: Given item isn't in your inventory");
-                    }
-                }
-
+                drop(command, index);
             } 
             else if (verb.equals("take")) {
-                String itemName = "";
-                Item item = null;
-                for (int i = 1; i < 4 && i < command.length - index; i++) {
-                    itemName += command[index + i];
-                    item = DungeonMaster.player.scene.invenFind(itemName);
-                    if (item != null) {
-                        if (item.location.equals(DungeonMaster.player.location)) {
-                            DungeonMaster.player.invenAdd(item);
-                            DungeonMaster.player.scene.invenRemov(item);
-                            System.out.println("System: Item taken");
-                        } 
-                        else {
-                            System.out.println("System: Can't pick that up from here");
-                            if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                        }
-                        break;
-                    } 
-                    else {
-                        itemName += " ";
-                    }
-                    if ((i == 3 || i == command.length - index - 1) && item == null) {
-                        System.out.println("System: Item not found");
-                    }
-                }
+                take(command, index);
             } 
             else if (verb.equals("check")) {
                 String output = "";
@@ -427,9 +227,8 @@ public class wordUse {
                     if ((i == 3 || i == command.length - index - 1) && !found) {
                         System.out.println("System: Door not found");
                         if (DungeonMaster.help)System.out.println("Help: Given door not found in current scene");
-                    }
-                }
-                
+                    }                
+                }                
             }
             else if (verb.equals("look")) {
                 String output = "";
@@ -514,7 +313,7 @@ public class wordUse {
         }
         DungeonMaster.inputCommand();
     }
-   
+    
     public static boolean isNum(String string) {
         boolean ret = true;
         try {
@@ -524,6 +323,198 @@ public class wordUse {
             ret = false;
         }
         return ret;
+    }
+
+    private static void enter() {
+        Point players = DungeonMaster.player.location;
+        Scene curScene = DungeonMaster.player.scene;
+        boolean found = false;
+        for (int i = 0; i < curScene.doors.size(); i++) {
+            if (curScene.doors.get(i).location == players) {
+                found = true;
+                if (!curScene.doors.get(i).locked) {
+                    DungeonMaster.player.scene = curScene.doors.get(i).connectScene;
+                    DungeonMaster.player.location = curScene.doors.get(i).connectPoint;
+                    System.out.println("System: You`re now in " + DungeonMaster.player.scene.niceName);
+                    System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+                    for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
+                        DungeonMaster.player.inventory[j].location = DungeonMaster.player.location;
+                    }
+                    String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
+                    checkVerbs("look", temp, 0);
+                    DungeonMaster.inputCommand();
+                }
+                else {
+                    Key testKey = new Key(null, null, null);
+                    for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
+                        if(DungeonMaster.player.inventory[j].getClass().equals(testKey.getClass())){
+                            Key key = (Key)DungeonMaster.player.inventory[j];
+                            if(key.door == curScene.doors.get(i)){
+                                curScene.doors.get(i).locked = false;
+                                System.out.println("System: Door unlocked");
+                                enter();
+                            }
+                            else System.out.println("System: This door is locked");
+                        }
+                    }
+                }
+                DungeonMaster.player.scene = curScene.doors.get(i).connectScene;
+                DungeonMaster.player.location = curScene.doors.get(i).connectPoint;
+                System.out.println("System: You`re now in " + curScene.doors.get(i).niceName);
+                System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+                for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
+                    DungeonMaster.player.inventory[j].location = DungeonMaster.player.location;
+                }
+                String[] temp = new String[2];temp[0] = "look";temp[1] = "around";
+                checkVerbs("look", temp, 0);
+            }
+            else{ 
+                System.out.println("System: Can't enter that from here");
+                if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+            }
+        }
+        if (!found) {
+            System.out.println("System: No door here");
+            if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+        }
+    }
+    
+    private static void go(String[] command, int index){
+        Scene curScene = DungeonMaster.player.scene;//look for actors
+        int actorIndex = -1;
+        String place = "";
+        boolean found = false;
+        for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
+            place += command[index + 1 + i];
+            actorIndex = curScene.findActor(place);
+            if (actorIndex != -1) {found = true; break;}
+            else place += " ";
+        }
+        if (found) {
+            DungeonMaster.player.location = curScene.actors[actorIndex].location;
+            System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+            for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
+                DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            }
+            DungeonMaster.inputCommand();
+        }
+        int itemIndex = -1;
+        if (!found){
+
+            String item = "";//look for items
+            for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
+                item += command[index + 1 + i];
+                for (int j = 0; j < curScene.inventory.length; j++) {
+                    if (curScene.inventory[i].name.equals(item)) {itemIndex = i; break;}
+                }
+                if (itemIndex != -1) {found = true; break;}
+                else item += " ";
+            }
+        }
+        if (found) {
+            DungeonMaster.player.location = curScene.inventory[itemIndex].location;
+            System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+            for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
+                DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            }
+            DungeonMaster.inputCommand();
+        }
+        if (!found) {
+            place = "";//look for doors
+            for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
+                place += command[index + 1 + i];
+                for (int j = 0; j < curScene.doors.size(); j++) {
+                    if (curScene.doors.get(j).name.equals(place)) {
+                        actorIndex = j;
+                        found = true;;
+                    }
+                }
+                if (found) break;
+                else place += " ";
+            }
+        }
+        if (found) {
+            if (!curScene.doors.get(actorIndex).locked) {
+                DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
+                String[] temp = new String[1];temp[0] = "enter";
+                checkVerbs("enter", temp, 0);
+                DungeonMaster.inputCommand();    
+            }
+            else{
+                System.out.println("System: It's locked");
+                for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
+                    if(DungeonMaster.player.inventory[i].name.equals(curScene.doors.get(actorIndex).name+" key")){
+                        System.out.println("System: Key used");
+                        DungeonMaster.player.invenRemov(DungeonMaster.player.inventory[i]);
+                        curScene.doors.get(actorIndex).locked = false;
+                        DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
+                        String[] temp = new String[1];temp[0] = "enter";
+                        checkVerbs("enter", temp, 0);
+                    }
+                }
+            }
+
+        } 
+        else if (isNum(command[index + 2]) && isNum(command[index + 3])) {//check if it's a location
+            DungeonMaster.player.location = new Point(Integer.parseInt(command[index + 2]), Integer.parseInt(command[index + 3]));
+            System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+            for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
+                DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            }
+        } 
+        else {
+            System.out.println("System: Location not found");
+            if (DungeonMaster.help)System.out.println("Help: Try Look Around");
+        }
+    }
+
+    private static void drop(String[] command, int index) {
+        String itemName = "";
+        Item item = null;
+        for (int i = 1; i < 4 && i < command.length - index; i++) {
+            itemName += command[index + i];
+            item = DungeonMaster.player.invenFind(itemName);
+            if (item != null) {
+                DungeonMaster.player.invenRemov(item);
+                DungeonMaster.player.scene.invenAdd(item);
+                System.out.println("System: Item droped");
+                break;
+            } 
+            else {
+                itemName += " ";
+            }
+            if ((i == 3 || i == command.length - index - 1) && item == null) {
+                System.out.println("System: Item not found");
+                if (DungeonMaster.help)System.out.println("Help: Given item isn't in your inventory");
+            }
+        }
+    }
+
+    private static void take(String[] command, int index) {
+        String itemName = "";
+        Item item = null;
+        for (int i = 1; i < 4 && i < command.length - index; i++) {
+            itemName += command[index + i];
+            item = DungeonMaster.player.scene.invenFind(itemName);
+            if (item != null) {
+                if (item.location.equals(DungeonMaster.player.location)) {
+                    DungeonMaster.player.invenAdd(item);
+                    DungeonMaster.player.scene.invenRemov(item);
+                    System.out.println("System: Item taken");
+                } 
+                else {
+                    System.out.println("System: Can't pick that up from here");
+                    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+                }
+                break;
+            } 
+            else {
+                itemName += " ";
+            }
+            if ((i == 3 || i == command.length - index - 1) && item == null) {
+                System.out.println("System: Item not found");
+            }
+        }
     }
 
 }

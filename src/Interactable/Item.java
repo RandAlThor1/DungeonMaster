@@ -19,13 +19,16 @@ public class Item {
     public String name;
     public String niceName;
     public Point location;
+    public Runnable use = new Runnable() {
+
+        @Override
+        public void run() {
+            System.out.println("System: You can't use that");
+        }
+    };
+    
     public Item(String name) {
         this.niceName = name;
         this.name = name.toLowerCase();
     }
-    
-    public void eat(Actor actor){}
-    public void equip(Actor actor){}
-    public void drop(){}
-    public void take(Actor actor){}
 }
