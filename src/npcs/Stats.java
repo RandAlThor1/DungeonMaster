@@ -51,7 +51,7 @@ public class Stats {
         this.maxHealth = health;
         this.speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
         this.dodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
-        this.armorClass = DexterityMod + 
+        //this.armorClass = DexterityMod + 
 
     }    
 }

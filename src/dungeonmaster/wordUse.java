@@ -68,6 +68,9 @@ public class wordUse {
             else if (verb.equals("look")) {
                 look(command, index);
             }
+            else if (verb.equals("use")) {
+                look(command, index);
+            }
             else {
                 System.out.println("System: No command code found");
                 if (DungeonMaster.help)System.out.println("Help: Code error");
@@ -165,10 +168,10 @@ public class wordUse {
         if (!found){
 
             String item = "";//look for items
-            for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
+            for (int i = 1; i < 4 && i < command.length - index; i++) {
                 item += command[index + i];
                 for (int j = 0; j < curScene.inventory.length; j++) {
-                    if (curScene.inventory[i].name.equals(item)) {itemIndex = i; break;}
+                    if (curScene.inventory[j].name.equals(item)) {itemIndex = j; break;}
                 }
                 if (itemIndex != -1) found = true;
                 else item += " ";
@@ -278,57 +281,61 @@ public class wordUse {
 
     private static void check(String[] command, int index) {
         String output = "";
-                Item[] inventory = null;
-                boolean possible = true;
-                if (command[index + 1].equals("inventory")) {
-                    inventory = DungeonMaster.player.inventory;
-                    output = "System: You have ";
-                } 
-                else {
-                    String invenName = "";
-                    Scene curScene = DungeonMaster.player.scene;
-                    for (int i = 1; i < 4 && i < command.length - index; i++) {
-                        invenName += command[index + i];
-                        int actorIndex = curScene.findActor(invenName);
-                        if (actorIndex != -1) {
-                            inventory = curScene.actors[actorIndex].inventory;
-                        }
-                        if (inventory != null) {
-                            if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) {
-                                output = "System: You found ";
-                            } 
-                            else {
-                                System.out.println("System: You can't check that form here");
-                                if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                                possible = false;
-                            }
-                            break;
-                        } 
-                        else {
-                            invenName += " ";
-                        }
-                    }
+        Item[] inventory = null;
+        boolean possible = true;
+        if (command[index + 1].equals("inventory")) {
+            inventory = DungeonMaster.player.inventory;
+            output = "System: You have ";
+        } 
+        if (command[index + 1].equals("equipment")) {
+            inventory = DungeonMaster.player.equipment.equipArray;
+            output = "System: You're wearing ";
+        } 
+        else {
+            String invenName = "";
+            Scene curScene = DungeonMaster.player.scene;
+            for (int i = 1; i < 4 && i < command.length - index; i++) {
+                invenName += command[index + i];
+                int actorIndex = curScene.findActor(invenName);
+                if (actorIndex != -1) {
+                    inventory = curScene.actors[actorIndex].inventory;
                 }
-                if (inventory != null && possible) {
-                    boolean empty = true;
-                    for (int i = 0; i < inventory.length; i++) {
-                        if (!inventory[i].name.equals("empty")) {
-                            empty = false;
-                            output += inventory[i].niceName + ", ";
-                        }
-                    }
-                    if (empty) {
-                        System.out.println(output += "nothing.");
+                if (inventory != null) {
+                    if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) {
+                        output = "System: You found ";
                     } 
                     else {
-                        output = output.substring(0, output.length() - 2);
-                        System.out.println(output += ".");
+                        System.out.println("System: You can't check that form here");
+                        if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+                        possible = false;
                     }
+                    break;
+                } 
+                else {
+                    invenName += " ";
                 }
-                if (inventory == null && possible) {
-                    System.out.println("System: Actor not found");
-                    if (DungeonMaster.help)System.out.println("Help: Given actor isn't in your current scene");
+            }
+        }
+        if (inventory != null && possible) {
+            boolean empty = true;
+            for (int i = 0; i < inventory.length; i++) {
+                if (!inventory[i].name.equals("empty")) {
+                    empty = false;
+                    output += inventory[i].niceName + ", ";
                 }
+            }
+            if (empty) {
+                System.out.println(output += "nothing.");
+            } 
+            else {
+                output = output.substring(0, output.length() - 2);
+                System.out.println(output += ".");
+            }
+        }
+        if (inventory == null && possible) {
+            System.out.println("System: Actor not found");
+            if (DungeonMaster.help)System.out.println("Help: Given actor isn't in your current scene");
+        }
     }
 
     private static void loot(String[] command, int index) {

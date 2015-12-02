@@ -5,13 +5,18 @@
  */
 package combat;
 
+import Interactable.Item;
+
 /**
  *
  * @author b.allen
  */
-public class Armor {
+public class Armor extends Item{
     int durability, maxDurability;
     int armorBonus;
     int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
-    int name;
+
+    public Armor(String name) {//ben can do what he wants with this
+        super(name);
+    }
 }

@@ -1,6 +1,7 @@
 package Interactable;
 
 import combat.Armor;
+import combat.Equipment;
 import combat.Weapon;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -41,6 +42,7 @@ public class Actor {
     };
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
+    public Equipment equipment;
     
     public Actor(String name, Point location, Scene scene) {
         this.niceName = name;
@@ -53,6 +55,7 @@ public class Actor {
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
         }
+        equipment = new Equipment();
     }
 
     public Actor(String name, String niceName, Point location, Scene scene, Stats stats) {
@@ -99,8 +102,8 @@ public class Actor {
     
     public void fight(Actor actor){//we need to figure out how combat works; 
         if (this.location.equals(actor.location)) {
-            if (actor.stats.Health > 0) {
-            actor.stats.Health = 0;//instakill
+            if (actor.stats.health > 0) {
+            actor.stats.health = 0;//instakill
             actor.death.run();
             int xp = 10;
             //this.stats.xp += xp; why xp not a thing?
@@ -114,15 +117,15 @@ public class Actor {
 
     public void eat(Food food) {
        
-        if (food.heal >= 0 && this.stats.Health != this.stats.maxHealth){
+        if (food.heal >= 0 && this.stats.health != this.stats.maxHealth){
             System.out.println("System: You recovered "+food.heal+"HP.");
-            if (this.stats.Health != this.stats.maxHealth) {
-                this.stats.Health += food.heal;//need maximum
+            if (this.stats.health != this.stats.maxHealth) {
+                this.stats.health += food.heal;//need maximum
             }
         }
         if (food.heal < 0){
             System.out.println("System: You lost "+food.heal*-1+"HP.");
-            this.stats.Health += food.heal;
+            this.stats.health += food.heal;
         }
     }
 

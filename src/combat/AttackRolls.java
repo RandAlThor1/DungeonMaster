@@ -17,10 +17,10 @@ public class AttackRolls {
     }
     public int AttackRoll(Actor attacker, Actor defender, int statModToUse){
         int toHitBonus = attacker.equippedWeapon.bonus + statModToUse;
-        
+        return 0;
     }
     public int damageDone(){
-        int result = (int) ((maxDam - minDam + 1) * (Math.random() + 1));
+        int result = 0;//(int) ((maxDam - minDam + 1) * (Math.random() + 1));
         return result;
     }
    
