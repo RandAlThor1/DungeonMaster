@@ -15,7 +15,7 @@ import java.awt.Point;
  * Teacher: Mr. Wachs 
  */
 public class Item {
-
+    public int weight;
     public String name;
     public String niceName;
     public Point location;
@@ -30,5 +30,11 @@ public class Item {
     public Item(String name) {
         this.niceName = name;
         this.name = name.toLowerCase();
+    }
+    public String getNiceName(){
+        return this.niceName;
+    }
+    public String getNameLC(){
+        return this.name;
     }
 }

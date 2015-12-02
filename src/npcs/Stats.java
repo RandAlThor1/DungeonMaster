@@ -25,10 +25,12 @@ public class Stats {
     public int WisdomMod;
     public int CharismaMod;
     
-    public int Health;
+    public int health;
     public int maxHealth;
-    public int Speed;
-    public int DodgeChance;
+    public int speed;
+    public int dodgeChance;
+    public int armorClass;
+    
 
     public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma) {
         this.Strength = Strength;
@@ -45,10 +47,11 @@ public class Stats {
         this.WisdomMod =        (int) ((Wisdom - 10) / 2);
         this.CharismaMod =      (int) ((Charisma - 10) / 2);
         
-        this.Health = (int) 200 + ((Constitution - 10) / 2) * 50;
-        this.maxHealth = Health;
-        this.Speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
-        this.DodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
+        this.health = (int) 200 + ((Constitution - 10) / 2) * 50;
+        this.maxHealth = health;
+        this.speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
+        this.dodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
+        this.armorClass = DexterityMod + 
 
     }    
 }
