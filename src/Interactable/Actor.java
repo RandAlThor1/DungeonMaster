@@ -1,5 +1,7 @@
 package Interactable;
 
+import combat.Armor;
+import combat.Weapon;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,8 @@ public class Actor {
     public String niceName;
     public Point location;
     public Scene scene;
+    public Weapon equippedWeapon;
+    public Armor armor;
     public Item[] inventory = new Item[20];
     public Stats stats;
     public int gold; 

@@ -12,10 +12,8 @@ import Interactable.Item;
  * @author b.allen
  */
 public class Weapon extends Item{
-    int minDam, maxDam, requiredStrength;
-    //add below to Item Class.
-    int weight;
-
+    int minDam, maxDam, requiredStrength, bonus;
+    String type;
     public Weapon(String name) {
         super(name);
         niceName =  name;
@@ -26,16 +24,10 @@ public class Weapon extends Item{
     public int getMaxDam(){
         return this.maxDam;
     }
+    public int getBonus(){
+        return this.bonus;
+    }
     public int getRequiredStrength(){
         return this.requiredStrength;
     }
-    //add to item
-    public String getNiceName(){
-        return this.niceName;
-    }
-    //add to item
-    public String getNameLC(){
-        return this.name;
-    }
-    
 }
