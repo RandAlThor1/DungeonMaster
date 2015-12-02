@@ -44,7 +44,7 @@ public class wordUse {
             else if(verb.equals("enter")){
                 enter();
             }
-            else if (verb.equals("go") && command[index + 1].equals("to")) {
+            else if (verb.equals("go")) {
                 go(command,index);
             } 
             else if (verb.equals("drop")) {
@@ -146,10 +146,11 @@ public class wordUse {
         int actorIndex = -1;
         String place = "";
         boolean found = false;
-        for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
-            place += command[index + 1 + i];
+        if (command[index+1].equals("to")) index++;         
+        for (int i = 1; i < 4 && i < command.length - index; i++) {
+            place += command[index + i];
             actorIndex = curScene.findActor(place);
-            if (actorIndex != -1) {found = true; break;}
+            if (actorIndex != -1) found = true;
             else place += " ";
         }
         if (found) {
@@ -165,11 +166,11 @@ public class wordUse {
 
             String item = "";//look for items
             for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
-                item += command[index + 1 + i];
+                item += command[index + i];
                 for (int j = 0; j < curScene.inventory.length; j++) {
                     if (curScene.inventory[i].name.equals(item)) {itemIndex = i; break;}
                 }
-                if (itemIndex != -1) {found = true; break;}
+                if (itemIndex != -1) found = true;
                 else item += " ";
             }
         }
@@ -183,16 +184,15 @@ public class wordUse {
         }
         if (!found) {
             place = "";//look for doors
-            for (int i = 1; i < 4 && i < command.length - index - 1; i++) {
-                place += command[index + 1 + i];
+            for (int i = 1; i < 4 && i < command.length - index; i++) {
+                place += command[index + i];
                 for (int j = 0; j < curScene.doors.size(); j++) {
                     if (curScene.doors.get(j).name.equals(place)) {
                         actorIndex = j;
                         found = true;;
                     }
                 }
-                if (found) break;
-                else place += " ";
+                place += " ";
             }
         }
         if (found) {
@@ -217,8 +217,8 @@ public class wordUse {
             }
 
         } 
-        else if (isNum(command[index + 2]) && isNum(command[index + 3])) {//check if it's a location
-            DungeonMaster.player.location = new Point(Integer.parseInt(command[index + 2]), Integer.parseInt(command[index + 3]));
+        else if (isNum(command[index + 1]) && isNum(command[index + 2])) {//check if it's a location
+            DungeonMaster.player.location = new Point(Integer.parseInt(command[index + 1]), Integer.parseInt(command[index + 2]));
             System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
             for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
                 DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
@@ -235,21 +235,18 @@ public class wordUse {
         Item item = null;
         for (int i = 1; i < 4 && i < command.length - index; i++) {
             itemName += command[index + i];
-            item = DungeonMaster.player.invenFind(itemName);
-            if (item != null) {
-                DungeonMaster.player.invenRemov(item);
-                DungeonMaster.player.scene.invenAdd(item);
-                System.out.println("System: Item droped");
-                break;
-            } 
-            else {
-                itemName += " ";
-            }
+            item = DungeonMaster.player.invenFind(itemName);         
+            itemName += " ";
             if ((i == 3 || i == command.length - index - 1) && item == null) {
                 System.out.println("System: Item not found");
                 if (DungeonMaster.help)System.out.println("Help: Given item isn't in your inventory");
             }
         }
+        if (item != null) {
+                DungeonMaster.player.invenRemov(item);
+                DungeonMaster.player.scene.invenAdd(item);
+                System.out.println("System: Item droped");      
+        } 
     }
 
     private static void take(String[] command, int index) {

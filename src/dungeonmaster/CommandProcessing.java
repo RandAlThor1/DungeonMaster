@@ -44,7 +44,7 @@ public class CommandProcessing {
 
     private void checkForsynonym(String[][] Words) {// this is what we would do for words that come up very often with the chekcing it makes it simpler to find what we are looking for.[in most case]
         for (int i = 0; i < Words.length; i++) {
-            if ("move".equals(Words[0][i]) || "walk".equals(Words[0][i])) {// add syonyms of the words, only doing the one for now as a example. will add more at school
+            if ("move".equals(Words[0][i]) || "walk".equals(Words[0][i]) || "meander".equals(Words[0][i])) {// add syonyms of the words, only doing the one for now as a example. will add more at school
                 CommandProcessing.Words[1][i] = "go";
             }
             else if ("search".equals(Words[0][i])){

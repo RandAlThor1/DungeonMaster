@@ -110,7 +110,7 @@ public class DungeonMaster {
         if (!temp) {
             System.out.println("System: No command found");
             if (DungeonMaster.help) System.out.println("Help: No action found in input");
-            //textFiles.addToLog(rawCommand);
+            textFiles.addToLog(rawCommand);
             inputCommand();
         }
         
