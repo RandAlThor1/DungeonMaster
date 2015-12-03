@@ -15,8 +15,8 @@ import java.awt.Point;
  */
 public class NPC extends Actor{
     PersonalityType personType;
-    public NPC(PersonalityType personType, String name, String niceName, Point location, Scene scene, Stats stats) {
-        super(name, niceName, location, scene, stats);
+    public NPC(PersonalityType personType, String name, Point location, Scene scene, Stats stats) {
+        super(name, location, scene, stats);
         this.personType = personType;
     }    
 }   

@@ -58,9 +58,9 @@ public class Actor {
         equipment = new Equipment();
     }
 
-    public Actor(String name, String niceName, Point location, Scene scene, Stats stats) {
-        this.name = name;
-        this.niceName = niceName;
+    public Actor(String name, Point location, Scene scene, Stats stats) {
+        this.name = name.toLowerCase();
+        this.niceName = name;
         this.location = location;
         this.scene = scene;
         this.stats = stats;
