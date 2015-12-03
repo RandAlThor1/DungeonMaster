@@ -25,6 +25,7 @@ public class Actor {
     public Armor armor;
     public Item[] inventory = new Item[20];
     public Stats stats;
+    public Equipment equipment;
     public int gold; 
     public Runnable death = new Runnable() {
         @Override
@@ -40,9 +41,9 @@ public class Actor {
             System.out.println("System: You can't use that");
         }
     };
+    
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
-    public Equipment equipment;
     
     public Actor(String name, Point location, Scene scene) {
         this.niceName = name;
@@ -58,9 +59,9 @@ public class Actor {
         equipment = new Equipment();
     }
 
-    public Actor(String name, Point location, Scene scene, Stats stats) {
-        this.name = name.toLowerCase();
-        this.niceName = name;
+    public Actor(String name, String niceName, Point location, Scene scene, Stats stats) {
+        this.name = name;
+        this.niceName = niceName;
         this.location = location;
         this.scene = scene;
         this.stats = stats;

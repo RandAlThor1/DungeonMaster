@@ -19,8 +19,8 @@ public class AttackRolls {
         int toHitBonus = attacker.equippedWeapon.bonus + statModToUse;
         return 0;
     }
-    public int damageDone(){
-        int result = 0;//(int) ((maxDam - minDam + 1) * (Math.random() + 1));
+    public int damageDone(int maxDam, int minDam){
+        int result = (int) ((maxDam - minDam + 1) * (Math.random() + 1));
         return result;
     }
    

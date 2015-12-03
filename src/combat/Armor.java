@@ -11,12 +11,13 @@ import Interactable.Item;
  *
  * @author b.allen
  */
-public class Armor extends Item{
+public class Armor extends Item {
     int durability, maxDurability;
     int armorBonus;
     int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
+    boolean isHelm, isBoots, isChest, isArms, isLegs, isHands;
 
-    public Armor(String name) {//ben can do what he wants with this
+    public Armor(String name) {
         super(name);
     }
 }

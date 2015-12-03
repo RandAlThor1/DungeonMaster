@@ -66,8 +66,8 @@ public class NpcOperations {
      * @param string text for them to say
      * @param npcName name of NPC in string
      */
-    public static void npcTalk(String string, String npcName){
-        System.out.println(npcName + ": " + string);
+    public static void npcTalk(String string, NPC npc){
+        System.out.println(npc.niceName + ": " + string);
     }
     
 }

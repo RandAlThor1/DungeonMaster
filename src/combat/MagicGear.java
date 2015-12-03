@@ -5,11 +5,18 @@
  */
 package combat;
 
+import Interactable.Item;
+
 /**
  *
  * @author b.allen
  */
-public class MagicGear {
-    boolean isRing, isTrinket;
+public class MagicGear extends Item{
+    boolean isRing, isTrinket, isNeck;
+    int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
+
+    public MagicGear(String name) {
+        super(name);
+    }
     
 }

@@ -13,6 +13,9 @@ import Interactable.Item;
  */
 public class Weapon extends Item{
     int minDam, maxDam, requiredStrength, bonus;
+    int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
+    boolean isMainHand, isOffHand;
+    
     String type;
     public Weapon(String name) {
         super(name);

@@ -10,6 +10,7 @@ package npcs;
  * @author b.allen
  */
 public class Stats {
+    public int level;
     
     public int Strength;
     public int Constitution;
@@ -31,6 +32,7 @@ public class Stats {
     public int dodgeChance;
     public int armorClass;
     
+    Runnable levelUp;
 
     public Stats(int Strength, int Constitution, int Dexterity, int Intelligence, int Wisdom, int Charisma) {
         this.Strength = Strength;
@@ -51,7 +53,15 @@ public class Stats {
         this.maxHealth = health;
         this.speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
         this.dodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
-        //this.armorClass = DexterityMod + 
-
-    }    
+        this.levelUp = new Runnable() {
+            
+            @Override
+            public void run() {
+                level++;
+            }
+        };
+    }
+    public static void updateStats(){
+        this.
+    }
 }
