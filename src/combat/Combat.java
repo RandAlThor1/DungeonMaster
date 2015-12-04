@@ -11,7 +11,14 @@ import Interactable.Actor;
  *
  * @author b.allen
  */
-public class AttackRolls {
+public class Combat {
+    public Runnable Attack = new Runnable() {
+
+        @Override
+        public void run() {
+            defaultAttack(null, null);
+        }
+    };
    public static void defaultAttack(Actor player, Actor enemy){
        
     }

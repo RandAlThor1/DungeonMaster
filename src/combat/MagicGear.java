@@ -11,9 +11,8 @@ import Interactable.Item;
  *
  * @author b.allen
  */
-public class MagicGear extends Item{
+public class MagicGear extends Equipment{
     boolean isRing, isTrinket, isNeck;
-    int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
 
     public MagicGear(String name) {
         super(name);

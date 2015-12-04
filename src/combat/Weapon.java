@@ -11,9 +11,8 @@ import Interactable.Item;
  *
  * @author b.allen
  */
-public class Weapon extends Item{
+public class Weapon extends Equipment{
     int minDam, maxDam, requiredStrength, bonus;
-    int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
     boolean isMainHand, isOffHand;
     
     String type;

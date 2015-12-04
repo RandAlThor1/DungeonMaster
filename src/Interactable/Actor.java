@@ -2,6 +2,7 @@ package Interactable;
 
 import combat.Armor;
 import combat.Equipment;
+import combat.Gear;
 import combat.Weapon;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,7 @@ public class Actor {
     public Armor armor;
     public Item[] inventory = new Item[20];
     public Stats stats;
-    public Equipment equipment;
+    public Gear gear;
     public int gold; 
     public Runnable death = new Runnable() {
         @Override
@@ -56,7 +57,7 @@ public class Actor {
         for (int i = 0; i < inventory.length; i++) {
             inventory[i] = new Item("empty");
         }
-        equipment = new Equipment();
+        gear = new Gear();
     }
 
     public Actor(String name, String niceName, Point location, Scene scene, Stats stats) {

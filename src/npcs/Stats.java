@@ -58,6 +58,7 @@ public class Stats {
             @Override
             public void run() {
                 level++;
+                
             }
         };
     }
