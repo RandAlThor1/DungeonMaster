@@ -5,17 +5,15 @@
  */
 package combat;
 
-import Interactable.Item;
-
 /**
  *
  * @author b.allen
  */
-public class MagicGear extends Equipment{
+public class MiscGear extends Equipment {
     boolean isRing, isTrinket, isNeck;
 
-    public MagicGear(String name) {
+    public MiscGear(String name, boolean isRing) {
         super(name);
+        this.isRing = isRing;
     }
-    
 }

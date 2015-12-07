@@ -13,9 +13,11 @@ import Interactable.Item;
  */
 public class Equipment extends Item{
     int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
-
     public Equipment(String name) {
         super(name);
+    }
+    public void use(){
+        
     }
 }
 
