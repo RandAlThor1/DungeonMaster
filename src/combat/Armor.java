@@ -5,18 +5,16 @@
  */
 package combat;
 
-import Interactable.Item;
-
 /**
  *
  * @author b.allen
  */
 public class Armor extends Equipment {
-    int durability, maxDurability;
     int armorBonus;
     boolean isHelm, isBoots, isChest, isArms, isLegs, isHands;
 
-    public Armor(String name) {
-        super(name);
+    public Armor(String name,int armorClass, int maxDurability) {
+        super(name, maxDurability);
+        this.armorBonus = armorClass;
     }
 }

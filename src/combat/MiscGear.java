@@ -12,8 +12,8 @@ package combat;
 public class MiscGear extends Equipment {
     boolean isRing, isTrinket, isNeck;
 
-    public MiscGear(String name, boolean isRing) {
-        super(name);
+    public MiscGear(String name, boolean isRing, int maxDurability) {
+        super(name, maxDurability);
         this.isRing = isRing;
     }
 }
