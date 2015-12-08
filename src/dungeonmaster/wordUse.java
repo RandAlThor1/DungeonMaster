@@ -202,7 +202,7 @@ public class wordUse {
             if (!curScene.doors.get(actorIndex).locked) {
                 DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
                 String[] temp = new String[1];temp[0] = "enter";
-                checkVerbs("enter", temp, 0);
+                enter();
                 DungeonMaster.inputCommand();    
             }
             else{
@@ -214,7 +214,7 @@ public class wordUse {
                         curScene.doors.get(actorIndex).locked = false;
                         DungeonMaster.player.location = curScene.doors.get(actorIndex).location;
                         String[] temp = new String[1];temp[0] = "enter";
-                        checkVerbs("enter", temp, 0);
+                        enter();
                     }
                 }
             }
@@ -288,7 +288,7 @@ public class wordUse {
             output = "System: You have ";
         } 
         if (command[index + 1].equals("equipment")) {
-            inventory = DungeonMaster.player.equipment.equipArray;
+            inventory = DungeonMaster.player.gear.equipArray;
             output = "System: You're wearing ";
         } 
         else {
@@ -299,8 +299,6 @@ public class wordUse {
                 int actorIndex = curScene.findActor(invenName);
                 if (actorIndex != -1) {
                     inventory = curScene.actors[actorIndex].inventory;
-                }
-                if (inventory != null) {
                     if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) {
                         output = "System: You found ";
                     } 
