@@ -5,8 +5,6 @@
  */
 package combat;
 
-import Interactable.Item;
-
 /**
  *
  * @author b.allen
@@ -16,8 +14,8 @@ public class Weapon extends Equipment{
     boolean isMainHand, isOffHand;
     
     String type;
-    public Weapon(String name) {
-        super(name);
+    public Weapon(String name, int maxDurability) {
+        super(name, maxDurability);
         niceName =  name;
     }
     public int getMinDam(){

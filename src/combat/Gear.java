@@ -12,6 +12,9 @@ import Interactable.Item;
  * @author b.allen
  */
 public class Gear {
+    public int totalIntelBonus, totalDexBonus, totalStrengthBonus, totalWisBonus, totalConBonus, totalCharBonus;
+    public int totalArmorClass;
+    
     public Armor helm;
     public Armor Chest;
     public Armor Legs;
@@ -20,22 +23,33 @@ public class Gear {
     public Armor Hands;
     public Weapon mainHand;
     public Weapon offHand;
-    public MagicGear RingRight;
-    public MagicGear RingLeft;
-    public MagicGear TrinketRight;
-    public MagicGear TrinketLeft;
-    public MagicGear Neck;
-    public Item[] equipArray = {helm, Chest, Legs, Neck, Boots, Arms, Hands, mainHand, offHand};//used for outputing\
+    public MiscGear RingRight;
+    public MiscGear RingLeft;
+    public MiscGear TrinketRight;
+    public MiscGear TrinketLeft;
+    public MiscGear Neck;
+    public static Equipment[] equipArray;
     public Armor[] armorArray = {helm, Chest, Legs, Boots, Arms, Hands};
-    public int getAC(){
+    public void updateAC(){
         int armorClass = 0;
         for (int i = 0; i < equipArray.length; i++) {
             armorClass += armorArray[i].armorBonus;
         }
-        return armorClass;
+        this.totalArmorClass = armorClass;
     }
+    
     public static void getStatsBoost(){
-        int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
+        int intelBonus = 0, dexBonus = 0, strengthBonus = 0, wisBonus = 0, conBonus = 0, charBonus = 0;
+        for (int i = 0; i < equipArray.length; i++) {
+            if (!(equipArray[i].isBroken)) {
+                intelBonus += equipArray[i].intelBonus;
+                charBonus += equipArray[i].charBonus;
+                dexBonus += equipArray[i].dexBonus;
+                strengthBonus += equipArray[i].strengthBonus;
+                wisBonus += equipArray[i].wisBonus;
+                conBonus += equipArray[i].conBonus;
+            }
+        }
     }
     public void equipNewArmor(Armor newArmor){
         if (newArmor.isArms) {
@@ -70,7 +84,7 @@ public class Gear {
         }
         updateEquipment();
     }
-    public void equipMagicItem(MagicGear newMagicGear, String leftOrRight){
+    public void equipMagicItem(MiscGear newMagicGear, String leftOrRight){
         if (newMagicGear.isTrinket) {
             if (leftOrRight.equalsIgnoreCase("R")) {
                 this.RingRight = newMagicGear;
@@ -92,8 +106,12 @@ public class Gear {
         }
         updateEquipment();
     }
-    public void updateEquipment(){
-        Item[] equipArray = {helm, Chest, Legs, Neck, Boots, Arms, Hands, mainHand, offHand, RingRight, RingLeft, TrinketRight, TrinketLeft, Neck};
+    public Item[] updateEquipment(){
+        Item[] itemArray = {helm, Chest, Legs, Neck, Boots, Arms, Hands, mainHand, offHand, RingRight, RingLeft, TrinketRight, TrinketLeft, Neck};
+        return itemArray;
+
     }
 }
+
+
 
