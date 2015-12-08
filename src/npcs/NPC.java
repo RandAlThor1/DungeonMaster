@@ -15,6 +15,14 @@ import java.awt.Point;
  */
 public class NPC extends Actor{
     PersonalityType personType;
+    public Runnable talk = new Runnable() {
+
+        @Override
+        public void run() {
+            System.out.println(NPC.this.niceName+": Hello "+dungeonmaster.DungeonMaster.player.niceName+".");
+        }
+    };
+    
     public NPC(PersonalityType personType, String name, Point location, Scene scene, Stats stats) {
         super(name, location, scene, stats);
         this.personType = personType;

@@ -17,10 +17,10 @@ public class PersonalityType {
     boolean isJudging;
     boolean isAssertive;
     
-    final int ANALYST = 1;
-    final int DIPLOMAT = 2;
-    final int SENTINEL = 3;
-    final int EXPLORER= 4;
+    final int ANALYST = 0;
+    final int DIPLOMAT = 1;
+    final int SENTINEL = 2;
+    final int EXPLORER= 3;
     
     String type;
     

@@ -9,6 +9,7 @@ import Interactable.Key;
 import java.awt.Point;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import npcs.NPC;
 
 /**
  * Project:
@@ -71,6 +72,9 @@ public class wordUse {
             else if (verb.equals("use")) {
                 look(command, index);
             }
+            else if (verb.equals("talk")) {
+                interact(command, index);
+            }
             else {
                 System.out.println("System: No command code found");
                 if (DungeonMaster.help)System.out.println("Help: Code error");
@@ -79,6 +83,11 @@ public class wordUse {
         DungeonMaster.inputCommand();
     }
     
+    /**
+     * checks if the given string is a number
+     * @param string the string to be checked
+     * @return is the string a number
+     */
     public static boolean isNum(String string) {
         boolean ret = true;
         try {
@@ -90,6 +99,9 @@ public class wordUse {
         return ret;
     }
 
+    /**
+     * makes the player enter the door, if its not locked
+     */
     private static void enter() {
         Point players = DungeonMaster.player.location;
         Scene curScene = DungeonMaster.player.scene;
@@ -143,7 +155,11 @@ public class wordUse {
             if (DungeonMaster.help)System.out.println("Help: Try Go To-");
         }
     }
-    
+    /**
+     * Sends the player to the given actor, door, or item
+     * @param command
+     * @param index 
+     */
     private static void go(String[] command, int index){
         Scene curScene = DungeonMaster.player.scene;//look for actors
         int actorIndex = -1;
@@ -232,7 +248,11 @@ public class wordUse {
             if (DungeonMaster.help)System.out.println("Help: Try Look Around");
         }
     }
-
+    /**
+     * makes the player drop the given item
+     * @param command
+     * @param index 
+     */
     private static void drop(String[] command, int index) {
         String itemName = "";
         Item item = null;
@@ -251,7 +271,11 @@ public class wordUse {
                 System.out.println("System: Item droped");      
         } 
     }
-
+    /**
+     * makes the player take the given item that has the same location as them
+     * @param command
+     * @param index 
+     */
     private static void take(String[] command, int index) {
         String itemName = "";
         Item item = null;
@@ -278,7 +302,11 @@ public class wordUse {
             }
         }
     }
-
+    /**
+     * outputs the inventory of the given actor or the players inventory or the players equipment
+     * @param command
+     * @param index 
+     */
     private static void check(String[] command, int index) {
         String output = "";
         Item[] inventory = null;
@@ -335,7 +363,11 @@ public class wordUse {
             if (DungeonMaster.help)System.out.println("Help: Given actor isn't in your current scene");
         }
     }
-
+    /**
+     * makes the player take everything from the given actors inventory, if allowed
+     * @param command
+     * @param index 
+     */
     private static void loot(String[] command, int index) {
         String actorName = "";
         Actor actor = null;
@@ -385,7 +417,11 @@ public class wordUse {
             System.out.println("System: Actor not found");
         }
     }
-
+    /**
+     * starts a fight with the given actor
+     * @param command
+     * @param index 
+     */
     private static void attack(String[] command, int index) {
         Scene curScene = DungeonMaster.player.scene;
         String actorName = "";
@@ -410,7 +446,11 @@ public class wordUse {
             }
         }
     }
-
+    /**
+     * make the player eat the given item in their inventory
+     * @param command
+     * @param index 
+     */
     private static void eat(String[] command, int index) {
         String foodName = "";
         Item food;
@@ -439,7 +479,12 @@ public class wordUse {
         }
         testFood = null;
     }
-
+    /**
+     * outputs all of the actors, items, and doors in the current scene
+     * or outputs all of the respective objects in the current scene
+     * @param command
+     * @param index 
+     */
     private static void look(String[] command, int index) {
         String output = "";
         Scene scene = DungeonMaster.player.scene;
@@ -516,4 +561,49 @@ public class wordUse {
             System.out.println(output);
         }
     }
+    /**
+     * temp method for npc interactions
+     * @param command
+     * @param index 
+     */
+    private static void interact(String[] command, int index){
+        Scene curScene = DungeonMaster.player.scene;
+        int npcIndex = -1;
+        String npcName = "";
+        boolean found = false;
+        NPC testNpc = new NPC(null, npcName, null, curScene, null);
+        if (command[index+1].equals("to")) index++;
+        for (int i = 1; i < 4 && i < command.length - index; i++) {
+            npcName += command[index + i];
+            npcIndex = curScene.findActor(npcName);
+            if (npcIndex != -1) {
+                if (curScene.actors[npcIndex].getClass().equals(testNpc.getClass())) {
+                    NPC realNpc = (NPC)curScene.actors[npcIndex];
+                    realNpc.talk.run();
+                } 
+                else {
+                    System.out.println("System: You can't talk to that");
+                    if (DungeonMaster.help)System.out.println("Help: That actor isn't a NPC");
+                }
+                break;
+            } 
+            else {
+                npcName += " ";
+            }
+            if ((i == 3 || i == command.length - index - 1) && npcIndex != -1) {
+                System.out.println("System: NPC not found");
+                if (DungeonMaster.help)System.out.println("Help: Given NPC not found in current scene");
+            }
+        }
+        testNpc = null;
+    }
 }
+
+
+
+
+
+
+
+
+

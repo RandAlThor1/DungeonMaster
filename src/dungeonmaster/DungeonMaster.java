@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import npcs.NPC;
+import npcs.PersonalityType;
 
 /**
  *
@@ -31,42 +33,19 @@ public class DungeonMaster {
     public static boolean help = false;
     public static String intro = "";
     public static void main(String[] args) throws IOException {
-        //System.out.println("System: Enter your name");
-        //Scanner s = new Scanner(System.in);
-        //String playerName = s.nextLine();
         makeBasics();
-        Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
-        Scene maxsBar = new Scene("Max's Bar"); 
-        Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
-        outside.addDoor(maxsBarDoor, true);
-        
-        Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
-//        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
-//        kingBoar.death = new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                System.out.println("Story: You win!");
-//                System.exit(0);
-//            }
-//        };
-        Actor actualEnemy = new Actor("Boar", player.location, outside);
-        actualEnemy.addKey(maxsBarDoor);
-        
-        actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
-        actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
-        actualEnemy.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, actualEnemy));//john's a dick
-        
-        for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));             
+        testingStuff();
         startGame();
     }
     static public void makeBasics(){
+        //System.out.println("System: Enter your name");
+        //Scanner s = new Scanner(System.in);
+        //String playerName = s.nextLine();
         outside = new Scene("Outside");
         player = new Actor("player", new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         player.gold = 100;
     }
-    
     static public void startGame(){
         try {
             new textFiles(textFolder);
@@ -86,7 +65,6 @@ public class DungeonMaster {
         wordUse.checkVerbs("look",temp, 0);
         
     }
-    
     static public void inputCommand(){
         Scanner s = new Scanner(System.in);
         String rawCommand = s.nextLine();
@@ -115,4 +93,37 @@ public class DungeonMaster {
         }
         
     }
+    
+    static public void testingStuff(){
+        Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
+        Scene maxsBar = new Scene("Max's Bar"); 
+        Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
+        outside.addDoor(maxsBarDoor, true);
+        
+        Scene johnsHouse = new Scene("John's House"); outside.addDoor(johnsHouse, new Point(0, 0),new Point(28, 17), true);
+//        Actor kingBoar = new Actor("King Boar", player.location, maxsBar);
+//        kingBoar.death = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                System.out.println("Story: You win!");
+//                System.exit(0);
+//            }
+//        };
+        Actor actualEnemy = new Actor("Boar", player.location, outside);
+        actualEnemy.addKey(maxsBarDoor);
+        
+        actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
+        actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
+        actualEnemy.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, actualEnemy));//john's a dick
+        for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));  
+        
+        NPC rick = new NPC(new PersonalityType(0), "Rick", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC dave = new NPC(new PersonalityType(0), "Dave", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC bob = new NPC(new PersonalityType(0), "Bob", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC chaeroele = new NPC(new PersonalityType(0), "Girl", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC betty = new NPC(new PersonalityType(0), "Betty", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC johnsBrother = new NPC(new PersonalityType(0), "John`s Brother", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC johnsSister = new NPC(new PersonalityType(0), "John`s Sister", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+    } 
 }
