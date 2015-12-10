@@ -561,38 +561,85 @@ public class wordUse {
     private static String nameList(Actor[] array){
         String output = "";
         boolean nothing = true;
+        String[] uniqueActors = new String[array.length];
+        for (int i = 0; i < uniqueActors.length; i++) uniqueActors[i] = ""; 
+        int[] uniqueActorAmount = new int[array.length];
         for (int i = 0; i < array.length; i++) {
-                    if(array[i] != DungeonMaster.player){
-                        output += array[i].niceName + ", ";
-                        nothing = false;
+            if (!array[i].name.equals("empty")) {
+                for (int j = 0; j < uniqueActors.length; j++) {
+                    if (uniqueActors[j].equals(array[i].name)) {
+                        uniqueActorAmount[i]++;
+                    }
+                    else{
+                        uniqueActors[j] = array[i].name;
                     }
                 }
-                if (nothing) output += "nothing  ";
-                output = output.substring(0, output.length()-2)+".";
+                if (uniqueActorAmount[i] == 0) output += array[i].niceName +", ";
+                else output += array[i].niceName+" X"+uniqueActorAmount[i]+", ";
+                nothing = false;
+            }     
+        }
+        for (int i = 0; i < uniqueActors.length; i++) {
+            if (uniqueItemsAmount[i] == 0) output += array[i].niceName +", ";
+            else output += array[i].niceName+" X"+uniqueItemsAmount[i]+", ";
+        }
+        if (nothing) output += "nothing  ";
+        output = output.substring(0, output.length()-2)+".";
         return output;
     }
     private static String nameList(Item[] array){
         String output = "";
         boolean nothing = true;
+        String[] uniqueItems = new String[array.length];
+        for (int i = 0; i < uniqueItems.length; i++) uniqueItems[i] = "";
+        int[] uniqueItemsAmount = new int[array.length];
         for (int i = 0; i < array.length; i++) {
-                if (!array[i].name.equals("empty")) {
-                    output += array[i].niceName + ", ";
-                    nothing = false;
-                }     
-            }
-            if (nothing) output += "nothing  ";
-            output = output.substring(0, output.length()-2)+".";
+            if (!array[i].name.equals("empty")) {
+                for (int j = 0; j < uniqueItems.length; j++) {
+                    if (uniqueItems[j].equals(array[i].name)) {
+                        uniqueItemsAmount[i]++;
+                    }
+                    else{
+                        uniqueItems[j] = array[i].name;
+                    }
+                }
+                nothing = false;
+                
+            }     
+        }
+        for (int i = 0; i < uniqueItems.length; i++) {
+            if (uniqueItemsAmount[i] == 0) output += array[i].niceName +", ";
+            else output += array[i].niceName+" X"+uniqueItemsAmount[i]+", ";
+        }
+        if (nothing) output += "nothing  ";
+        output = output.substring(0, output.length()-2)+".";
         return output;
     }
     private static String nameList(ArrayList<Door> array){
         String output = "";
         boolean nothing = true;
+        String[] uniqueDoors = new String[array.size()];
+        for (int i = 0; i < uniqueDoors.length; i++) uniqueDoors[i] = "";
+        int[] uniqueDoorsAmount = new int[array.size()];
         for (int i = 0; i < array.size(); i++) {
-                    output += array.get(i).niceName + ", ";
-                    nothing = false;
+            if (!array.get(i).name.equals("empty")) {
+                for (int j = 0; j < uniqueDoors.length; j++) {
+                    if (uniqueDoors[j].equals(array.get(i).niceName)) {
+                        uniqueDoorsAmount[i]++;
+                    }
+                    else{
+                        uniqueDoors[j] = array.get(i).niceName;
+                    }
                 }
-                if (nothing) output += "nothing  ";
-                output = output.substring(0, output.length()-2)+".";
+                nothing = false;
+            }     
+        }
+        for (int i = 0; i < uniqueDoors.length; i++) {
+            if (uniqueDoorsAmount[i] == 0) output += array.get(i).niceName +", ";
+            else output += array.get(i).niceName+" X"+uniqueDoorsAmount[i]+", ";
+        }
+        if (nothing) output += "nothing  ";
+        output = output.substring(0, output.length()-2)+".";
         return output;
     }
 }
