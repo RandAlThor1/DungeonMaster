@@ -8,6 +8,7 @@ import Interactable.Door;
 import Interactable.Key;
 import java.awt.Point;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import npcs.NPC;
 
@@ -488,76 +489,36 @@ public class wordUse {
     private static void look(String[] command, int index) {
         String output = "";
         Scene scene = DungeonMaster.player.scene;
-        boolean nothing = true;
         if (command.length-index >= 2 && command[index + 1].equals("for")){
             if (command[index + 2].equals("items")){
                 System.out.println("System: You see: ");
                 output += " Items: "; 
-                for (int i = 0; i < scene.inventory.length; i++) {
-                    if (!scene.inventory[i].name.equals("empty")) {
-                        output += scene.inventory[i].niceName + ", ";
-                        nothing = false;
-                    }     
-                }
-                if (nothing) output += "nothing  ";
-                output = output.substring(0, output.length()-2)+".";
+                output += nameList(scene.inventory);
                 System.out.println(output);
-                nothing = true;
             }
             if (command[index + 2].equals("actors")){
                 System.out.println("System: You see: ");
                 output += " Actors: "; 
-                for (int i = 0; i < scene.actors.length; i++) {
-                    if(scene.actors[i] != DungeonMaster.player){
-                        output += scene.actors[i].niceName + ", ";
-                        nothing = false;
-                    }
-                }
-                if (nothing) output += "nothing  ";
-                output = output.substring(0, output.length()-2)+".";
+                output += nameList(scene.actors);
                 System.out.println(output);
             }
             if (command[index + 2].equals("places")){
                 System.out.println("System: You see: ");
                 output += " Places: "; 
-                for (int i = 0; i < scene.doors.size(); i++) {
-                    output += scene.doors.get(i).niceName + ", ";
-                    nothing = false;
-                }
-                if (nothing) output += "nothing  ";
-                output = output.substring(0, output.length()-2)+".";
+                output += nameList(scene.doors);
                 System.out.println(output);
             }
         }
         else if(command[index + 1].equals("around")){
             System.out.println("System: You see: ");
-            output += " Items: "; 
-            for (int i = 0; i < scene.inventory.length; i++) {
-                if (!scene.inventory[i].name.equals("empty")) {
-                    output += scene.inventory[i].niceName + ", ";
-                    nothing = false;
-                }     
-            }
-            if (nothing) output += "nothing  ";
-            output = output.substring(0, output.length()-2)+".\n";
-            nothing = true;
-            output += " Actors: "; 
-            for (int i = 0; i < scene.actors.length; i++) {
-                if(scene.actors[i] != DungeonMaster.player){
-                    output += scene.actors[i].niceName + ", ";
-                    nothing = false;
-                }
-            }
-            if (nothing) output += "nothing  ";
-            output = output.substring(0, output.length()-2)+".\n";
-            nothing = true;
-            output += " Places: "; 
-            for (int i = 0; i < scene.doors.size(); i++) {
-                output += scene.doors.get(i).niceName + ", ";
-                nothing = false;
-            }
-            if (nothing) output += "nothing  ";
-            output = output.substring(0, output.length()-2)+".";
+            output = " Items: "; 
+            output += nameList(scene.inventory);
+            System.out.println(output);
+            output = " Actors: "; 
+            output += nameList(scene.actors);
+            System.out.println(output);
+            output = " Places: "; 
+            output += nameList(scene.doors);
             System.out.println(output);
         }
     }
@@ -596,6 +557,43 @@ public class wordUse {
             }
         }
         testNpc = null;
+    }
+    private static String nameList(Actor[] array){
+        String output = "";
+        boolean nothing = true;
+        for (int i = 0; i < array.length; i++) {
+                    if(array[i] != DungeonMaster.player){
+                        output += array[i].niceName + ", ";
+                        nothing = false;
+                    }
+                }
+                if (nothing) output += "nothing  ";
+                output = output.substring(0, output.length()-2)+".";
+        return output;
+    }
+    private static String nameList(Item[] array){
+        String output = "";
+        boolean nothing = true;
+        for (int i = 0; i < array.length; i++) {
+                if (!array[i].name.equals("empty")) {
+                    output += array[i].niceName + ", ";
+                    nothing = false;
+                }     
+            }
+            if (nothing) output += "nothing  ";
+            output = output.substring(0, output.length()-2)+".";
+        return output;
+    }
+    private static String nameList(ArrayList<Door> array){
+        String output = "";
+        boolean nothing = true;
+        for (int i = 0; i < array.size(); i++) {
+                    output += array.get(i).niceName + ", ";
+                    nothing = false;
+                }
+                if (nothing) output += "nothing  ";
+                output = output.substring(0, output.length()-2)+".";
+        return output;
     }
 }
 
