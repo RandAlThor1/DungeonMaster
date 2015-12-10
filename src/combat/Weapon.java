@@ -11,7 +11,9 @@ package combat;
  */
 public class Weapon extends Equipment{
     int minDam, maxDam, requiredStrength, bonus;
-    boolean isMainHand, isOffHand;
+    public boolean isMainHand;
+    public boolean isTwoHand;
+    public boolean isOffHand;
     
     String type;
     public Weapon(String name, int maxDurability) {

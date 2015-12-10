@@ -21,17 +21,17 @@ public class Combat {
         }
     };
     public static void defaultAttack(Actor player, Actor enemy){
-        int maxDam = player.equippedWeapon.maxDam;
-        int minDam = player.equippedWeapon.minDam;
+        int maxDam = player.equippedWeaponMainHand.maxDam;
+        int minDam = player.equippedWeaponMainHand.minDam;
         int damage = damageDone(maxDam,minDam);
         int armor = enemy.gear.totalArmorClass;
         enemy.stats.health -= damage - armor;
-        player.equippedWeapon.loseDurability(0);
+        player.equippedWeaponMainHand.loseDurability(0);
         Random equipRoll = new Random();
         enemy.gear.armorArray[equipRoll.nextInt(enemy.gear.armorArray.length)].loseDurability(0);//you can tell davin wrote this //also NullPointerExeptions 
     }
     public static int AttackRoll(Actor attacker, Actor defender, int statModToUse){
-        int toHitBonus = attacker.equippedWeapon.bonus + statModToUse;
+        int toHitBonus = attacker.equippedWeaponMainHand.bonus + statModToUse;
         return 0;
     }
     public static int damageDone(int maxDam, int minDam){

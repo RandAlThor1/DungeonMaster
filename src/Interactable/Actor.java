@@ -1,9 +1,6 @@
 package Interactable;
 
-import combat.Armor;
-import combat.Equipment;
-import combat.Gear;
-import combat.Weapon;
+import combat.*;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +19,8 @@ public class Actor {
     public String niceName;
     public Point location;
     public Scene scene;
-    public Weapon equippedWeapon;
+    public Weapon equippedWeaponMainHand;
+    public Weapon equippedWeaponOffHand;
     public Item[] inventory = new Item[20];
     public Stats stats;
     public Gear gear;
@@ -135,6 +133,72 @@ public class Actor {
             System.out.println("System: You lost "+food.heal*-1+"HP.");
             this.stats.health += food.heal;
         }
+    }
+    public void equipNewArmor(Armor newArmor){
+        if (newArmor.isArms) {
+            gear.arms = newArmor;
+        }
+        else if (newArmor.isBoots) {
+            gear.boots = newArmor;
+        }
+        else if (newArmor.isChest) {
+            gear.chest = newArmor;
+        }
+        else if (newArmor.isLegs) {
+            gear.legs = newArmor;
+        }
+        else if (newArmor.isHelm) {
+            gear.helm = newArmor;
+        }
+        else if (newArmor.isHands) {
+            gear.hands = newArmor;
+        }
+        else {
+            System.out.println("what are you trying to wear?");
+        }
+        gear.updateEquipment();
+    }
+    public void equipNewWeapon(Weapon newWeapon){
+        if (newWeapon.isTwoHand) { //its public you liar code!
+            gear.mainHand = newWeapon;
+            gear.offHand = null;
+        }
+        else if (newWeapon.isMainHand) {
+            gear.mainHand = newWeapon;
+        }
+        else if (newWeapon.isOffHand) {
+            gear.offHand = newWeapon;
+        }
+        gear.updateEquipment();
+    }
+    public void equipMagicItem(MiscGear newMagicGear, String leftOrRight){
+        if (newMagicGear.isTrinket) {
+            if (leftOrRight.equalsIgnoreCase("R")) {
+                removeEquipment(gear.ringRight);
+                gear.ringRight = newMagicGear;
+            }
+            else if (leftOrRight.equalsIgnoreCase("L")) {
+                removeEquipment(gear.ringLeft);
+                gear.ringLeft =  newMagicGear;
+            }
+        }
+        else if (newMagicGear.isRing) {
+            if (leftOrRight.equalsIgnoreCase("R")) {
+                removeEquipment(gear.trinketRight);
+                gear.trinketRight = newMagicGear;
+            }
+            else if (leftOrRight.equalsIgnoreCase("L")) {
+                removeEquipment(gear.trinketLeft);
+                gear.trinketLeft =  newMagicGear;
+            }
+        }
+        else if (newMagicGear.isNeck) {
+            gear.neck = newMagicGear;
+        }
+        gear.updateEquipment();
+    }
+    public void removeEquipment(Equipment equipment) {
+        invenAdd(equipment);
     }
 
     

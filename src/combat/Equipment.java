@@ -14,7 +14,7 @@ import Interactable.Item;
 public class Equipment extends Item{
     int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
     int durability, maxDurability;
-    boolean isBroken;
+    public boolean isBroken, isEmpty;
     final int DEFAULT_DURABILITY = 60; // can change
     final int DEFAULT_DURABILITY_DAMAGE = 10; // can change
     public Equipment(String name, int maxDurability) {

@@ -11,7 +11,7 @@ package combat;
  */
 public class Armor extends Equipment {
     int armorBonus;
-    boolean isHelm, isBoots, isChest, isArms, isLegs, isHands;
+    public boolean isHelm, isBoots, isChest, isArms, isLegs, isHands;
 
     public Armor(String name,int armorClass, int maxDurability) {
         super(name, maxDurability);
