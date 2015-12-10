@@ -6,6 +6,7 @@
 package combat;
 
 import Interactable.Actor;
+import java.util.Random;
 
 /**
  *
@@ -19,14 +20,21 @@ public class Combat {
             defaultAttack(null, null);
         }
     };
-   public static void defaultAttack(Actor player, Actor enemy){
-       
+    public static void defaultAttack(Actor player, Actor enemy){
+        int maxDam = player.equippedWeapon.maxDam;
+        int minDam = player.equippedWeapon.minDam;
+        int damage = damageDone(maxDam,minDam);
+        int armor = enemy.gear.totalArmorClass;
+        enemy.stats.health -= damage - armor;
+        player.equippedWeapon.loseDurability(0);
+        Random equipRoll = new Random();
+        enemy.gear.armorArray[equipRoll.nextInt(enemy.gear.armorArray.length)].loseDurability(0);//you can tell davin wrote this //also NullPointerExeptions 
     }
-    public int AttackRoll(Actor attacker, Actor defender, int statModToUse){
+    public static int AttackRoll(Actor attacker, Actor defender, int statModToUse){
         int toHitBonus = attacker.equippedWeapon.bonus + statModToUse;
         return 0;
     }
-    public int damageDone(int maxDam, int minDam){
+    public static int damageDone(int maxDam, int minDam){
         int result = (int) ((maxDam - minDam + 1) * (Math.random() + 1));
         return result;
     }

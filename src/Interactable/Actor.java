@@ -23,7 +23,6 @@ public class Actor {
     public Point location;
     public Scene scene;
     public Weapon equippedWeapon;
-    public Armor armor;
     public Item[] inventory = new Item[20];
     public Stats stats;
     public Gear gear;
@@ -110,11 +109,13 @@ public class Actor {
     public void fight(Actor actor){//we need to figure out how combat works; 
         if (this.location.equals(actor.location)) {
             if (actor.stats.health > 0) {
-            actor.stats.health = 0;//instakill
-            actor.death.run();
-            int xp = 10;
-            //this.stats.xp += xp; why xp not a thing?
-            System.out.println("System: Fight won! Gained " + xp + "XP.");    
+                combat.Combat.defaultAttack(this, actor);
+                if (actor.stats.health <= 0){
+                    actor.death.run();
+                    int xp = 10;
+                    //this.stats.xp += xp; why xp not a thing?
+                    System.out.println("System: Fight won! Gained " + xp + "XP.");    
+                }
             }
             else System.out.println("System: Your target is dead");   
             
