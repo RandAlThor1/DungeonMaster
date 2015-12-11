@@ -16,4 +16,5 @@ public class MiscGear extends Equipment {
         super(name, maxDurability);
         this.isRing = isRing;
     }
+    
 }

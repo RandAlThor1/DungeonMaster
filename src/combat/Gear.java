@@ -12,6 +12,13 @@ import Interactable.Item;
  * @author b.allen
  */
 public class Gear {
+
+    public Gear() {
+        for (int i = 0; i < equipArray.length; i++) {
+            equipArray[i].makeEmpty();
+        }
+    }
+    
     public int totalIntelBonus, totalDexBonus, totalStrengthBonus, totalWisBonus, totalConBonus, totalCharBonus;
     public int totalArmorClass;
     
@@ -55,6 +62,12 @@ public class Gear {
         Item[] itemArray = {helm, chest, legs, neck, boots, arms, hands, mainHand, offHand, ringRight, ringLeft, trinketRight, trinketLeft, neck};
         return itemArray;
 
+    }
+    public Armor[] DamageAllArmor(int howMuchDurabilityLoss, Armor[] armorArray){
+        for (int i = 0; i < armorArray.length; i++) {
+            armorArray[i].loseDurability(howMuchDurabilityLoss);
+        }
+        return armorArray;
     }
 }
 

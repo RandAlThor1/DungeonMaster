@@ -38,6 +38,10 @@ public class Equipment extends Item{
             this.isBroken = true;
         }
     }
+    public void makeEmpty(){
+        this.name = "Empty";
+        this.isEmpty = true;
+    }
     
     
 }

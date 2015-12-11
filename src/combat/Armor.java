@@ -17,4 +17,10 @@ public class Armor extends Equipment {
         super(name, maxDurability);
         this.armorBonus = armorClass;
     }
+    @Override
+    public void makeEmpty(){
+        this.isEmpty = true;
+        this.armorBonus = 0;
+        this.name = "empty";
+    }
 }
