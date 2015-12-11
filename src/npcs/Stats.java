@@ -65,4 +65,28 @@ public class Stats {
     public static void updateStats(){
         //this.
     }
+    public int getStatMod(String statToGet){
+        if (statToGet.equalsIgnoreCase("Str")) {
+            return this.StrengthMod;
+        }
+        else if (statToGet.equalsIgnoreCase("Con")) {
+            return this.ConstitutionMod;
+        }
+        else if (statToGet.equalsIgnoreCase("Dex")) {
+            return this.DexterityMod;
+        }
+        else if (statToGet.equalsIgnoreCase("Itel")) {
+            return this.IntelligenceMod;
+        }
+        else if (statToGet.equalsIgnoreCase("Wis")) {
+            return this.WisdomMod;
+        }
+        else if (statToGet.equalsIgnoreCase("Cha")) {
+            return this.CharismaMod;
+        }
+        return -1;
+    }
+    public int getDodgeChance(){
+        return this.dodgeChance;
+    }
 }

@@ -14,9 +14,10 @@ public class Weapon extends Equipment{
     public boolean isMainHand;
     public boolean isTwoHand;
     public boolean isOffHand;
+    String statModBonus;
     
     String type;
-    public Weapon(String name, int maxDurability) {
+    public Weapon(String name, int maxDurability, String statModBonus) {
         super(name, maxDurability);
         niceName =  name;
     }
@@ -31,5 +32,8 @@ public class Weapon extends Equipment{
     }
     public int getRequiredStrength(){
         return this.requiredStrength;
+    }
+    public String getStatModBonus(){
+        return this.statModBonus;
     }
 }

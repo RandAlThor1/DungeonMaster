@@ -107,7 +107,7 @@ public class Actor {
     public void fight(Actor actor){//we need to figure out how combat works; 
         if (this.location.equals(actor.location)) {
             if (actor.stats.health > 0) {
-                combat.Combat.defaultAttack(this, actor);
+                //combat.Combat.defaultAttack(this, actor);
                 if (actor.stats.health <= 0){
                     actor.death.run();
                     int xp = 10;
