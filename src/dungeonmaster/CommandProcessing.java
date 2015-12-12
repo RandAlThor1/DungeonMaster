@@ -56,6 +56,9 @@ public class CommandProcessing {
             else if ("exit".equals(Words[0][i])){
                 CommandProcessing.Words[1][i] = "enter";
             }
+            else if ("place".equals(Words[0][i]) || "put".equals(Words[0][i])){
+                CommandProcessing.Words[1][i] = "place";
+            }
             else if (/*"poop".equals(Words[0][i])*/ false){//make this into more sysnonpmkjndsas
                 CommandProcessing.Words[1][i] = "things";
             }

@@ -76,6 +76,9 @@ public class wordUse {
             else if (verb.equals("talk")) {
                 interact(command, index);
             }
+            else if (verb.equals("give")) {
+                give(command, index);
+            }
             else {
                 System.out.println("System: No command code found");
                 if (DungeonMaster.help)System.out.println("Help: Code error");
@@ -163,7 +166,7 @@ public class wordUse {
         String place = "";
         boolean found = false;
         if (command[index+1].equals("to")) index++;         
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        for (int i = 1; i < command.length - index; i++) {
             place += command[index + i];
             actorIndex = curScene.findActor(place);
             if (actorIndex != -1) found = true;
@@ -181,7 +184,7 @@ public class wordUse {
         if (!found){
 
             String item = "";//look for items
-            for (int i = 1; i < 4 && i < command.length - index; i++) {
+            for (int i = 1; i < command.length - index; i++) {
                 item += command[index + i];
                 for (int j = 0; j < curScene.inventory.length; j++) {
                     if (curScene.inventory[j].name.equals(item)) {itemIndex = j; break;}
@@ -200,7 +203,7 @@ public class wordUse {
         }
         if (!found) {
             place = "";//look for doors
-            for (int i = 1; i < 4 && i < command.length - index; i++) {
+            for (int i = 1; i < command.length - index; i++) {
                 place += command[index + i];
                 for (int j = 0; j < curScene.doors.size(); j++) {
                     if (curScene.doors.get(j).name.equals(place)) {
@@ -253,7 +256,7 @@ public class wordUse {
     private static void drop(String[] command, int index) {
         String itemName = "";
         Item item = null;
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        for (int i = 1; i < command.length - index; i++) {
             itemName += command[index + i];
             item = DungeonMaster.player.invenFind(itemName);         
             itemName += " ";
@@ -276,7 +279,7 @@ public class wordUse {
     private static void take(String[] command, int index) {
         String itemName = "";
         Item item = null;
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        for (int i = 1; i < command.length - index; i++) {
             itemName += command[index + i];
             item = DungeonMaster.player.scene.invenFind(itemName);
             if (item != null) {
@@ -319,7 +322,7 @@ public class wordUse {
         else {
             String invenName = "";
             Scene curScene = DungeonMaster.player.scene;
-            for (int i = 1; i < 4 && i < command.length - index; i++) {
+            for (int i = 1; i < command.length - index; i++) {
                 invenName += command[index + i];
                 int actorIndex = curScene.findActor(invenName);
                 if (actorIndex != -1) {
@@ -340,20 +343,8 @@ public class wordUse {
             }
         }
         if (inventory != null && possible) {
-            boolean empty = true;
-            for (int i = 0; i < inventory.length; i++) {
-                if (!inventory[i].name.equals("empty")) {
-                    empty = false;
-                    output += inventory[i].niceName + ", ";
-                }
-            }
-            if (empty) {
-                System.out.println(output += "nothing.");
-            } 
-            else {
-                output = output.substring(0, output.length() - 2);
-                System.out.println(output += ".");
-            }
+            output += nameList(inventory);
+            System.out.println(output);
         }
         if (inventory == null && possible) {
             System.out.println("System: Actor not found");
@@ -369,7 +360,7 @@ public class wordUse {
         String actorName = "";
         Actor actor = null;
         boolean possible = true;
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        for (int i = 1; i < command.length - index; i++) {
             actorName += command[index + i];
             int actorIndex = DungeonMaster.player.scene.findActor(actorName);
             if (actorIndex != -1) {
@@ -422,7 +413,7 @@ public class wordUse {
     private static void attack(String[] command, int index) {
         Scene curScene = DungeonMaster.player.scene;
         String actorName = "";
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        for (int i = 1; i < command.length - index; i++) {
             actorName += command[index + i];
             int actorIndex = curScene.findActor(actorName);
             if (actorIndex != -1) {
@@ -452,7 +443,7 @@ public class wordUse {
         String foodName = "";
         Item food;
         Food testFood = new Food("", 0, new Point(-10000, -10000));
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        for (int i = 1;i < command.length - index; i++) {
             foodName += command[index + i];
             food = DungeonMaster.player.invenFind(foodName);
             if (food != null) {
@@ -530,7 +521,8 @@ public class wordUse {
         boolean found = false;
         NPC testNpc = new NPC(null, npcName, null, curScene, null);
         if (command[index+1].equals("to")) index++;
-        for (int i = 1; i < 4 && i < command.length - index; i++) {
+        if (command[index+1].equals("with")) index++;
+        for (int i = 1; i < command.length - index; i++) {
             npcName += command[index + i];
             npcIndex = curScene.findActor(npcName);
             if (npcIndex != -1) {
@@ -554,7 +546,39 @@ public class wordUse {
         }
         testNpc = null;
     }
-   private static String nameList(Actor[] array){
+    private static void give(String[] command, int index){
+        Item item = null;
+        Actor actor = null;
+        String name = "";
+        boolean done = false;
+        for (int i = index; i < command.length; i++) {
+            name += command[i+1];
+            if (item == null) {
+                item = DungeonMaster.player.invenFind(name);
+                if (item != null){
+                    name = "";
+                    if(command.length > i) if(command[i+1].equals("in"))i++;    
+                }
+                
+            }
+            if (actor == null){
+                int actorIndex = DungeonMaster.player.scene.findActor(name);
+                if(actorIndex != -1) {
+                    actor = DungeonMaster.player.scene.actors[actorIndex];
+                    name = "";
+                }
+            }
+            if(actor != null && item != null) {done = true; break;}
+        }
+        if (done) {
+            actor.invenAdd(item);
+            DungeonMaster.player.invenRemov(item);
+            System.out.println("System: "+item.niceName+" is now in "+actor.niceName+"'s inventory.");
+        }
+        else System.out.println("System: Actor or Item not found");
+    }
+    
+    private static String nameList(Actor[] array){
         String output = "";
         boolean nothing = true;
         for (int i = 0; i < array.length; i++) {

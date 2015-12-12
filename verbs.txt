@@ -1,1 +1,1 @@
-go attack eat talk drop take loot equip check search walk move enter look end kill exit fight use meander talk 
+go attack eat talk drop take loot equip check search walk move enter look end kill exit fight use meander talk place give put 

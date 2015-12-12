@@ -9,6 +9,7 @@ import npcs.Stats;
 import Interactable.Actor;
 import Interactable.Door;
 import Interactable.Food;
+import Interactable.Item;
 import Interactable.Scene;
 import java.awt.Point;
 import java.io.IOException;
@@ -125,5 +126,7 @@ public class DungeonMaster {
         NPC betty = new NPC(new PersonalityType(0), "Betty", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
         NPC johnsBrother = new NPC(new PersonalityType(0), "John`s Brother", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
         NPC johnsSister = new NPC(new PersonalityType(0), "John`s Sister", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        
+        player.invenAdd(new Item("Rock"));
     } 
 }
