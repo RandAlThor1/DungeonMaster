@@ -12,13 +12,6 @@ import Interactable.Item;
  * @author b.allen
  */
 public class Gear {
-
-    public Gear() {
-        for (int i = 0; i < equipArray.length; i++) {
-            equipArray[i].makeEmpty();
-        }
-    }
-    
     public int totalIntelBonus, totalDexBonus, totalStrengthBonus, totalWisBonus, totalConBonus, totalCharBonus;
     public int totalArmorClass;
     
@@ -37,6 +30,15 @@ public class Gear {
     public MiscGear neck;
     public static Equipment[] equipArray;
     public Armor[] armorArray = {helm, chest, legs, boots, arms, hands};
+
+    public Gear() {
+        equipArray = new Equipment[13];
+        for (int i = 0; i < equipArray.length; i++) {
+            equipArray[i] = new Equipment("empty", 0);
+            equipArray[i].makeEmpty();
+        }
+    }
+
     public void updateAC(){
         int armorClass = 0;
         for (int i = 0; i < equipArray.length; i++) {
