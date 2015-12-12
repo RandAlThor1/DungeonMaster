@@ -84,6 +84,9 @@ public class Stats {
         else if (statToGet.equalsIgnoreCase("Cha")) {
             return this.CharismaMod;
         }
+        else if(statToGet.equalsIgnoreCase("none")) {
+            return 0;
+        }
         return -1;
     }
     public int getDodgeChance(){

@@ -30,26 +30,23 @@ public class Combat {
         else {
             defence = enemy.gear.totalArmorClass;
         }
-        if (!(player.equippedWeaponMainHand.isEmpty) && player.equippedWeaponOffHand.isEmpty) { 
-            bonus = player.equippedWeaponMainHand.bonus + 2;
-            int attack = attackRoll(bonus, player.stats.getStatMod(player.equippedWeaponMainHand.getStatModBonus()));
-            if (attack >= defence) {
-                
-            }
-            
+        if (!(player.gear.mainHand.isEmpty) && player.gear.offHand.isEmpty) { 
+            bonus = player.gear.mainHand.bonus + 2;
+            int attack = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
             //still need to right the defence code
-            if (!(dodged(enemy.stats.dodgeChance))) {
-                int damage = damageDone(player.equippedWeaponMainHand.maxDam, player.equippedWeaponMainHand.minDam);
+            if (((dodged(enemy.stats.dodgeChance)))) {
+                int damage = damageDone(player.gear.mainHand.maxDam, player.gear.mainHand.minDam);
                 enemy.stats.health -= damage;
-                enemy.gear.DamageAllArmor(-1, enemy.gear.armorArray);
+                //enemy.gear.DamageAllArmor(-1);
+                System.out.println(enemy.stats.health);
                 
             }
         }
-        else if (!(player.equippedWeaponMainHand.isEmpty) && !(player.equippedWeaponOffHand.isEmpty)) {
-            int bonus2 = player.equippedWeaponOffHand.bonus;
-            bonus = player.equippedWeaponMainHand.bonus;
-            int attack1 = attackRoll(bonus, player.stats.getStatMod(player.equippedWeaponMainHand.getStatModBonus()));
-            int attack2 = attackRoll(bonus2, player.stats.getStatMod(player.equippedWeaponOffHand.getStatModBonus()));
+        else if (!(player.gear.mainHand.isEmpty) && !(player.gear.offHand.isEmpty)) {
+            int bonus2 = player.gear.offHand.bonus;
+            bonus = player.gear.mainHand.bonus;
+            int attack1 = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
+            int attack2 = attackRoll(bonus2, player.stats.getStatMod(player.gear.offHand.getStatModBonus()));
         }
 //        int maxDam = player.equippedWeaponMainHand.maxDam;
 //        int minDam = player.equippedWeaponMainHand.minDam;
@@ -88,10 +85,13 @@ public class Combat {
         
     }
     public static boolean dodged(int dodgeChance){
-        boolean isDodged;
+        boolean isDodged = false;
         int result = 0;
-        int reuslt = (int) (Math.random() * (1 + 100 - 1)) + 1;
+        int reuslt = (int) (Math.random() * 100) + 1;
         isDodged = result <= dodgeChance;
+        if (result > dodgeChance) {
+            System.out.println("to fast");
+        }
         return isDodged;
     }
 
