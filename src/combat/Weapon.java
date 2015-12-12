@@ -19,7 +19,9 @@ public class Weapon extends Equipment{
     String type;
     public Weapon(String name, int maxDurability, String statModBonus) {
         super(name, maxDurability);
+        this.statModBonus = statModBonus;
         niceName =  name;
+
     }
     public int getMinDam(){
         return this.minDam;
