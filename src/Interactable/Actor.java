@@ -199,6 +199,7 @@ public class Actor {
     }
     public void removeEquipment(Equipment equipment) {
         invenAdd(equipment);
+        
     }
 
     

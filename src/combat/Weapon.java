@@ -17,11 +17,27 @@ public class Weapon extends Equipment{
     String statModBonus;
     
     String type;
-    public Weapon(String name, int maxDurability, String statModBonus) {
+
+    /**
+     *
+     * @param name
+     * @param maxDurability
+     * @param statModBonus
+     * @param Hand give "MH" for MainHand, "TH" for TwoHand or "OH" for OffHand
+     */
+    public Weapon(String name, int maxDurability, String statModBonus, String Hand) {
         super(name, maxDurability);
         this.statModBonus = statModBonus;
         niceName =  name;
-
+        if (Hand.equalsIgnoreCase("MH")) {
+            this.isMainHand = true;
+        }
+        else if (Hand.equalsIgnoreCase("TH")) {
+            this.isTwoHand = true;
+        }
+        else if (Hand.equalsIgnoreCase("OF")) {
+            this.isOffHand = true;
+        }
     }
     public int getMinDam(){
         return this.minDam;

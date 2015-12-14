@@ -38,8 +38,8 @@ public class Gear {
 
     public Gear() {
        
-            emptyWeapon = new Weapon("empty", -1, "none");
-            emptyArmor =  new Armor("empty", -1, -1);
+            emptyWeapon = new Weapon("empty", -1, "none", "none");
+            emptyArmor =  new Armor("empty", -1, -1, "none");
             emptyMisc = new MiscGear("none", "none", -1);
             this.helm = emptyArmor;
             this.chest = emptyArmor;
@@ -80,7 +80,6 @@ public class Gear {
         }
         this.totalArmorClass = armorClass;
     }
-    
     public void getStatsBoost(){
         int intelBonus = 0, dexBonus = 0, strengthBonus = 0, wisBonus = 0, conBonus = 0, charBonus = 0;
         for (int i = 0; i < equipArray.length; i++) {
