@@ -48,6 +48,12 @@ public class Combat {
             int attack1 = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
             int attack2 = attackRoll(bonus2, player.stats.getStatMod(player.gear.offHand.getStatModBonus()));
         }
+        else if (player.gear.mainHand.isMainHand && player.gear.offHand.isEmpty) {
+            bonus = 0;
+            int attack = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));;
+            int damage = damageDone(player.gear.mainHand.maxDam, player.gear.mainHand.minDam);
+            enemy.stats.health -= damage;
+        }
 //        int maxDam = player.equippedWeaponMainHand.maxDam;
 //        int minDam = player.equippedWeaponMainHand.minDam;
 //        int damage = damageDone(maxDam,minDam);

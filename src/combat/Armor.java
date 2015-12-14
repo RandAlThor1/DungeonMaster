@@ -13,9 +13,27 @@ public class Armor extends Equipment {
     int armorBonus;
     public boolean isHelm, isBoots, isChest, isArms, isLegs, isHands;
 
-    public Armor(String name,int armorClass, int maxDurability) {
+    public Armor(String name,int armorClass, int maxDurability, String type) {
         super(name, maxDurability);
         this.armorBonus = armorClass;
+         if (type.equalsIgnoreCase("helm")) {
+            this.isHelm = true;
+        }
+        else if (type.equalsIgnoreCase("chest")) {
+            this.isChest = true;
+        }
+        else if (type.equalsIgnoreCase("arms")) {
+            this.isArms = true;
+        }
+        else if (type.equalsIgnoreCase("legs")) {
+            this.isLegs = true;
+        }
+        else if (type.equalsIgnoreCase("boots")) {
+            this.isBoots = true;
+        }
+        else if (type.equalsIgnoreCase("hands")) {
+            this.isHands = true;
+        }
     }
     @Override
     public void makeEmpty(){
