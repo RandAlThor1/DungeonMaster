@@ -183,7 +183,7 @@ public class wordUse {
         int itemIndex = -1;
         if (!found){
 
-            String item = "";//look for items
+            String item = "";//look for actors
             for (int i = 1; i < command.length - index; i++) {
                 item += command[index + i];
                 for (int j = 0; j < curScene.inventory.length; j++) {
@@ -283,15 +283,15 @@ public class wordUse {
             itemName += command[index + i];
             item = DungeonMaster.player.scene.invenFind(itemName);
             if (item != null) {
-                if (item.location.equals(DungeonMaster.player.location)) {
+                //if (item.location.equals(DungeonMaster.player.location)) {
                     DungeonMaster.player.invenAdd(item);
                     DungeonMaster.player.scene.invenRemov(item);
                     System.out.println("System: Item taken");
-                } 
-                else {
-                    System.out.println("System: Can't pick that up from here");
-                    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                }
+                //} 
+                //else {
+                //    System.out.println("System: Can't pick that up from here");
+                //   if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+                //}
                 break;
             } 
             else {
@@ -327,14 +327,14 @@ public class wordUse {
                 int actorIndex = curScene.findActor(invenName);
                 if (actorIndex != -1) {
                     inventory = curScene.actors[actorIndex].inventory;
-                    if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) {
+                    //if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) {
                         output = "System: You found ";
-                    } 
-                    else {
-                        System.out.println("System: You can't check that form here");
-                        if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                        possible = false;
-                    }
+                    //} 
+                    //else {
+                    //    System.out.println("System: You can't check that form here");
+                    //    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+                    //    possible = false;
+                    //}
                     break;
                 } 
                 else {
@@ -365,11 +365,11 @@ public class wordUse {
             int actorIndex = DungeonMaster.player.scene.findActor(actorName);
             if (actorIndex != -1) {
                 actor = DungeonMaster.player.scene.actors[actorIndex];
-                if (!actor.location.equals(DungeonMaster.player.location)) {
+                //if (!actor.location.equals(DungeonMaster.player.location)) {
                     possible = false;
                     System.out.println("System: You can't loot that from here");
                     if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                }
+                //}
             } 
             else {
                 actorName += " ";
@@ -417,13 +417,13 @@ public class wordUse {
             actorName += command[index + i];
             int actorIndex = curScene.findActor(actorName);
             if (actorIndex != -1) {
-                if (curScene.actors[actorIndex].location == DungeonMaster.player.location) {
+                //if (curScene.actors[actorIndex].location == DungeonMaster.player.location) {
                     DungeonMaster.player.fight(curScene.actors[actorIndex]);
-                } 
-                else {
-                    System.out.println("You can't attack that from here");
-                    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                }
+                //} 
+                //else {
+                //    System.out.println("You can't attack that from here");
+                //    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
+                //}
             } 
             else {
                 actorName += " ";
@@ -468,8 +468,8 @@ public class wordUse {
         testFood = null;
     }
     /**
-     * outputs all of the actors, items, and doors in the current scene
-     * or outputs all of the respective objects in the current scene
+     * outputs all of the actors, actors, and doors in the current scene
+ or outputs all of the respective objects in the current scene
      * @param command
      * @param index 
      */
@@ -551,7 +551,7 @@ public class wordUse {
         Actor actor = null;
         String name = "";
         boolean done = false;
-        for (int i = index; i < command.length; i++) {
+        for (int i = index; i < command.length-1; i++) {
             name += command[i+1];
             if (item == null) {
                 item = DungeonMaster.player.invenFind(name);
@@ -574,6 +574,8 @@ public class wordUse {
             actor.invenAdd(item);
             DungeonMaster.player.invenRemov(item);
             System.out.println("System: "+item.niceName+" is now in "+actor.niceName+"'s inventory.");
+            NPC testNpc= new NPC(null, "", null, DungeonMaster.outside, null);
+            if (actor.getClass() == testNpc.getClass()) System.out.println(actor.niceName+": Thank you.");
         }
         else System.out.println("System: Actor or Item not found");
     }
@@ -581,14 +583,42 @@ public class wordUse {
     private static String nameList(Actor[] array){
         String output = "";
         boolean nothing = true;
+        boolean found = false;
+        String[] actors = new String[array.length];
+        for (int i = 0; i < actors.length; i++) actors[i] = "";
+        int[] amount = new int[array.length];
         for (int i = 0; i < array.length; i++) {
-                    if(array[i] != DungeonMaster.player){
-                        output += array[i].niceName + ", ";
-                        nothing = false;
+            if (!array[i].name.equals(DungeonMaster.player.name)) {
+                nothing = false;
+                for (int j = 0; j < actors.length; j++) {
+                    if (actors[j].equals(array[i].niceName)) {
+                        amount[j]++;
+                        found = true;
+                        break;
                     }
                 }
-                if (nothing) output += "nothing  ";
-                output = output.substring(0, output.length()-2)+".";
+                if(!found){
+                    for (int j = 0; j < actors.length; j++) {
+                        if (actors[j].equals("")) {
+                            actors[j] = array[i].niceName;
+                            amount[j]++;
+                            break;
+                        }
+                    }
+                }
+            }     
+        }
+        if (nothing) output += "nothing  ";
+        else{
+            for (int i = 0; i < actors.length; i++) {
+                if (!actors[i].equals("")) {
+                    if (amount[i] == 1) output += actors[i]+", ";
+                    else output += actors[i]+" X"+amount[i]+", ";    
+                }
+                
+            }
+        }
+        output = output.substring(0, output.length()-2)+".";
         return output;
     }
     private static String nameList(Item[] array){
