@@ -38,7 +38,7 @@ public class Gear {
 
     public Gear() {
        
-            emptyWeapon = new Weapon("empty", -1, "none", "none");
+            emptyWeapon = new Weapon("empty", -1, "none", "none", 4, 1);
             emptyArmor =  new Armor("empty", -1, -1, "none");
             emptyMisc = new MiscGear("none", "none", -1);
             this.helm = emptyArmor;

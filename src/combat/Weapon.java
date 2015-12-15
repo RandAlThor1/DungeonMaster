@@ -25,7 +25,7 @@ public class Weapon extends Equipment{
      * @param statModBonus
      * @param Hand give "MH" for MainHand, "TH" for TwoHand or "OH" for OffHand
      */
-    public Weapon(String name, int maxDurability, String statModBonus, String Hand) {
+    public Weapon(String name, int maxDurability, String statModBonus, String Hand, int maxDam, int minDam) {
         super(name, maxDurability);
         this.statModBonus = statModBonus;
         niceName =  name;
