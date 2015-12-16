@@ -38,6 +38,10 @@ public class Weapon extends Equipment{
         else if (Hand.equalsIgnoreCase("OF")) {
             this.isOffHand = true;
         }
+        if (this.isEmpty) {
+            this.maxDam = 4;
+            this.minDam = 1;
+        }
     }
     public int getMinDam(){
         return this.minDam;

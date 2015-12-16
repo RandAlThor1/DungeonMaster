@@ -66,25 +66,17 @@ public class Combat {
                 enemy.stats.health -= damage;
             }
         }
-        else if (player.gear.mainHand.isMainHand && player.gear.offHand.isEmpty) {
+        else if (player.gear.mainHand.isEmpty && player.gear.offHand.isEmpty) {
             bonus = 0;
-            attack = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));;
-            System.out.println("atack roll" + attack);
+            attack = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
+            System.out.println("atack roll: " + attack);
             System.out.println("Enemy defence: " + defence);
             if (attack >= defence) {
                 int damage = damageDone(player.gear.offHand.maxDam, player.gear.offHand.minDam);
                 enemy.stats.health -= damage;
                 System.out.println("Enemy health: " + enemy.stats.health);
             }
-        }
-//        int maxDam = player.equippedWeaponMainHand.maxDam;
-//        int minDam = player.equippedWeaponMainHand.minDam;
-//        int damage = damageDone(maxDam,minDam);
-//        int armor = enemy.gear.totalArmorClass;
-//        enemy.stats.health -= damage - armor;
-//        player.equippedWeaponMainHand.loseDurability(0);
-//        Random equipRoll = new Random();
-//        
+        } 
     }
     public static int attackRoll( int bonus, int statModToUse){
         int toHitBonus = bonus + statModToUse;

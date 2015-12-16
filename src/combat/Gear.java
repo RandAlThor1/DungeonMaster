@@ -70,7 +70,7 @@ public class Gear {
             equipArray[12] = this.neck;
             for (int i = 0; i < equipArray.length; i++) {
             equipArray[i].makeEmpty();
-        }
+            }
                     
     }
     public void updateAC(){
