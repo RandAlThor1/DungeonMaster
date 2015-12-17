@@ -30,6 +30,15 @@ public class Combat {
         if (opposingDefence.equalsIgnoreCase("AC")) {
             defence = enemy.gear.totalArmorClass; // again, useless unless i add other defences. just adding it for now.
         }
+        else if (opposingDefence.equalsIgnoreCase("REFLEX")) {
+            
+        }
+        else if (opposingDefence.equalsIgnoreCase("FORTITUDE")) {
+            
+        }
+        else if (opposingDefence.equalsIgnoreCase("WILL")) {
+            
+        }
         else {
             defence = enemy.gear.totalArmorClass;
         }
@@ -91,23 +100,6 @@ public class Combat {
         int damage = (int) (Math.random() * maxDam -  minDam) + minDam;
         System.out.println("Damage roll: " + damage);
         return damage;
-    }
-    public static int dualWieldAttack(Actor player){ // meh
-        return 0;
-        
-    }
-    public static int twoHandedAttack(Actor player){ // meh
-        return 0;
-        
-    
-    }
-    public static int magicAttack(){ // meh
-        return 0;
-        
-    }
-    public static int rangedAttack(){ // meh
-        return 0;
-        
     }
     public static boolean dodged(int dodgeChance){
         int high = 100;

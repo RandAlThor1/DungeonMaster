@@ -29,8 +29,12 @@ public class Stats {
     public int health;
     public int maxHealth;
     public int speed;
+    
     public int dodgeChance;
     public int armorClass;
+    public int will;
+    public int reflex;
+    public int fortitude;
     
     Runnable levelUp;
 
@@ -52,7 +56,12 @@ public class Stats {
         this.health = (int) 200 + ((Constitution - 10) / 2) * 50;
         this.maxHealth = health;
         this.speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
-        this.dodgeChance = (int) 10 + ((Dexterity - 10) / 2) * 5;
+        
+        this.dodgeChance = (int) 10 + DexterityMod * 2;
+        this.reflex = 10 + DexterityMod + CharismaMod;
+        this.will = 10 + IntelligenceMod + WisdomMod;
+        this.fortitude = 10 + ConstitutionMod + StrengthMod;
+        
         this.levelUp = new Runnable() {
             
             @Override
