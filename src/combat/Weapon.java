@@ -24,6 +24,8 @@ public class Weapon extends Equipment{
      * @param maxDurability
      * @param statModBonus
      * @param Hand give "MH" for MainHand, "TH" for TwoHand or "OH" for OffHand
+     * @param maxDam 
+     * @param minDam 
      */
     public Weapon(String name, int maxDurability, String statModBonus, String Hand, int maxDam, int minDam) {
         super(name, maxDurability);

@@ -38,9 +38,9 @@ public class Gear {
 
     public Gear() {
        
-            emptyWeapon = new Weapon("empty", -1, "none", "none", 4, 1);
-            emptyArmor =  new Armor("empty", -1, -1, "none");
-            emptyMisc = new MiscGear("none", "none", -1);
+            emptyWeapon = new Weapon("Empty", -1, "none", "none", 4, 1);
+            emptyArmor =  new Armor("empty", -1, -1, "Empty");
+            emptyMisc = new MiscGear("Empty", "none", -1);
             this.helm = emptyArmor;
             this.chest = emptyArmor;
             this.legs = emptyArmor;
@@ -94,7 +94,7 @@ public class Gear {
         }
     }
     public void updateEquipment(){
-        Equipment[] itemArray = {helm, chest, legs, neck, boots, arms, hands, mainHand, offHand, ringRight, ringLeft, trinketRight, trinketLeft, neck};
+        Equipment[] itemArray = {helm, chest, legs, boots, arms, hands, mainHand, offHand, ringRight, ringLeft, trinketLeft, trinketRight,  neck};
         equipArray = itemArray;
     }
     public void DamageAllArmor(int howMuchDurabilityLoss){

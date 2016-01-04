@@ -14,6 +14,8 @@ import java.util.Random;
  */
 public class Combat {
     private static final String DEFAULT_DEFENCE_TO_ATTACK = "AC"; //only one at the moment might implement reflex, will, and fortitude later. mabey
+    private static final int UNARMED_MAX_DAMAGE = 4;
+    private static final int UNARMED_MIN_DAMAGE = 1;
     public Runnable Attack = new Runnable() {
 
         @Override
@@ -48,7 +50,6 @@ public class Combat {
             //still need to right the defence code'
             System.out.println("attack roll: " + attack);
             System.out.println("Enemy defence: " + defence);
-            System.out.println(!(dodged(enemy.stats.dodgeChance)));
             if (attack >= defence){
                  if (((dodged(enemy.stats.dodgeChance)))) {
                 int damage = damageDone(player.gear.mainHand.maxDam, player.gear.mainHand.minDam);
@@ -81,7 +82,7 @@ public class Combat {
             System.out.println("atack roll: " + attack);
             System.out.println("Enemy defence: " + defence);
             if (attack >= defence) {
-                int damage = damageDone(player.gear.offHand.maxDam, player.gear.offHand.minDam);
+                int damage = damageDone(UNARMED_MAX_DAMAGE, UNARMED_MIN_DAMAGE);
                 enemy.stats.health -= damage;
                 System.out.println("Enemy health: " + enemy.stats.health);
             }
