@@ -53,7 +53,7 @@ public class Stats {
         this.WisdomMod =        (int) ((Wisdom - 10) / 2);
         this.CharismaMod =      (int) ((Charisma - 10) / 2);
         
-        this.health = (int) 200 + ((Constitution - 10) / 2) * 50;
+        this.health = (int) 50 + ((Constitution - 10) / 2) * 50;
         this.maxHealth = health;
         this.speed = (int) 100 + ((Dexterity - 10) / 2) * 25;
         

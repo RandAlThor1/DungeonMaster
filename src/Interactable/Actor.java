@@ -161,7 +161,6 @@ public class Actor {
     public void equipNewWeapon(Weapon newWeapon){
         if (newWeapon.isTwoHand) { //its public you liar code!
             gear.mainHand = newWeapon;
-            gear.offHand = null;
         }
         else if (newWeapon.isMainHand) {
             gear.mainHand = newWeapon;
