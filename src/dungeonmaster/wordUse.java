@@ -316,8 +316,23 @@ public class wordUse {
             output = "System: You have ";
         } 
         if (command[index + 1].equals("equipment")) {
-            inventory = DungeonMaster.player.gear.equipArray;
-            output = "System: You're wearing ";
+            System.out.println("System: You have equiped:");
+            check(new String[]{"check", "armor"}, 0);
+            check(new String[]{"check", "weapon"}, 0);
+            check(new String[]{"check", "misc"}, 0);
+            DungeonMaster.inputCommand();
+        } 
+        else if (command[index + 1].equals("armor")) {
+            inventory = DungeonMaster.player.gear.armorArray;
+            output = "  Armor: ";
+        } 
+        else if (command[index + 1].equals("weapon")) {
+            inventory = DungeonMaster.player.gear.weaponArray;
+            output = "  Weapon: ";
+        } 
+        else if (command[index + 1].equals("misc")) {
+            inventory = DungeonMaster.player.gear.miscArray;
+            output = "  Misc: ";
         } 
         else {
             String invenName = "";

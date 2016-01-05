@@ -35,10 +35,4 @@ public class Armor extends Equipment {
             this.isHands = true;
         }
     }
-    @Override
-    public void makeEmpty(){
-        this.isEmpty = true;
-        this.armorBonus = 0;
-        this.name = "empty";
-    }
 }

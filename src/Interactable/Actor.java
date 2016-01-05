@@ -51,8 +51,9 @@ public class Actor {
         this.scene.addActor(this);
         isLootable = false; 
         stats = new Stats(10, 10, 10, 10, 10, 10);
+        Item empty = new Item("empty");
         for (int i = 0; i < inventory.length; i++) {
-            inventory[i] = new Item("empty");
+            inventory[i] = empty;
         }
         gear = new Gear();
     }

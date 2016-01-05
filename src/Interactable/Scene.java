@@ -21,8 +21,9 @@ public class Scene {//temp class for testing
     public Scene(String name) {
         this.niceName = name;
         this.name = name.toLowerCase();
+        Item empty = new Item("empty");
         for (int i = 0; i < inventory.length; i++) {
-            inventory[i] = new Item("empty");
+            inventory[i] = empty;
         }
     }
     

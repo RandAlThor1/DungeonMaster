@@ -30,7 +30,6 @@ public class Weapon extends Equipment{
     public Weapon(String name, int maxDurability, String statModBonus, String Hand, int maxDam, int minDam) {
         super(name, maxDurability);
         this.statModBonus = statModBonus;
-        niceName =  name;
         if (Hand.equalsIgnoreCase("MH")) {
             this.isMainHand = true;
         }
