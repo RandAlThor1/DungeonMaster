@@ -11,6 +11,7 @@ import Interactable.Door;
 import Interactable.Food;
 import Interactable.Item;
 import Interactable.Scene;
+import combat.Weapon;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.Scanner;
@@ -117,6 +118,7 @@ public class DungeonMaster {
         actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
         actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
         actualEnemy.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, actualEnemy));//john's a dick
+        player.equipNewWeapon(new Weapon("Sword", -1, "AC", "TH", 20, 2));
         for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));  
         
         NPC rick = new NPC(new PersonalityType(0), "Rick", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
