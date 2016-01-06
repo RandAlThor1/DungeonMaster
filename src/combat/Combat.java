@@ -16,13 +16,19 @@ public class Combat {
     private static final String DEFAULT_DEFENCE_TO_ATTACK = "AC"; //only one at the moment might implement reflex, will, and fortitude later. mabey
     private static final int UNARMED_MAX_DAMAGE = 4;
     private static final int UNARMED_MIN_DAMAGE = 1;
-    public Runnable Attack = new Runnable() {
+    public Runnable Attack = new Runnable() { //I dont think that this needs to be a runnable -  ben
 
         @Override
         public void run() {
             //defaultAttack(null, null);
         }
     };
+    /**
+     * @param player
+     * @param enemy
+     * @param opposingDefence
+     * @see <b> the default attack method. Will use proper weapons </b>
+     */
     public static void defaultAttack(Actor player, Actor enemy, String opposingDefence){
         int bonus = 0;
         int defence = 0;
@@ -33,13 +39,13 @@ public class Combat {
             defence = enemy.gear.totalArmorClass; // again, useless unless i add other defences. just adding it for now.
         }
         else if (opposingDefence.equalsIgnoreCase("REFLEX")) {
-            
+            defence = enemy.stats.reflex;
         }
         else if (opposingDefence.equalsIgnoreCase("FORTITUDE")) {
-            
+            defence =  enemy.stats.fortitude;
         }
         else if (opposingDefence.equalsIgnoreCase("WILL")) {
-            
+            defence = enemy.stats.will;
         }
         else {
             defence = enemy.gear.totalArmorClass;
@@ -105,9 +111,14 @@ public class Combat {
                     System.out.println("Enemy health: " + enemy.stats.health);
                 }
             }
-            
         }
     }
+    /**
+     * 
+     * @param bonus
+     * @param statModToUse
+     * @return the attack roll as an int
+     */
     public static int attackRoll( int bonus, int statModToUse){
         int toHitBonus = bonus + statModToUse;
         int high = 20;
@@ -117,18 +128,29 @@ public class Combat {
         result += toHitBonus;
         return result;
     }
+    /**
+     * 
+     * @param maxDam
+     * @param minDam
+     * @return damage done as an int
+     */
     public static int damageDone(int maxDam, int minDam){
         int damage = (int) (Math.random() * maxDam -  minDam) + minDam;
         System.out.println("Damage roll: " + damage);
         return damage;
     }
+    /**
+     * 
+     * @param dodgeChance
+     * @return a boolean if the attack hit or not
+     */
     public static boolean dodged(int dodgeChance){
         int high = 100;
         int low = 1;
         boolean isDodged = false;
         int result = (int) (Math.random() * high -  low) + low;
         System.out.println("dodge result: " + result);
-        if (result <= dodgeChance) {
+        if (result >= dodgeChance) {
             isDodged = true;
             System.out.println("Enemy was to slow");
         }

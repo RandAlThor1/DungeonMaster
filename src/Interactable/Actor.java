@@ -137,21 +137,39 @@ public class Actor {
     }
     public void equipNewArmor(Armor newArmor){
         if (newArmor.isArms) {
+            if (!(gear.arms.isEmpty)) {
+                this.invenAdd(gear.arms);
+            }
             gear.arms = newArmor;
         }
         else if (newArmor.isBoots) {
+            if (!(gear.boots.isEmpty)) {
+                this.invenAdd(gear.boots);
+            }
             gear.boots = newArmor;
         }
         else if (newArmor.isChest) {
+            if (!(gear.chest.isEmpty)) {
+                this.invenAdd(gear.chest);
+            }
             gear.chest = newArmor;
         }
         else if (newArmor.isLegs) {
+            if (!(gear.legs.isEmpty)) {
+                this.invenAdd(gear.legs);
+            }
             gear.legs = newArmor;
         }
         else if (newArmor.isHelm) {
+            if (!(gear.helm.isEmpty)) {
+                this.invenAdd(gear.helm);
+            }
             gear.helm = newArmor;
         }
         else if (newArmor.isHands) {
+            if (!(gear.hands.isEmpty)) {
+                this.invenAdd(gear.hands);
+            }
             gear.hands = newArmor;
         }
         else {
@@ -160,46 +178,79 @@ public class Actor {
         gear.updateEquipment();
     }
     public void equipNewWeapon(Weapon newWeapon){
-        if (newWeapon.isTwoHand) { //its public you liar code!
+        if (newWeapon.isTwoHand) {
+            if (!(gear.mainHand.isEmpty)) {
+                this.invenAdd(gear.mainHand);
+            }
+            if (!(gear.offHand.isEmpty)) {
+                this.invenAdd(gear.offHand);
+            }
             gear.mainHand = newWeapon;
+            gear.offHand = gear.emptyWeapon;
+            gear.mainHand.isTwoHand = true;
+            gear.mainHand.isOffHand = false;
+            gear.mainHand.isMainHand = false;
         }
         else if (newWeapon.isMainHand) {
+            if (!(gear.mainHand.isEmpty)) {
+                this.invenAdd(gear.mainHand);
+            }
             gear.mainHand = newWeapon;
+            gear.mainHand.isTwoHand = false;
+            gear.mainHand.isOffHand = false;
+            gear.mainHand.isMainHand = true;
         }
         else if (newWeapon.isOffHand) {
+            if (!(gear.offHand.isEmpty)) {
+                this.invenAdd(gear.offHand);
+            }
             gear.offHand = newWeapon;
+            gear.mainHand.isTwoHand = false;
+            gear.mainHand.isOffHand = true;
+            gear.mainHand.isMainHand = false;
         }
         gear.updateEquipment();
     }
-    public void equipMagicItem(MiscGear newMagicGear, String leftOrRight){
-        if (newMagicGear.isTrinket) {
+    public void equipMagicItem(MiscGear newMiscGear, String leftOrRight){
+        if (newMiscGear.isTrinket) {
             if (leftOrRight.equalsIgnoreCase("R")) {
-                removeEquipment(gear.ringRight);
-                gear.ringRight = newMagicGear;
+                if (!(gear.trinketRight.isEmpty)) {
+                    this.invenAdd(gear.trinketRight);
+                }
+                gear.ringRight = newMiscGear;
             }
             else if (leftOrRight.equalsIgnoreCase("L")) {
-                removeEquipment(gear.ringLeft);
-                gear.ringLeft =  newMagicGear;
+                if (!(gear.trinketLeft.isEmpty)) {
+                    this.invenAdd(gear.trinketLeft);
+                }
+                gear.ringLeft =  newMiscGear;
             }
         }
-        else if (newMagicGear.isRing) {
+        else if (newMiscGear.isRing) {
             if (leftOrRight.equalsIgnoreCase("R")) {
-                removeEquipment(gear.trinketRight);
-                gear.trinketRight = newMagicGear;
+                if (!(gear.ringRight.isEmpty)) {
+                    this.invenAdd(gear.ringRight);
+                }
+                gear.trinketRight = newMiscGear;
             }
             else if (leftOrRight.equalsIgnoreCase("L")) {
-                removeEquipment(gear.trinketLeft);
-                gear.trinketLeft =  newMagicGear;
+                if (!(gear.ringLeft.isEmpty)) {
+                    this.invenAdd(gear.ringLeft);
+                }
+                gear.trinketLeft =  newMiscGear;
             }
         }
-        else if (newMagicGear.isNeck) {
-            gear.neck = newMagicGear;
+        else if (newMiscGear.isNeck) {
+            if (!(gear.neck.isEmpty)) {
+                this.invenAdd(gear.neck);
+            }
+            gear.neck = newMiscGear;
         }
         gear.updateEquipment();
     }
-    public void removeEquipment(Equipment equipment) {
-        invenAdd(equipment);
+    public void unEquipEquipment(Equipment equipment) {
         
+        invenAdd(equipment);
     }
 
     
