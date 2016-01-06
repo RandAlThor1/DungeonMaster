@@ -6,6 +6,10 @@ import Interactable.Food;
 import Interactable.Scene;
 import Interactable.Door;
 import Interactable.Key;
+import combat.Armor;
+import combat.Equipment;
+import combat.MiscGear;
+import combat.Weapon;
 import java.awt.Point;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -78,6 +82,9 @@ public class wordUse {
             }
             else if (verb.equals("give")) {
                 give(command, index);
+            }
+            else if (verb.equals("equip")) {
+                equip(command, index);
             }
             else {
                 System.out.println("System: No command code found");
@@ -594,6 +601,41 @@ public class wordUse {
         }
         else System.out.println("System: Actor or Item not found");
     }
+    private static void equip(String[] command, int index){
+        String itemName = "";
+        Item item = null;
+        for (int i = 1; i < command.length - index; i++) {
+            itemName += command[index + i];
+            item = DungeonMaster.player.invenFind(itemName);         
+            itemName += " ";
+            if ((i == 3 || i == command.length - index - 1) && item == null) {
+                System.out.println("System: Item not found");
+                if (DungeonMaster.help)System.out.println("Help: Given item isn't in your inventory");
+            }
+        }
+        if (item != null) {
+            Weapon weapon = new Weapon("empty", -1, "none", "none", 4, 1);
+            Armor armor =  new Armor("empty", -1, -1, "Empty");
+            MiscGear misc = new MiscGear("empty", "none", -1);
+            if (item.getClass().equals(weapon.getClass())){
+                DungeonMaster.player.invenRemov(item);
+                DungeonMaster.player.equipNewWeapon((Weapon)item);
+                System.out.println("System: Weapon equiped");          
+            }
+            else if (item.getClass().equals(armor.getClass())){
+                DungeonMaster.player.invenRemov(item);
+                DungeonMaster.player.equipNewArmor((Armor)item);
+                System.out.println("System: Armor equiped");          
+            }
+            else if (item.getClass().equals(misc.getClass())){
+                DungeonMaster.player.invenRemov(item);
+                DungeonMaster.player.equipMagicItem((MiscGear)item, "left");
+                System.out.println("System: Item equiped");          
+            }
+            else System.out.println("System: You can't equip that.");
+            
+        } 
+    }
     
     private static String nameList(Actor[] array){
         String output = "";
@@ -688,6 +730,8 @@ public class wordUse {
                 output = output.substring(0, output.length()-2)+".";
         return output;
     }
+
+    
 }
 
 
