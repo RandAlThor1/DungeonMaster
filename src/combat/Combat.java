@@ -63,30 +63,50 @@ public class Combat {
             bonus = player.gear.mainHand.bonus;
             attack1 = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
             attack2 = attackRoll(bonus2, player.stats.getStatMod(player.gear.offHand.getStatModBonus()));
-            System.out.println("atack1 roll" + attack1);
+            System.out.println("attack1 roll" + attack1);
             System.out.println("Enemy defence: " + defence);
             if (attack1 >= defence){
-                int damage = damageDone(player.gear.mainHand.maxDam, player.gear.mainHand.minDam);
-                enemy.stats.health -= damage;
+                if (((dodged(enemy.stats.dodgeChance)))) {
+                    int damage = damageDone(player.gear.mainHand.maxDam, player.gear.mainHand.minDam);
+                    enemy.stats.health -= damage;
+                }
             }
-            System.out.println("atack2 roll" + attack2);
+            System.out.println("attack2 roll" + attack2);
             System.out.println("Enemy defence: " + defence);
             if (attack2 >= defence) {
-                int damage = damageDone(player.gear.offHand.maxDam, player.gear.offHand.minDam);
-                enemy.stats.health -= damage;
+                if (((dodged(enemy.stats.dodgeChance)))) {
+                    int damage = damageDone(player.gear.offHand.maxDam, player.gear.offHand.minDam);
+                    enemy.stats.health -= damage;
+                }
             }
         }
         else if (player.gear.mainHand.isEmpty && player.gear.offHand.isEmpty) {
             bonus = 0;
             attack = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
-            System.out.println("atack roll: " + attack);
+            System.out.println("attack roll: " + attack);
             System.out.println("Enemy defence: " + defence);
             if (attack >= defence) {
-                int damage = damageDone(UNARMED_MAX_DAMAGE, UNARMED_MIN_DAMAGE);
-                enemy.stats.health -= damage;
-                System.out.println("Enemy health: " + enemy.stats.health);
+                if (((dodged(enemy.stats.dodgeChance)))) {
+                    int damage = damageDone(UNARMED_MAX_DAMAGE, UNARMED_MIN_DAMAGE);
+                    enemy.stats.health -= damage;
+                    System.out.println("Enemy health: " + enemy.stats.health);
+                }
             }
-        } 
+        }
+        else if (player.gear.mainHand.isTwoHand) {
+            bonus = player.gear.mainHand.bonus;
+            attack = attackRoll(bonus, player.stats.getStatMod(player.gear.mainHand.getStatModBonus()));
+            System.out.println("attack roll: " + attack);
+            System.out.println("Enemy defence: " + defence);
+            if (attack >= defence) {
+                if (((dodged(enemy.stats.dodgeChance)))) {
+                    int damage = damageDone(player.gear.mainHand.maxDam, player.gear.mainHand.minDam);
+                    enemy.stats.health -= damage;
+                    System.out.println("Enemy health: " + enemy.stats.health);
+                }
+            }
+            
+        }
     }
     public static int attackRoll( int bonus, int statModToUse){
         int toHitBonus = bonus + statModToUse;
@@ -118,5 +138,4 @@ public class Combat {
         }
         return isDodged;
     }
-
 }
