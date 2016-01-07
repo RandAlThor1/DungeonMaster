@@ -2,9 +2,6 @@ package Interactable;
 
 import combat.*;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Action;
 import npcs.Stats;
 
 /**
@@ -13,15 +10,10 @@ import npcs.Stats;
  * Date: 02/10/2015 
  * Teacher: Mr. Wachs 
  */
-public class Actor {
+public class Actor extends Objects{
 
-    public String name;
-    public String niceName;
-    public Point location;
-    public Scene scene;
     public Weapon equippedWeaponMainHand;
     public Weapon equippedWeaponOffHand;
-    public Item[] inventory = new Item[20];
     public Stats stats;
     public Gear gear;
     public int gold; 
@@ -44,10 +36,8 @@ public class Actor {
     public boolean isLootable;
     
     public Actor(String name, Point location, Scene scene) {
-        this.niceName = name;
-        this.name = name.toLowerCase();
-        this.location = location;
-        this.scene = scene;
+        super(name, location, scene);
+        inventory = new Item[20];
         this.scene.addActor(this);
         isLootable = false; 
         stats = new Stats(10, 10, 10, 10, 10, 10);
@@ -59,10 +49,8 @@ public class Actor {
     }
 
     public Actor(String name, Point location, Scene scene, Stats stats) {
-        this.niceName = name;
-        this.name = name.toLowerCase();
-        this.location = location;
-        this.scene = scene;
+        super(name, location, scene);
+        inventory = new Item[20];
         this.scene.addActor(this);
         isLootable = false; 
         this.stats = stats;
@@ -70,39 +58,6 @@ public class Actor {
             inventory[i] = new Item("empty");
         }
         gear = new Gear();
-    }
-    
-
-    public void addKey(Door door){
-        Key key = new Key(door.niceName, door);
-        this.invenAdd(key);
-        key.location = this.location;
-    } 
-  
-    public void invenAdd(Item item){
-        for (int i = 0; i < this.inventory.length ; i++) {
-            if (this.inventory[i].name.equals("empty")) {
-                this.inventory[i] = item;
-                break;
-            }
-        }
-    }
-    
-    public void invenRemov(Item item){
-        for (int i = 0; i < this.inventory.length ; i++) {
-            if (this.inventory[i] == item){
-                this.inventory[i] = new Item("empty");
-                break;}
-            } 
-    }
-    
-    public Item invenFind(String name){
-        Item item = null;
-        boolean found = false;
-        for (int i = 0; i < inventory.length; i++) {
-            if (inventory[i].name.equals(name)) item = inventory[i];
-        }
-        return item;
     }
     
     public void fight(Actor actor){//we need to figure out how combat works; 

@@ -11,7 +11,8 @@ import java.util.ArrayList;
  */
 public class Scene {//temp class for testing
     
-    public Actor[] actors = new Actor[0];//i really should make methods for this
+    public Actor[] actors = new Actor[0];
+    public Objects[] objects = new Objects[0];
     public Item[] inventory = new Item[40];
     public ArrayList<Door> doors = new ArrayList<>();
     public String name;
@@ -112,5 +113,36 @@ public class Scene {//temp class for testing
             if (inventory[i].name.equals(name)) item = inventory[i];
         }
         return item; 
+    }
+
+    void addObject(Objects object) {
+        Objects[] temp = new Objects[objects.length+1];
+        for (int i = 0; i < objects.length; i++) temp[i] = objects[i];
+        temp[objects.length] = object;
+        objects = temp;
+    }
+    
+    public int findObject(Objects object){
+        int index = -1;
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i].equals(object)) {
+                index = i;
+                break;
+            }
+            
+        }
+        return index;
+    } 
+    
+    public int findObject(String object){
+        int index = -1;
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i].name.equals(object)) {
+                index = i;
+                break;
+            }
+            
+        }
+        return index;
     }
 }

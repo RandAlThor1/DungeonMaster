@@ -11,6 +11,7 @@ import Interactable.Door;
 import Interactable.Food;
 import Interactable.Item;
 import Interactable.Scene;
+import combat.Armor;
 import combat.Weapon;
 import java.awt.Point;
 import java.io.IOException;
@@ -36,7 +37,8 @@ public class DungeonMaster {
     public static String intro = "";
     public static void main(String[] args) throws IOException {
         makeBasics();
-        testingStuff();
+        //testingStuff();
+        new Story();
         startGame();
     }
     static public void makeBasics(){
@@ -130,5 +132,11 @@ public class DungeonMaster {
         NPC johnsSister = new NPC(new PersonalityType(0), "John`s Sister", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
         
         player.invenAdd(new Item("Rock"));
+        outside.invenAdd(new Armor("Hat", 10, 60, "helm"));
+        outside.invenAdd(new Armor("Boots", 10, 60, "boots"));
+        outside.invenAdd(new Armor("Legs", 10, 60, "legs"));
+        outside.invenAdd(new Armor("Chest", 10, 60, "chest"));
+        outside.invenAdd(new Armor("Arms", 10, 60, "arms"));
+        outside.invenAdd(new Armor("Hands", 10, 60, "hands"));
     } 
 }

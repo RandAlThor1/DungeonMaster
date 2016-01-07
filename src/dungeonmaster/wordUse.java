@@ -163,7 +163,7 @@ public class wordUse {
         }
     }
     /**
-     * Sends the player to the given actor, door, or item
+     * Sends the player to the given actorIndex, door, or item
      * @param command
      * @param index 
      */
@@ -181,6 +181,25 @@ public class wordUse {
         }
         if (found) {
             DungeonMaster.player.location = curScene.actors[actorIndex].location;
+            System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
+            for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
+                DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
+            }
+            DungeonMaster.inputCommand();
+        }
+        if (!found){
+            actorIndex = -1;
+            place = "";
+            found = false;        
+            for (int i = 1; i < command.length - index; i++) {
+                place += command[index + i];
+                actorIndex = curScene.findObject(place);
+                if (actorIndex != -1) found = true;
+                else place += " ";
+            }
+        }
+        if (found) {
+            DungeonMaster.player.location = curScene.objects[actorIndex].location;
             System.out.println("System: You're new loctaion is: " + DungeonMaster.player.location.x + ", " + DungeonMaster.player.location.y);
             for (int i = 0; i < DungeonMaster.player.inventory.length; i++) {
                 DungeonMaster.player.inventory[i].location = DungeonMaster.player.location;
@@ -310,7 +329,7 @@ public class wordUse {
         }
     }
     /**
-     * outputs the inventory of the given actor or the players inventory or the players equipment
+     * outputs the inventory of the given actorIndex or the players inventory or the players equipment
      * @param command
      * @param index 
      */
@@ -347,19 +366,20 @@ public class wordUse {
             for (int i = 1; i < command.length - index; i++) {
                 invenName += command[index + i];
                 int actorIndex = curScene.findActor(invenName);
+                
                 if (actorIndex != -1) {
                     inventory = curScene.actors[actorIndex].inventory;
-                    //if (curScene.actors[actorIndex].location.equals(DungeonMaster.player.location)) {
-                        output = "System: You found ";
-                    //} 
-                    //else {
-                    //    System.out.println("System: You can't check that form here");
-                    //    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                    //    possible = false;
-                    //}
+                    output = "System: You found ";
                     break;
                 } 
-                else {
+                
+                else actorIndex = curScene.findObject(invenName);
+                if (actorIndex != -1) {
+                    inventory = curScene.objects[actorIndex].inventory;
+                    output = "System: You found ";
+                    break;
+                }
+                else{
                     invenName += " ";
                 }
             }
@@ -369,8 +389,8 @@ public class wordUse {
             System.out.println(output);
         }
         if (inventory == null && possible) {
-            System.out.println("System: Actor not found");
-            if (DungeonMaster.help)System.out.println("Help: Given actor isn't in your current scene");
+            System.out.println("System: Object not found");
+            if (DungeonMaster.help)System.out.println("Help: Given object isn't in your current scene");
         }
     }
     /**
@@ -387,7 +407,7 @@ public class wordUse {
             int actorIndex = DungeonMaster.player.scene.findActor(actorName);
             if (actorIndex != -1) {
                 actor = DungeonMaster.player.scene.actors[actorIndex];
-                //if (!actor.location.equals(DungeonMaster.player.location)) {
+                //if (!actorIndex.location.equals(DungeonMaster.player.location)) {
                     possible = false;
                     System.out.println("System: You can't loot that from here");
                     if (DungeonMaster.help)System.out.println("Help: Try Go To-");
@@ -428,7 +448,7 @@ public class wordUse {
         }
     }
     /**
-     * starts a fight with the given actor
+     * starts a fight with the given actorIndex
      * @param command
      * @param index 
      */
