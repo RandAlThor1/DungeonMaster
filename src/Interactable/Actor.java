@@ -24,14 +24,6 @@ public class Actor extends Objects{
             niceName += "(dead)";
         }
     };
-    public Runnable use = new Runnable() {
-
-        @Override
-        public void run() {
-            System.out.println("System: You can't use that");
-        }
-    };
-    
     //public Personality personality //use achitypes to make this easyer
     public boolean isLootable;
     
@@ -145,6 +137,9 @@ public class Actor extends Objects{
             gear.mainHand.isTwoHand = true;
             gear.mainHand.isOffHand = false;
             gear.mainHand.isMainHand = false;
+            
+            gear.mainHand.isEmpty = false;
+            gear.offHand.isEmpty = false;
         }
         else if (newWeapon.isMainHand) {
             if (!(gear.mainHand.isEmpty)) {
@@ -154,6 +149,8 @@ public class Actor extends Objects{
             gear.mainHand.isTwoHand = false;
             gear.mainHand.isOffHand = false;
             gear.mainHand.isMainHand = true;
+            
+            gear.mainHand.isEmpty = false;
         }
         else if (newWeapon.isOffHand) {
             if (!(gear.offHand.isEmpty)) {
@@ -163,6 +160,8 @@ public class Actor extends Objects{
             gear.mainHand.isTwoHand = false;
             gear.mainHand.isOffHand = true;
             gear.mainHand.isMainHand = false;
+            
+            gear.offHand.isEmpty = false;
         }
         gear.updateEquipment();
     }

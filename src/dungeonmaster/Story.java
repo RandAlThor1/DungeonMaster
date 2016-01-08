@@ -21,6 +21,8 @@ public class Story {
     public Story() {
         Scene throneRoom = new Scene("Throne Room");
         
+        DungeonMaster.player.equipNewWeapon(new Weapon("Dagger", -1, "AC", "MH", 100, 100, 1));
+        
         Objects throne = new Objects("Throne", new Point(5, 10), throneRoom);
         
         NPC king = new NPC(new PersonalityType(1), "King Bob", new Point(5, 10), throneRoom, new Stats(10, 10, 11, 14, 12, 17));

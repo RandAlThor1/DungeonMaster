@@ -71,6 +71,8 @@ public class Gear {
             for (int i = 0; i < equipArray.length; i++) {
             }
                     
+            mainHand.isEmpty = true;
+            offHand.isEmpty = true;    
     }
     public void updateAC(){
         int armorClass = 0;
