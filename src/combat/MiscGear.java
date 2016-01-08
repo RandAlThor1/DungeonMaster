@@ -14,6 +14,7 @@ public class MiscGear extends Equipment {
 
     public MiscGear(String name, String type, int maxDurability) {
         super(name, maxDurability);
+        this.Type = 'M';
         if (type.equalsIgnoreCase("Ring")) {
             this.isRing = true;
         }

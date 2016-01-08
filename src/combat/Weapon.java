@@ -14,6 +14,7 @@ public class Weapon extends Equipment{
     public boolean isMainHand;
     public boolean isTwoHand;
     public boolean isOffHand;
+    public boolean isWeapon;
     String statModBonus;
     
     String type;
@@ -23,12 +24,13 @@ public class Weapon extends Equipment{
      * @param name
      * @param maxDurability
      * @param statModBonus
-     * @param Hand give "MH" for MainHand, "TH" for TwoHand or "OH" for OffHand
+     * @param Hand <b>give "MH" for MainHand, "TH" for TwoHand or "OH" for OffHand</b>
      * @param maxDam 
      * @param minDam 
      */
     public Weapon(String name, int maxDurability, String statModBonus, String Hand, int maxDam, int minDam) {
         super(name, maxDurability);
+        this.Type = 'W';
         this.statModBonus = statModBonus;
         if (Hand.equalsIgnoreCase("MH")) {
             this.isMainHand = true;

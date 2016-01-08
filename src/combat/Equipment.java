@@ -15,6 +15,7 @@ public class Equipment extends Item{
     int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
     int durability, maxDurability;
     public boolean isBroken, isEmpty;
+    public char Type;
     final int DEFAULT_DURABILITY = 60; // can change
     final int DEFAULT_DURABILITY_DAMAGE = 10; // can change
     public Equipment(String name, int maxDurability) {
@@ -37,6 +38,24 @@ public class Equipment extends Item{
         if (durability <= 0) {
             this.isBroken = true;
         }
+    }
+    /**
+     * 
+     * @return <b> 0 if Weapon, 1 if Armor, 2 if MiscGear </b>
+     * @see <b> Requires the chat Type to be set within Equipment, 'W' for Weapon, 'A' for Armor, 'M' for MiscGear. MUST BE CAPS 
+     */
+    public int getType(){
+        int result = -1;
+        if (Type == 'W') {
+            result = 0;
+        }
+        else if (Type == 'A') {
+            result = 1;
+        }
+        else if (Type == 'M') {
+            result = 2;
+        }
+        return result;
     }
 }
 

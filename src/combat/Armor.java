@@ -15,6 +15,7 @@ public class Armor extends Equipment {
 
     public Armor(String name,int armorClass, int maxDurability, String type) {
         super(name, maxDurability);
+        this.Type = 'A';
         this.armorBonus = armorClass;
          if (type.equalsIgnoreCase("helm")) {
             this.isHelm = true;
