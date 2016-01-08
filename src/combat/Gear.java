@@ -44,6 +44,9 @@ public class Gear {
             emptyWeapon.isEmpty = true;
             emptyArmor.isEmpty = true;
             emptyMisc.isEmpty = true;
+            UniqueGear.addUniqueItem(emptyWeapon);
+            UniqueGear.addUniqueItem(emptyArmor);
+            UniqueGear.addUniqueItem(emptyMisc);
             this.helm = emptyArmor;
             this.chest = emptyArmor;
             this.legs = emptyArmor;

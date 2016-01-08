@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 //This can be put somewhere else.
 public class UniqueGear {
-    private final ArrayList<Equipment> uniqueGear;
+    private static ArrayList<Equipment> uniqueGear;
 
     public UniqueGear() {
         uniqueGear = new ArrayList<>();
@@ -26,7 +26,7 @@ public class UniqueGear {
      * @return Index for the Unique Equipment with that name. 
      * @see <b> returns -1 if item name is invalid </b>
      */
-    public int findUniqueIndex(String name){
+    public static int findUniqueIndex(String name){
         for (int i = 0; i < uniqueGear.size(); i++) {
             if (uniqueGear.get(i).name.equalsIgnoreCase(name)) {
                 return i;
@@ -39,7 +39,7 @@ public class UniqueGear {
      * @param equipment 
      * @see Adds Equipment to ArrayList Storage
      */
-    public void addUniqueItem(Equipment equipment){
+    public static void addUniqueItem(Equipment equipment){
         if (isUnique(equipment)) {
             uniqueGear.add(equipment);
         }
@@ -48,14 +48,14 @@ public class UniqueGear {
      * 
      * @param name
      */
-    public void removeUniqueItem(String name){
+    public static void removeUniqueItem(String name){
         for (int i = 0; i < uniqueGear.size(); i++) {
             if (uniqueGear.get(i).name.equalsIgnoreCase(name)) {
                 uniqueGear.remove(i);
             }
         }
     }
-    public void removeUniqueItem(Equipment equipment){
+    public static void removeUniqueItem(Equipment equipment){
         for (int i = 0; i < uniqueGear.size(); i++) {
             if (uniqueGear.get(i).equals(equipment)) {
                 uniqueGear.remove(i);
@@ -67,7 +67,7 @@ public class UniqueGear {
      * @param equipment
      * @return True if Unique False if not
      */
-    private boolean isUnique(Equipment equipment){
+    private static boolean isUnique(Equipment equipment){
           for (int i = 0; i < uniqueGear.size(); i++) {
               if (uniqueGear.get(i).equals(equipment)) {
                   return false;
