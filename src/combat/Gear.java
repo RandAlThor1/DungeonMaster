@@ -28,9 +28,9 @@ public class Gear {
     public MiscGear trinketRight;
     public MiscGear trinketLeft;
     public MiscGear neck;
-    public Weapon emptyWeapon;
-    public Armor emptyArmor;
-    public MiscGear emptyMisc;
+    public static Weapon emptyWeapon;
+    public static Armor emptyArmor;
+    public static MiscGear emptyMisc;
     public Equipment[] equipArray;
     public Armor[] armorArray;
     public Weapon[] weaponArray;
@@ -38,9 +38,9 @@ public class Gear {
 
     public Gear() {
        
-            emptyWeapon = new Weapon("empty", -1, "none", "none", 4, 1);
-            emptyArmor =  new Armor("empty", -1, -1, "Empty");
-            emptyMisc = new MiscGear("empty", "none", -1);
+            emptyWeapon = new Weapon("empty", -1, "none", "none", 4, -1, -1);
+            emptyArmor =  new Armor("empty", -1, -1, "Empty", -1);
+            emptyMisc = new MiscGear("empty", "none", -1, -1);
             this.helm = emptyArmor;
             this.chest = emptyArmor;
             this.legs = emptyArmor;
@@ -103,6 +103,15 @@ public class Gear {
         for (int i = 0; i < this.armorArray.length; i++) {
             this.armorArray[i].loseDurability(howMuchDurabilityLoss);
         }
+    }
+    public static Weapon getEmptyWeapon(){
+        return emptyWeapon;
+    }
+    public static Armor getEmptyArmor(){
+        return emptyArmor;
+    }
+    public static MiscGear getEmptyMisc(){
+        return emptyMisc;
     }
 }
 

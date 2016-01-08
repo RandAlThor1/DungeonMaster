@@ -27,9 +27,10 @@ public class Weapon extends Equipment{
      * @param Hand <b>give "MH" for MainHand, "TH" for TwoHand or "OH" for OffHand</b>
      * @param maxDam 
      * @param minDam 
+     * @param weight 
      */
-    public Weapon(String name, int maxDurability, String statModBonus, String Hand, int maxDam, int minDam) {
-        super(name, maxDurability);
+    public Weapon(String name, int maxDurability, String statModBonus, String Hand, int maxDam, int minDam, int weight) {
+        super(name, maxDurability, weight);
         this.Type = 'W';
         this.statModBonus = statModBonus;
         if (Hand.equalsIgnoreCase("MH")) {

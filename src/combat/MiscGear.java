@@ -12,8 +12,8 @@ package combat;
 public class MiscGear extends Equipment {
     public boolean isRing, isTrinket, isNeck;
 
-    public MiscGear(String name, String type, int maxDurability) {
-        super(name, maxDurability);
+    public MiscGear(String name, String type, int maxDurability, int weight) {
+        super(name, maxDurability, weight);
         this.Type = 'M';
         if (type.equalsIgnoreCase("Ring")) {
             this.isRing = true;

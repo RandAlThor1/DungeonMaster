@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 //This can be put somewhere else.
 public class UniqueGear {
-    private ArrayList<Equipment> uniqueGear;
+    private final ArrayList<Equipment> uniqueGear;
 
     public UniqueGear() {
         uniqueGear = new ArrayList<>();

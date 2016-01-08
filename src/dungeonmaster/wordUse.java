@@ -8,6 +8,7 @@ import Interactable.Door;
 import Interactable.Key;
 import combat.Armor;
 import combat.Equipment;
+import combat.Gear;
 import combat.MiscGear;
 import combat.Weapon;
 import java.awt.Point;
@@ -634,9 +635,12 @@ public class wordUse {
             }
         }
         if (item != null) {
-            Weapon weapon = new Weapon("empty", -1, "none", "none", 4, 1);
-            Armor armor =  new Armor("empty", -1, -1, "Empty");
-            MiscGear misc = new MiscGear("empty", "none", -1);
+            Weapon weapon = Gear.getEmptyWeapon();
+            Armor armor = Gear.getEmptyArmor();
+            MiscGear misc = Gear.getEmptyMisc();       
+//            Weapon weapon = new Weapon("empty", -1, "none", "none", 4, 1);
+//            Armor armor =  new Armor("empty", -1, -1, "Empty");
+//            MiscGear misc = new MiscGear("empty", "none", -1);
             if (item.getClass().equals(weapon.getClass())){
                 DungeonMaster.player.invenRemov(item);
                 DungeonMaster.player.equipNewWeapon((Weapon)item);

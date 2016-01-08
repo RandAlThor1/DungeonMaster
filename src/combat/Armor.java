@@ -13,8 +13,8 @@ public class Armor extends Equipment {
     int armorBonus;
     public boolean isHelm, isBoots, isChest, isArms, isLegs, isHands;
 
-    public Armor(String name,int armorClass, int maxDurability, String type) {
-        super(name, maxDurability);
+    public Armor(String name,int armorClass, int maxDurability, String type, int weight) {
+        super(name, maxDurability, weight);
         this.Type = 'A';
         this.armorBonus = armorClass;
          if (type.equalsIgnoreCase("helm")) {

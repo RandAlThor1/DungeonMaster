@@ -22,7 +22,15 @@ public class NPC extends Actor{
             System.out.println(NPC.this.niceName+": Hello "+dungeonmaster.DungeonMaster.player.niceName+".");
         }
     };
-    
+    /**
+     * 
+     * @param personType
+     * @param name
+     * @param location
+     * @param scene
+     * @param stats 
+     * @see <b> DO NOT CALL USE <u>NpcOperations addNpc()</u> </b>
+     */
     public NPC(PersonalityType personType, String name, Point location, Scene scene, Stats stats) {
         super(name, location, scene, stats);
         this.personType = personType;

@@ -17,6 +17,7 @@ public class PersonalityType {
     boolean isJudging;
     boolean isAssertive;
     
+    final int SQUARE = -1;
     final int ANALYST = 0;
     final int DIPLOMAT = 1;
     final int SENTINEL = 2;
@@ -58,9 +59,31 @@ public class PersonalityType {
             isAssertive = false;
             this.type = "EXPLORER";
         }
+        else if (type == SQUARE) {
+            this.type = "SQUARE";
+        }
         else{
             System.out.println("you are a square");
         }
+    }
+    public PersonalityType newPersonType(int type){
+            return new PersonalityType(type);
+    }
+    public PersonalityType newPersonType(String type){
+        int Type = -1;
+        if (type.equalsIgnoreCase("ANALYST")) {
+            return new PersonalityType(ANALYST);
+        }
+        else if (type.equalsIgnoreCase("DIPLOMAT")) {
+            return new PersonalityType(DIPLOMAT);
+        }
+        else if (type.equalsIgnoreCase("SETINEL")) {
+            return new PersonalityType(SENTINEL);
+        }
+        else if (type.equalsIgnoreCase("EXPLORER")) {
+            return new PersonalityType(EXPLORER);
+        }
+        return new PersonalityType(SQUARE);
     }
     
 }

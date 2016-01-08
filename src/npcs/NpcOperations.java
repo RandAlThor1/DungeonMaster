@@ -6,7 +6,6 @@
 package npcs;
 
 import Interactable.Scene;
-import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -15,19 +14,15 @@ import java.util.ArrayList;
  */
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
-    //public static ArrayList<Stats> npcStats = new ArrayList<>(); //might remove
-    public static void addNPC(String name, Point point, Scene scene){
-        int temp = 15; //temp number for stats of a npc
-         
-        
-        
+    public static void addNPC(NPC npc){
+        allNPCs.add(npc);
     }
     /**
      * 
      * @param name
      * @return Index of NPC with name, returns -1 if ArrayList is empty
      */
-    public static int getNPCIndex(String name){
+    public int getNPCIndex(String name){
         if (!(allNPCs.isEmpty())) {
             return -1;
         }
@@ -42,31 +37,21 @@ public class NpcOperations {
         }
         return -2;
     }
-    /**
-     * 
-     * @param name
-     * @return 
-     * might just remove this method.
-     */
-//    public static int getNPCStatIndex(String name){
-//        int result = -1;
-//        if (!(NPCstats.isEmpty())) {
-//            return result;
-//        }
-//        else {
-//            for (int i = 0; i < 10; i++) {
-//                
-//            }
-//        }
-//        int unitIndex = getNPCIndex(name);
-//        return -2;
-//    }
+    public int[] findNpcsInScene(Scene scene){
+        int[] array = null;
+        for (int i = 0; i < allNPCs.size(); i++) {
+            if (allNPCs.get(i).scene.equals(scene) ) {
+                array[array.length] = i;
+            }
+        }
+        return array;
+    }
     /**
      * 
      * @param string text for them to say
      * @param npcName name of NPC in string
      */
-    public static void npcTalk(String string, NPC npc){
+    public void npcTalk(String string, NPC npc){
         System.out.println(npc.niceName + ": " + string);
     }
     

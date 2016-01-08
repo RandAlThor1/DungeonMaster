@@ -120,9 +120,12 @@ public class DungeonMaster {
         actualEnemy.invenAdd(new Food("The Bread", 10, actualEnemy));
         actualEnemy.invenAdd(new Food("The Apple", 5, actualEnemy));
         actualEnemy.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, actualEnemy));//john's a dick
-        player.invenAdd(new Weapon("Sword", -1, "AC", "TH", 20, 2));
+        player.invenAdd(new Weapon("Sword", -1, "AC", "TH", 20, 2, -1));
         for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));  
         
+        /**
+         * Change these to use NpcOperations addNPC();
+         */
         NPC rick = new NPC(new PersonalityType(0), "Rick", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
         NPC dave = new NPC(new PersonalityType(0), "Dave", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
         NPC bob = new NPC(new PersonalityType(0), "Bob", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
@@ -132,11 +135,11 @@ public class DungeonMaster {
         NPC johnsSister = new NPC(new PersonalityType(0), "John`s Sister", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
         
         player.invenAdd(new Item("Rock"));
-        outside.invenAdd(new Armor("Hat", 10, 60, "helm"));
-        outside.invenAdd(new Armor("Boots", 10, 60, "boots"));
-        outside.invenAdd(new Armor("Legs", 10, 60, "legs"));
-        outside.invenAdd(new Armor("Chest", 10, 60, "chest"));
-        outside.invenAdd(new Armor("Arms", 10, 60, "arms"));
-        outside.invenAdd(new Armor("Hands", 10, 60, "hands"));
+        outside.invenAdd(new Armor("Hat", 10, 60, "helm", -1));
+        outside.invenAdd(new Armor("Boots", 10, 60, "boots", -1));
+        outside.invenAdd(new Armor("Legs", 10, 60, "legs", -1));
+        outside.invenAdd(new Armor("Chest", 10, 60, "chest", -1));
+        outside.invenAdd(new Armor("Arms", 10, 60, "arms", -1));
+        outside.invenAdd(new Armor("Hands", 10, 60, "hands", -1));
     } 
 }

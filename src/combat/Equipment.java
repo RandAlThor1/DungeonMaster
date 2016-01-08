@@ -13,13 +13,23 @@ import Interactable.Item;
  */
 public class Equipment extends Item{
     int intelBonus, dexBonus, strengthBonus, wisBonus, conBonus, charBonus;
-    int durability, maxDurability;
-    public boolean isBroken, isEmpty;
+    int durability, maxDurability, weight;
+    public boolean isBroken, isEmpty, isWeighted;
     public char Type;
     final int DEFAULT_DURABILITY = 60; // can change
     final int DEFAULT_DURABILITY_DAMAGE = 10; // can change
-    public Equipment(String name, int maxDurability) {
+    final int DEFAULT_WEIGHT_ARMOR = 15;
+    final int DEFAULT_WEIGHT_WEAPON = 5;
+    final int DEFAULT_WEIGHT_MISC_GEAR = 1;
+    public Equipment(String name, int maxDurability, int weight) {
         super(name);
+        if (weight == -1) {
+            isWeighted = false;
+        }
+        else{
+            this.weight = weight;
+            isWeighted = true;
+        }
         if (maxDurability == -1) {
             maxDurability = DEFAULT_DURABILITY;
         }
@@ -56,6 +66,17 @@ public class Equipment extends Item{
             result = 2;
         }
         return result;
+    }
+    public void setWeight(){
+        if (Type == 'A') {
+            weight = DEFAULT_WEIGHT_ARMOR;
+        }
+        else if (Type == 'W') {
+            weight = DEFAULT_WEIGHT_WEAPON;
+        }
+        else if (Type == 'M') {
+            weight = DEFAULT_WEIGHT_MISC_GEAR;
+        }
     }
 }
 
