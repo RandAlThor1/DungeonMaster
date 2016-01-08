@@ -41,6 +41,9 @@ public class Gear {
             emptyWeapon = new Weapon("empty", -1, "none", "none", 4, -1, -1);
             emptyArmor =  new Armor("empty", -1, -1, "Empty", -1);
             emptyMisc = new MiscGear("empty", "none", -1, -1);
+            emptyWeapon.isEmpty = true;
+            emptyArmor.isEmpty = true;
+            emptyMisc.isEmpty = true;
             this.helm = emptyArmor;
             this.chest = emptyArmor;
             this.legs = emptyArmor;
