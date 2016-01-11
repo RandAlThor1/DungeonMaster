@@ -12,6 +12,5 @@ import javax.swing.JFrame;
  * @author b.allen
  */
 public class Display  extends JFrame{
-    private static final int HEIGHT = 728;//same H/W of the old project..can Change
-    private static final int WIDTH = 1256;
+    
 }
