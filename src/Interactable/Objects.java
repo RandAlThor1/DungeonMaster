@@ -22,6 +22,9 @@ public class Objects {
     public Scene scene;
     public Item[] inventory = new Item[1];
     public int gold; 
+    public boolean isLootable;
+    public boolean isActor;
+    public boolean isLocked;
     public Runnable use = new Runnable() {
 
         @Override
@@ -31,7 +34,7 @@ public class Objects {
     };
     
     //public Personality personality //use achitypes to make this easyer
-    public boolean isLootable;
+    
     
     public Objects(String name, Point location, Scene scene) {
         this.niceName = name;
@@ -43,7 +46,7 @@ public class Objects {
     }
     
     public void addKey(Door door){
-        Key key = new Key(door.niceName, door);
+        DoorKey key = new DoorKey(door.niceName, door);
         this.invenAdd(key);
         key.location = this.location;
     } 

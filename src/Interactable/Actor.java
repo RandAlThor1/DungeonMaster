@@ -38,6 +38,7 @@ public class Actor extends Objects{
             inventory[i] = empty;
         }
         gear = new Gear();
+        this.isActor = true;
     }
 
     public Actor(String name, Point location, Scene scene, Stats stats) {
@@ -50,6 +51,7 @@ public class Actor extends Objects{
             inventory[i] = new Item("empty");
         }
         gear = new Gear();
+        this.isActor = true;
     }
     
     public void fight(Actor actor){//we need to figure out how combat works; 

@@ -14,12 +14,9 @@ import java.util.ArrayList;
 
 
 //This can be put somewhere else.
-public class UniqueGear {
-    private static ArrayList<Equipment> uniqueGear;
+public class UniqueGear {//this needs to be deleted
+    private static ArrayList<Equipment> uniqueGear = new ArrayList<>();
 
-    public UniqueGear() {
-        uniqueGear = new ArrayList<>();
-    }
     /**
      * 
      * @param name

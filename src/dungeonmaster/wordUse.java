@@ -5,7 +5,8 @@ import Interactable.Actor;
 import Interactable.Food;
 import Interactable.Scene;
 import Interactable.Door;
-import Interactable.Key;
+import Interactable.DoorKey;
+import Interactable.Objects;
 import combat.Armor;
 import combat.Equipment;
 import combat.Gear;
@@ -134,10 +135,10 @@ public class wordUse {
                     DungeonMaster.inputCommand();
                 }
                 else {
-                    Key testKey = new Key(null, null, null);
+                    DoorKey testKey = new DoorKey(null, null, null);
                     for (int j = 0; j < DungeonMaster.player.inventory.length; j++) {
                         if(DungeonMaster.player.inventory[j].getClass().equals(testKey.getClass())){
-                            Key key = (Key)DungeonMaster.player.inventory[j];
+                            DoorKey key = (DoorKey)DungeonMaster.player.inventory[j];
                             if(key.door == curScene.doors.get(i)){
                                 curScene.doors.get(i).locked = false;
                                 System.out.println("System: Door unlocked");
@@ -189,7 +190,7 @@ public class wordUse {
             DungeonMaster.inputCommand();
         }
         if (!found){
-            actorIndex = -1;
+            actorIndex = -1;//look for objects
             place = "";
             found = false;        
             for (int i = 1; i < command.length - index; i++) {
@@ -366,17 +367,10 @@ public class wordUse {
             Scene curScene = DungeonMaster.player.scene;
             for (int i = 1; i < command.length - index; i++) {
                 invenName += command[index + i];
-                int actorIndex = curScene.findActor(invenName);
                 
-                if (actorIndex != -1) {
-                    inventory = curScene.actors[actorIndex].inventory;
-                    output = "System: You found ";
-                    break;
-                } 
-                
-                else actorIndex = curScene.findObject(invenName);
-                if (actorIndex != -1) {
-                    inventory = curScene.objects[actorIndex].inventory;
+                int objectIndex = curScene.findObject(invenName);
+                if (objectIndex != -1) {
+                    inventory = curScene.objects[objectIndex].inventory;
                     output = "System: You found ";
                     break;
                 }
@@ -395,56 +389,55 @@ public class wordUse {
         }
     }
     /**
-     * makes the player take everything from the given actors inventory, if allowed
+     * makes the player take everything from the given objects inventory, if allowed
      * @param command
      * @param index 
      */
     private static void loot(String[] command, int index) {
-        String actorName = "";
-        Actor actor = null;
+        String objectName = "";
+        Objects object = null;
         boolean possible = true;
         for (int i = 1; i < command.length - index; i++) {
-            actorName += command[index + i];
-            int actorIndex = DungeonMaster.player.scene.findActor(actorName);
-            if (actorIndex != -1) {
-                actor = DungeonMaster.player.scene.actors[actorIndex];
-                //if (!actorIndex.location.equals(DungeonMaster.player.location)) {
-                    possible = false;
-                    System.out.println("System: You can't loot that from here");
-                    if (DungeonMaster.help)System.out.println("Help: Try Go To-");
-                //}
+            objectName += command[index + i];
+            int objectIndex = DungeonMaster.player.scene.findObject(objectName);
+            if (objectIndex != -1) {
+                object = DungeonMaster.player.scene.objects[objectIndex];
+                possible = false;
             } 
             else {
-                actorName += " ";
+                objectName += " ";
             }
         }
-        if (actor != null && possible) {
-            if (actor.isLootable) {
+        if (object != null && possible) {
+            if (object.isLootable) {
                 String output = "System: You looted ";
                 boolean empty = true;
-                for (int i = 0; i < actor.inventory.length; i++) {
-                    if (!actor.inventory[i].name.equals("empty")) {
+                for (int i = 0; i < object.inventory.length; i++) {
+                    if (!object.inventory[i].name.equals("empty")) {
                         empty = false;
-                        DungeonMaster.player.invenAdd(actor.inventory[i]);
-                        actor.invenRemov(actor.inventory[i]);
+                        DungeonMaster.player.invenAdd(object.inventory[i]);
+                        object.invenRemov(object.inventory[i]);
                     }
                 }
                 if (empty) {
                     System.out.println(output += "nothing.");
                 } 
                 else {
-                    output += nameList(actor.inventory);
+                    output += nameList(object.inventory);
                     output = output.substring(0, output.length() - 2);
                     System.out.println(output += ".");
                 }
             } 
-            else {
+            else if(object.isActor){
                 System.out.println("System: It's still alive, you'll have to fight it!");
                 if (DungeonMaster.help)System.out.println("Help: Try attack- first");
-                DungeonMaster.player.fight(actor);
+            }
+            else if(object.isLocked){
+                System.out.println("System: It's locked");
+                if (DungeonMaster.help)System.out.println("Help: You need to unlock it first");
             }
         }
-        if (actor == null && possible) {
+        if (object == null && possible) {
             System.out.println("System: Actor not found");
         }
     }
@@ -532,6 +525,12 @@ public class wordUse {
                 output += nameList(scene.actors);
                 System.out.println(output);
             }
+            if (command[index + 2].equals("objects")){
+                System.out.println("System: You see: ");
+                output += " Objects: "; 
+                output += nameList(scene.objects);
+                System.out.println(output);
+            }
             if (command[index + 2].equals("places")){
                 System.out.println("System: You see: ");
                 output += " Places: "; 
@@ -546,6 +545,9 @@ public class wordUse {
             System.out.println(output);
             output = " Actors: "; 
             output += nameList(scene.actors);
+            System.out.println(output);
+            output = " Objects: "; 
+            output += nameList(scene.objects);
             System.out.println(output);
             output = " Places: "; 
             output += nameList(scene.doors);
@@ -591,7 +593,7 @@ public class wordUse {
     }
     private static void give(String[] command, int index){
         Item item = null;
-        Actor actor = null;
+        Objects object = null;
         String name = "";
         boolean done = false;
         for (int i = index; i < command.length-1; i++) {
@@ -604,21 +606,21 @@ public class wordUse {
                 }
                 
             }
-            if (actor == null){
-                int actorIndex = DungeonMaster.player.scene.findActor(name);
-                if(actorIndex != -1) {
-                    actor = DungeonMaster.player.scene.actors[actorIndex];
+            if (object == null){
+                int objectIndex = DungeonMaster.player.scene.findObject(name);
+                if(objectIndex != -1) {
+                    object = DungeonMaster.player.scene.objects[objectIndex];
                     name = "";
                 }
             }
-            if(actor != null && item != null) {done = true; break;}
+            if(object != null && item != null) {done = true; break;}
         }
         if (done) {
-            actor.invenAdd(item);
+            object.invenAdd(item);
             DungeonMaster.player.invenRemov(item);
-            System.out.println("System: "+item.niceName+" is now in "+actor.niceName+"'s inventory.");
+            System.out.println("System: "+item.niceName+" is now in "+object.niceName+"'s inventory.");
             NPC testNpc= new NPC(null, "", null, DungeonMaster.outside, null);
-            if (actor.getClass() == testNpc.getClass()) System.out.println(actor.niceName+": Thank you.");
+            if (object.getClass() == testNpc.getClass()) System.out.println(object.niceName+": Thank you.");
         }
         else System.out.println("System: Actor or Item not found");
     }
@@ -661,6 +663,47 @@ public class wordUse {
         } 
     }
     
+    private static String nameList(Objects[] array){
+        String output = "";
+        boolean nothing = true;
+        boolean found = false;
+        String[] objects = new String[array.length];
+        for (int i = 0; i < objects.length; i++) objects[i] = "";
+        int[] amount = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].isActor){
+                nothing = false;
+                for (int j = 0; j < objects.length; j++) {
+                    if (objects[j].equals(array[i].niceName)) {
+                        amount[j]++;
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    for (int j = 0; j < objects.length; j++) {
+                        if (objects[j].equals("")) {
+                            objects[j] = array[i].niceName;
+                            amount[j]++;
+                            break;
+                        }
+                    }
+                }
+            }     
+        }
+        if (nothing) output += "nothing  ";
+        else{
+            for (int i = 0; i < objects.length; i++) {
+                if (!objects[i].equals("")) {
+                    if (amount[i] == 1) output += objects[i]+", ";
+                    else output += objects[i]+" X"+amount[i]+", ";    
+                }
+                
+            }
+        }
+        output = output.substring(0, output.length()-2)+".";
+        return output;
+    }
     private static String nameList(Actor[] array){
         String output = "";
         boolean nothing = true;
