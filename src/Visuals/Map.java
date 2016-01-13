@@ -25,6 +25,7 @@ public class Map {
 
     public Map(String mapFileName) {
         this.tileType = new int[Height][Width];
+        this.tiles = new Tile[Height][Width];
         this.mapFileName = mapFileName;
         File temp = new File(mapFileName);//reads the map and stores it in tileType, also sets all borderType to 0
         try {
@@ -49,8 +50,8 @@ public class Map {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 if (tiles[i][j].point.equals(point)) {
-                    return point;
+                    return tiles[i][j].point;
 
                 }
             }
-        }
+        
