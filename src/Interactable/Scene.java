@@ -30,7 +30,7 @@ public class Scene {//temp class for testing
     
         
     public void addKey(Point location, Door door){
-        Key key = new Key(door.name, door);
+        DoorKey key = new DoorKey(door.name, door);
         this.invenAdd(key);
         key.location = location;
     } 
@@ -54,7 +54,7 @@ public class Scene {//temp class for testing
     }
     
     public void addKey(String name, Door door, Point location){
-        Key key = new Key(name, door, location);
+        DoorKey key = new DoorKey(name, door, location);
         this.invenAdd(key);
     } 
     
