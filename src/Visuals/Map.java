@@ -30,20 +30,24 @@ public class Map {
         File temp = new File(mapFileName);//reads the map and stores it in tileType, also sets all borderType to 0
         try {
             Scanner s = new Scanner(temp);
-            for (int j = 0; j <= Height - 1; j++) {
-                for (int i = 0; i <= Width - 1; i++) {
-                    tileType[i][j] = s.nextInt();
+            for (int j = 0; j <= 20 ; j++) {
+                for (int i = 0; i <= 20; i++) {
+                    tileType[i][j] = 0;//s.nextInt();
                     tiles[i][j] = new Tile(tileType[i][j], new Point(i, j));
                 }
             }
             s.close();
         } catch (FileNotFoundException e) {
-            System.out.println("error: Map File Not Found!" + " " + mapFileName);
+            System.out.println("error: Map File Not Found! " + mapFileName);
         }
     }
 
     public void changeTileType(Point point, Tile tile) {
         tileType[point.x][point.y] = tile.type;
+    }
+
+    public void changeTileType(Point point, int type) {
+        tileType[point.x][point.y] = type;
     }
 
     public Point findTile(Point point) {
@@ -54,4 +58,7 @@ public class Map {
 
                 }
             }
-        
+        }
+        return new Point(point);
+    }
+}

@@ -12,19 +12,19 @@ import java.util.ArrayList;
  * @author b.allen
  */
 public class DisplayHandleing {
-    public static Display display;
+    public Display display;
     ArrayList<Map> maps = new ArrayList<>();
 
-    static void leftPressed() {
+    void leftPressed() {
         if (display.rightOff != 0) display.rightOff--;     
     }
-    static void rightPressed(){
+    void rightPressed(){
         if (display.rightOff !=0) display.rightOff++;
     } 
-    static void downPressed() {
+    void downPressed() {
         if (display.downOff != 0) display.downOff++;
     }
-    static void upPressed(){
+    void upPressed(){
         if (display.downOff != 0) display.downOff--;
     } 
     
@@ -37,8 +37,8 @@ public class DisplayHandleing {
         maps.add(map);
     }
     public void setMapActive(Map map){
-        
         map.isActiveMap = true;
+        display.UpdateActive(map);
     }
     /**
      * 

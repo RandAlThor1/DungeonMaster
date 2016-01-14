@@ -11,6 +11,8 @@ import Interactable.Door;
 import Interactable.Food;
 import Interactable.Item;
 import Interactable.Scene;
+import Visuals.DisplayHandleing;
+import Visuals.Map;
 import combat.Armor;
 import combat.Weapon;
 import java.awt.Point;
@@ -36,10 +38,24 @@ public class DungeonMaster {
     public static boolean help = false;
     public static String intro = "";
     public static void main(String[] args) throws IOException {
-        makeBasics();
+        
+        
+        //my visual debug code
+        Map M = new Map("src\\Maps\\Map.txt");
+        DisplayHandleing DH = new DisplayHandleing();
+        DH.createMainDisplay();
+        DH.setMapActive(M);
+        DH.display.isRunning = true;
+        DH.display.runGame();
+        
+        
+        
+        
+        // end of my visual debug code
+        //makeBasics();
         //testingStuff();
-        new Story();
-        startGame();
+       // new Story();
+       // startGame();
     }
     static public void makeBasics(){
         //System.out.println("System: Enter your name");

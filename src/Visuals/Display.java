@@ -5,7 +5,7 @@
  */
 package Visuals;
 
-import java.awt.HeadlessException;
+import java.awt.Container;
 import javax.swing.JFrame;
 
 /**
@@ -19,19 +19,30 @@ public class Display extends JFrame {
     Map activeMap;
     int[][] activeTileTypes;
     Tile[][] activeTiles;
+    public boolean isRunning;
+    static Container tiles;
 
     public Display() {
         downOff = 0;
         rightOff = 0;
         x = this.getWidth() / 50;
         y = this.getHeight() / 50;
-        this.setSize(1256, 728);
+        
+        this.setSize(1000, 1000);
         this.setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLayout(null);
+        tiles = this.getContentPane();
+        this.setVisible(true);
+        
+    }
+    public void runGame(){
+        while(isRunning){
+            renderMap(activeMap);
+        }
     }
 
     public void renderMap(Map map) {
-
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 activeMap.tiles[i][j].setTile(activeTileTypes[i + rightOff][j + downOff]);

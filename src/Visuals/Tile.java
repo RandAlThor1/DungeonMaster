@@ -25,7 +25,7 @@ public class Tile extends JLabel{
      public void setTile(int type) {
         this.type = type;//stores new type
         if (type == 0 ){//grass
-            Icon tile = new ImageIcon("src\\Images\\GrassTile1.png");
+            Icon tile = new ImageIcon("src\\Images\\BlankTile.png");
             this.setIcon(tile);
         }
     }
