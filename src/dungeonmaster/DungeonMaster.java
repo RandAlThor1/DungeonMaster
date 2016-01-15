@@ -40,13 +40,16 @@ public class DungeonMaster {
     public static void main(String[] args) throws IOException {
         
         
-        //my visual debug code
+       //my visual debug code
         Map M = new Map("src\\Maps\\Map.txt");
         DisplayHandleing DH = new DisplayHandleing();
         DH.createMainDisplay();
         DH.setMapActive(M);
+        DH.display.UpdateActive(M);
         DH.display.isRunning = true;
-        DH.display.runGame();
+        DH.addTilesToContain();
+        DH.display.renderMap(M);
+        System.out.println("");
         
         
         

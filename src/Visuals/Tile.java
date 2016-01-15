@@ -22,12 +22,44 @@ public class Tile extends JLabel{
         this.type = type;
         this.point = point;
     }
+//     public void setTile(int type) {
+//        this.type = type;//stores new type
+//        if (type == 0 ){//grass
+//            Icon tile = new ImageIcon("src\\Images\\BlankTile.png");
+//            this.setIcon(tile);
+//        }
+//    }
      public void setTile(int type) {
-        this.type = type;//stores new type
+        type = type;//stores new type
         if (type == 0 ){//grass
-            Icon tile = new ImageIcon("src\\Images\\BlankTile.png");
+            Icon tile = new ImageIcon("src\\Images\\BlueBorder.png");
             this.setIcon(tile);
         }
+        if (type == 1){//dessert
+            Icon tile = new ImageIcon("src\\Images\\DessertTile1.png");
+            this.setIcon(tile);
+        }
+        if (type == 2){//water
+            Icon tile = new ImageIcon("src\\Images\\WaterTile1.png");
+            this.setIcon(tile);
+        }
+        if (type == 3){//border
+            Icon tile = new ImageIcon("src\\Images\\BorderTile1.png");
+            this.setIcon(tile);
+        }
+        if (type == 50){//farm improvement
+            Icon tile = new ImageIcon("src\\Images\\FarmTile1.png");
+            this.setIcon(tile);
+        }
+        if (type == 51){//mine improvement
+            Icon tile = new ImageIcon("src\\Images\\MineTile1.png");
+            this.setIcon(tile);
+        }
+        if (type == 100){//city
+            Icon tile = new ImageIcon("src\\Images\\CityTile1.png");
+            this.setIcon(tile);
+        }
+        this.setVisible(true);
     }
     
 }

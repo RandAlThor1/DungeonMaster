@@ -20,7 +20,7 @@ public class Display extends JFrame {
     int[][] activeTileTypes;
     Tile[][] activeTiles;
     public boolean isRunning;
-    static Container tiles;
+    Container tiles;
 
     public Display() {
         downOff = 0;
@@ -30,22 +30,23 @@ public class Display extends JFrame {
         
         this.setSize(1000, 1000);
         this.setResizable(false);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
+        this.setTitle("THIS IS A TITLE");
         tiles = this.getContentPane();
         this.setVisible(true);
-        
+        tiles.setLayout(null);
     }
     public void runGame(){
-        while(isRunning){
+       // while(true){
             renderMap(activeMap);
-        }
+        //}
     }
 
     public void renderMap(Map map) {
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
-                activeMap.tiles[i][j].setTile(activeTileTypes[i + rightOff][j + downOff]);
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 19; j++) {
+                activeTiles[i][j].setTile(activeTileTypes[i + rightOff][j + downOff]);
             }
         }
     }

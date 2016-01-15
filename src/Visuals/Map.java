@@ -24,14 +24,14 @@ public class Map {
     boolean isActiveMap;
 
     public Map(String mapFileName) {
-        this.tileType = new int[Height][Width];
-        this.tiles = new Tile[Height][Width];
+        this.tileType = new int[20][20];
+        this.tiles = new Tile[20][20];
         this.mapFileName = mapFileName;
         File temp = new File(mapFileName);//reads the map and stores it in tileType, also sets all borderType to 0
         try {
             Scanner s = new Scanner(temp);
-            for (int j = 0; j <= 20 ; j++) {
-                for (int i = 0; i <= 20; i++) {
+            for (int j = 0; j <= 19 ; j++) {
+                for (int i = 0; i <= 19; i++) {
                     tileType[i][j] = 0;//s.nextInt();
                     tiles[i][j] = new Tile(tileType[i][j], new Point(i, j));
                 }
@@ -50,15 +50,15 @@ public class Map {
         tileType[point.x][point.y] = type;
     }
 
-    public Point findTile(Point point) {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                if (tiles[i][j].point.equals(point)) {
-                    return tiles[i][j].point;
-
-                }
-            }
-        }
-        return new Point(point);
-    }
+//    public Point findTile(Point point) {
+//        for (int i = 0; i < tiles.length; i++) {
+//            for (int j = 0; j < tiles[i].length; j++) {
+//                if (tiles[i][j].point.equals(point)) {
+//                    return tiles[i][j].point;
+//
+//                }
+//            }
+//        }
+//        return new Point(point);
+//    }
 }
