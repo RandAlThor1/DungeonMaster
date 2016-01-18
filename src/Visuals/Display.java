@@ -17,8 +17,8 @@ public class Display extends JFrame {
     int downOff, rightOff;
     static int x, y;
     Map activeMap;
-    int[][] activeTileTypes;
-    Tile[][] activeTiles;
+    public int[][] activeTileTypes;
+    public Tile[][] activeTiles;
     public boolean isRunning;
     Container tiles;
 
@@ -33,8 +33,9 @@ public class Display extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setTitle("THIS IS A TITLE");
-        tiles = this.getContentPane();
         this.setVisible(true);
+        tiles = this.getContentPane();
+        
         tiles.setLayout(null);
     }
     public void runGame(){
@@ -55,6 +56,11 @@ public class Display extends JFrame {
         activeMap = map;
         activeTileTypes = map.tileType;
         activeTiles = map.tiles;
+        for (int i = 0; i < activeTiles.length; i++) {
+            for (int j = 0; j < activeTiles[i].length; j++) {
+                tiles.add(activeTiles[i][j]);
+            }
+        }
     }
 
 }

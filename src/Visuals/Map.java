@@ -18,7 +18,7 @@ public class Map {
 
     String mapFileName;
     int Height, Width;
-    int[][] tileType;
+    public int[][] tileType;
     Tile[][] tiles;
     boolean isBiggerThenScreen;
     boolean isActiveMap;
@@ -32,7 +32,7 @@ public class Map {
             Scanner s = new Scanner(temp);
             for (int j = 0; j <= 19 ; j++) {
                 for (int i = 0; i <= 19; i++) {
-                    tileType[i][j] = 0;//s.nextInt();
+                    tileType[i][j] = s.nextInt();
                     tiles[i][j] = new Tile(tileType[i][j], new Point(i, j));
                 }
             }

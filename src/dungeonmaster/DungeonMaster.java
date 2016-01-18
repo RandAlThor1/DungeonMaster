@@ -41,7 +41,7 @@ public class DungeonMaster {
         
         
        //my visual debug code
-        Map M = new Map("src\\Maps\\Map.txt");
+        Map M = new Map("src\\Maps\\ThroneRoom.txt");
         DisplayHandleing DH = new DisplayHandleing();
         DH.createMainDisplay();
         DH.setMapActive(M);
@@ -49,11 +49,19 @@ public class DungeonMaster {
         DH.display.isRunning = true;
         DH.addTilesToContain();
         DH.display.renderMap(M);
-        System.out.println("");
-        
-        
-        
-        
+        /*
+        for (int i = 0; i < DH.display.activeTileTypes.length; i++) {
+            for (int j = 0; j < DH.display.activeTileTypes[i].length; j++) {
+                System.out.println(DH.display.activeTileTypes[i][j]);
+            }
+        }
+        System.out.println("TILE TYPE TWO BLAHBHAH");
+        for (int i = 0; i < DH.display.activeTiles.length; i++) {
+            for (int j = 0; j < DH.display.activeTiles[i].length; j++) {
+                System.out.println(DH.display.activeTiles[i][j].type);
+            }
+        }
+        */
         // end of my visual debug code
         //makeBasics();
         //testingStuff();
