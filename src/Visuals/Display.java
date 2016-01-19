@@ -21,6 +21,7 @@ public class Display extends JFrame {
     public Tile[][] activeTiles;
     public boolean isRunning;
     Container tiles;
+    Container Actors;
 
     public Display() {
         downOff = 0;
@@ -29,24 +30,23 @@ public class Display extends JFrame {
         y = this.getHeight() / 50;
         
         this.setSize(1000, 1000);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setTitle("THIS IS A TITLE");
-        this.setVisible(true);
-        tiles = this.getContentPane();
         
-        tiles.setLayout(null);
+        tiles = this.getContentPane();
+        this.setVisible(true);
     }
     public void runGame(){
        // while(true){
-            renderMap(activeMap);
+            renderMap();
         //}
     }
 
-    public void renderMap(Map map) {
-        for (int i = 0; i < 19; i++) {
-            for (int j = 0; j < 19; j++) {
+    public void renderMap() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
                 activeTiles[i][j].setTile(activeTileTypes[i + rightOff][j + downOff]);
             }
         }
@@ -56,11 +56,11 @@ public class Display extends JFrame {
         activeMap = map;
         activeTileTypes = map.tileType;
         activeTiles = map.tiles;
-        for (int i = 0; i < activeTiles.length; i++) {
-            for (int j = 0; j < activeTiles[i].length; j++) {
-                tiles.add(activeTiles[i][j]);
-            }
-        }
+//        for (int i = 0; i < activeTiles.length; i++) {
+//            for (int j = 0; j < activeTiles[i].length; j++) {
+//                tiles.add(activeTiles[i][j]);
+//            }
+//        }
     }
 
 }

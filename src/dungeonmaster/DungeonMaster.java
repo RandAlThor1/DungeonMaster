@@ -37,33 +37,32 @@ public class DungeonMaster {
     public static Actor player;
     public static boolean help = false;
     public static String intro = "";
+    public static DisplayHandleing DH;
     public static void main(String[] args) throws IOException {
         
         
        //my visual debug code
-        Map M = new Map("src\\Maps\\ThroneRoom.txt");
-        DisplayHandleing DH = new DisplayHandleing();
+        Map M = new Map("ThroneRoom");
+        Map L = new Map("Test");
+        DH = new DisplayHandleing();
+        DH.addMap(L);
+        DH.addMap(M);
+        DH.getMap("ThroneRoom").isActiveMap = true;
         DH.createMainDisplay();
         DH.setMapActive(M);
-        DH.display.UpdateActive(M);
-        DH.display.isRunning = true;
+        DH.setMapActive(M);
+        DH.setIsRunning(true);
         DH.addTilesToContain();
-        DH.display.renderMap(M);
-        /*
-        for (int i = 0; i < DH.display.activeTileTypes.length; i++) {
-            for (int j = 0; j < DH.display.activeTileTypes[i].length; j++) {
-                System.out.println(DH.display.activeTileTypes[i][j]);
-            }
-        }
-        System.out.println("TILE TYPE TWO BLAHBHAH");
-        for (int i = 0; i < DH.display.activeTiles.length; i++) {
-            for (int j = 0; j < DH.display.activeTiles[i].length; j++) {
-                System.out.println(DH.display.activeTiles[i][j].type);
-            }
-        }
-        */
+        DH.render();
+        System.out.println("");
+        DH.setMapActive(L);
+        DH.render();
+        System.out.println("");
+        DH.setMapActive(M);
+        DH.render();
         // end of my visual debug code
         //makeBasics();
+        
         //testingStuff();
        // new Story();
        // startGame();

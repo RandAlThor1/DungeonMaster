@@ -21,6 +21,8 @@ public class Tile extends JLabel{
     public Tile(int type, Point point) {
         this.type = type;
         this.point = point;
+            this.setSize(50, 50);//sets bounds
+            this.setLocation((point.x * 50), (point.y * 50));
     }
 //     public void setTile(int type) {
 //        this.type = type;//stores new type
@@ -36,7 +38,7 @@ public class Tile extends JLabel{
             this.setIcon(tile);
         }
         if (type == 1){//dessert
-            Icon tile = new ImageIcon("src\\Images\\DessertTile1.png");
+            Icon tile = new ImageIcon("src\\Images\\BlueBorder.png");
             this.setIcon(tile);
         }
         if (type == 2){//water

@@ -13,28 +13,33 @@ import java.util.ArrayList;
  */
 public class DisplayHandleing {
 
-    public Display display;
-    ArrayList<Map> maps = new ArrayList<>();
+    public DisplayHandleing() {
+        maps = new ArrayList<>();
+    }
+    
 
-    void leftPressed() {
+    public static Display display;
+    public ArrayList<Map> maps;
+
+    static void leftPressed() {
         if (display.rightOff != 0) {
             display.rightOff--;
         }
     }
 
-    void rightPressed() {
+    static void rightPressed() {
         if (display.rightOff != 0) {
             display.rightOff++;
         }
     }
 
-    void downPressed() {
+    static void downPressed() {
         if (display.downOff != 0) {
             display.downOff++;
         }
     }
 
-    void upPressed() {
+    static void upPressed() {
         if (display.downOff != 0) {
             display.downOff--;
         }
@@ -52,17 +57,28 @@ public class DisplayHandleing {
     }
 
     public void setMapActive(Map map) {
+        display.tiles.removeAll();
+        getActiveMap().isActiveMap = false;
         map.isActiveMap = true;
         display.UpdateActive(map);
+        addTilesToContain();
     }
 
     public void addTilesToContain() {
-        for (int i = 0; i < 19; i++) {
-            for (int j = 0; j < 19; j++) {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
                 display.tiles.add(display.activeTiles[i][j]);
                 display.tiles.setVisible(true);
             }
         }
+    }
+    public Map getMap(String name){
+        for (int i = 0; i < maps.size(); i++) {
+            if (maps.get(i).mapName.equalsIgnoreCase(name)) {
+                return maps.get(i);
+            }
+        }
+        return null;
     }
 
     /**
@@ -78,6 +94,23 @@ public class DisplayHandleing {
             }
         }
         return index;
+    }
+    public void setIsRunning(boolean isRunning){
+        display.isRunning = isRunning;
+    }
+    public void render(){
+        display.renderMap();
+    }
+    public Map getActiveMap() throws NullPointerException{
+        for (int i = 0; i < maps.size(); i++) {
+            if (maps.get(i).isActiveMap) {
+                return maps.get(i);
+            }
+        }
+        return null;
+    }
+    public void UpdateActives(){
+        display.UpdateActive(getActiveMap());
     }
 }
 

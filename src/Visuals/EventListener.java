@@ -47,19 +47,20 @@ public class EventListener implements MouseListener, KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == UP) {
-           // DisplayHandleing.upPressed();
+            DisplayHandleing.upPressed();
         }
         else if (e.getKeyCode() == DOWN) {
-            //DisplayHandleing.downPressed();
+            DisplayHandleing.downPressed();
+            System.out.println("help");
         }
         else if (e.getKeyCode() == LEFT) {
-            //DisplayHandleing.leftPressed();
+            DisplayHandleing.leftPressed();
         }
         else if (e.getKeyCode() == RIGHT) {
-           // DisplayHandleing.rightPressed();
+            DisplayHandleing.rightPressed();
         }
         else if (e.getKeyCode() == ESCAPE) {
-            //DisplayHandleing.escapePressed();
+            DisplayHandleing.escapePressed();
         }
     }
     @Override

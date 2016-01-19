@@ -21,13 +21,15 @@ public class Map {
     public int[][] tileType;
     Tile[][] tiles;
     boolean isBiggerThenScreen;
-    boolean isActiveMap;
+    public boolean isActiveMap;
+    String mapName;
 
     public Map(String mapFileName) {
         this.tileType = new int[20][20];
         this.tiles = new Tile[20][20];
         this.mapFileName = mapFileName;
-        File temp = new File(mapFileName);//reads the map and stores it in tileType, also sets all borderType to 0
+        this.mapName = mapFileName.toLowerCase();
+        File temp = new File("src\\Maps\\" + mapFileName + ".txt");//reads the map and stores it in tileType, also sets all borderType to 0
         try {
             Scanner s = new Scanner(temp);
             for (int j = 0; j <= 19 ; j++) {
