@@ -16,10 +16,8 @@ public class Display extends JFrame {
 
     int downOff, rightOff;
     static int x, y;
-    Map activeMap;
-    public int[][] activeTileTypes;
-    public Tile[][] activeTiles;
-    public boolean isRunning;
+    Map map;
+    public boolean isRunning; //why is this needed? - Davin
     Container tiles;
     Container Actors;
 
@@ -33,29 +31,31 @@ public class Display extends JFrame {
         this.setResizable(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
-        this.setTitle("THIS IS A TITLE");
         
         tiles = this.getContentPane();
         this.setVisible(true);
     }
     public void runGame(){
-       // while(true){
+       // while(true){ //this should be timer controled, every possible tick is too much -Davin
             renderMap();
         //}
     }
 
     public void renderMap() {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                activeTiles[i][j].setTile(activeTileTypes[i + rightOff][j + downOff]);
+        if (map == null) return;
+        for (int i = 0; i < map.width; i++) {
+            for (int j = 0; j < map.height; j++) {
+                map.tiles[i][j].setTile(map.tileType[i + rightOff][j + downOff]);
             }
         }
+        this.repaint();
     }
 
     public void UpdateActive(Map map) {
-        activeMap = map;
-        activeTileTypes = map.tileType;
-        activeTiles = map.tiles;
+        this.map = map;
+        rightOff = map.defRightOff;
+        downOff = map.defDownOff;
+        renderMap();
 //        for (int i = 0; i < activeTiles.length; i++) {
 //            for (int j = 0; j < activeTiles[i].length; j++) {
 //                tiles.add(activeTiles[i][j]);

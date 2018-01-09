@@ -21,6 +21,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import npcs.NPC;
+import npcs.NpcOperations;
 import npcs.PersonalityType;
 
 /**
@@ -40,41 +41,25 @@ public class DungeonMaster {
     public static DisplayHandleing DH;
     public static void main(String[] args) throws IOException {
         
+        makeBasics();
         
-       //my visual debug code
-        Map M = new Map("ThroneRoom");
-        Map L = new Map("Test");
-        DH = new DisplayHandleing();
-        DH.addMap(L);
-        DH.addMap(M);
-        DH.getMap("ThroneRoom").isActiveMap = true;
-        DH.createMainDisplay();
-        DH.setMapActive(M);
-        DH.setMapActive(M);
-        DH.setIsRunning(true);
-        DH.addTilesToContain();
-        DH.render();
-        System.out.println("");
-        DH.setMapActive(L);
-        DH.render();
-        System.out.println("");
-        DH.setMapActive(M);
-        DH.render();
-        // end of my visual debug code
-        //makeBasics();
-        
-        //testingStuff();
-       // new Story();
-       // startGame();
+        storyTest();
+        visualTest();
+        //new Story();
+        startGame();
     }
     static public void makeBasics(){
-        //System.out.println("System: Enter your name");
-        //Scanner s = new Scanner(System.in);
-        //String playerName = s.nextLine();
+        System.out.println("System: Enter your name");
+        Scanner s = new Scanner(System.in);
+        String playerName = s.nextLine();
         outside = new Scene("Outside");
-        player = new Actor("player", new Point(0, 0), outside);
+        player = new Actor(playerName, new Point(0, 0), outside);
         player.stats = new Stats(20, 20, 20, 20, 20, 20);
         player.gold = 100;
+        
+        DH = new DisplayHandleing();
+        DH.setIsRunning(true);
+        DH.render();
     }
     static public void startGame(){
         try {
@@ -124,7 +109,7 @@ public class DungeonMaster {
         
     }
     
-    static public void testingStuff(){
+    static public void storyTest(){
         Scene theShack = new Scene("The Shack"); outside.addDoor(theShack, new Point(0, 0),new Point(12, 7), true);
         Scene maxsBar = new Scene("Max's Bar"); 
         Door maxsBarDoor = new Door(new Point(0,0), new Point(3, 0), maxsBar, "Max's Bar"); maxsBarDoor.locked = true;
@@ -149,16 +134,14 @@ public class DungeonMaster {
         player.invenAdd(new Weapon("Sword", -1, "AC", "TH", 20, 2, -1));
         for (int i = 0; i < 20; i++) johnsHouse.invenAdd(new Food("John's Cookie", -20, -20, -20, 20, new Point(5, 5)));  
         
-        /**
-         * Change these to use NpcOperations addNPC();
-         */
-        NPC rick = new NPC(new PersonalityType(0), "Rick", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
-        NPC dave = new NPC(new PersonalityType(0), "Dave", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
-        NPC bob = new NPC(new PersonalityType(0), "Bob", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
-        NPC chaeroele = new NPC(new PersonalityType(0), "Girl", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
-        NPC betty = new NPC(new PersonalityType(0), "Betty", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
-        NPC johnsBrother = new NPC(new PersonalityType(0), "John`s Brother", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
-        NPC johnsSister = new NPC(new PersonalityType(0), "John`s Sister", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC rick = NpcOperations.newNPC(new PersonalityType(0), "Rick", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC dave = NpcOperations.newNPC(new PersonalityType(0), "Dave", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC bob = NpcOperations.newNPC(new PersonalityType(0), "Bob", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC chaeroele = NpcOperations.newNPC(new PersonalityType(0), "Girl", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC betty = NpcOperations.newNPC(new PersonalityType(0), "Betty", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC johnsBrother = NpcOperations.newNPC(new PersonalityType(0), "John`s Brother", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        NPC johnsSister = NpcOperations.newNPC(new PersonalityType(0), "John`s Sister", new Point(6, 5), johnsHouse, new Stats(10, 10, 10, 10, 10, 10));
+        
         
         player.invenAdd(new Item("Rock"));
         outside.invenAdd(new Armor("Hat", 10, 60, "helm", -1));
@@ -168,4 +151,10 @@ public class DungeonMaster {
         outside.invenAdd(new Armor("Arms", 10, 60, "arms", -1));
         outside.invenAdd(new Armor("Hands", 10, 60, "hands", -1));
     } 
+
+    private static void visualTest() {
+        Map M = new Map("ThroneRoom");
+        DH.addMap(M);
+        DH.setMapActive(M);
+    }
 }

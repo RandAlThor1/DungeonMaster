@@ -17,28 +17,22 @@ import javax.swing.JLabel;
 public class Tile extends JLabel{
     public int type;
     public Point point;
+    public static int tileSize = 50;
 
     public Tile(int type, Point point) {
         this.type = type;
         this.point = point;
-            this.setSize(50, 50);//sets bounds
-            this.setLocation((point.x * 50), (point.y * 50));
+            this.setSize(tileSize, tileSize);//sets bounds
+            this.setLocation((point.x * tileSize), (point.y * tileSize));
     }
-//     public void setTile(int type) {
-//        this.type = type;//stores new type
-//        if (type == 0 ){//grass
-//            Icon tile = new ImageIcon("src\\Images\\BlankTile.png");
-//            this.setIcon(tile);
-//        }
-//    }
      public void setTile(int type) {
         type = type;//stores new type
         if (type == 0 ){//grass
-            Icon tile = new ImageIcon("src\\Images\\BlueBorder.png");
+            Icon tile = new ImageIcon("src\\Images\\GrassTile1.png");
             this.setIcon(tile);
         }
         if (type == 1){//dessert
-            Icon tile = new ImageIcon("src\\Images\\BlueBorder.png");
+            Icon tile = new ImageIcon("src\\Images\\GrassTile1.png");
             this.setIcon(tile);
         }
         if (type == 2){//water

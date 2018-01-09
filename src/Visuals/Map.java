@@ -16,24 +16,23 @@ import java.util.Scanner;
  */
 public class Map {
 
-    String mapFileName;
-    int Height, Width;
+    String mapFileName, mapName;
+    int height = 20, width = 20;
+    int defRightOff = 0, defDownOff = 0; 
     public int[][] tileType;
     Tile[][] tiles;
-    boolean isBiggerThenScreen;
     public boolean isActiveMap;
-    String mapName;
 
     public Map(String mapFileName) {
-        this.tileType = new int[20][20];
-        this.tiles = new Tile[20][20];
+        this.tileType = new int[width][height];
+        this.tiles = new Tile[width][height];
         this.mapFileName = mapFileName;
         this.mapName = mapFileName.toLowerCase();
         File temp = new File("src\\Maps\\" + mapFileName + ".txt");//reads the map and stores it in tileType, also sets all borderType to 0
         try {
             Scanner s = new Scanner(temp);
-            for (int j = 0; j <= 19 ; j++) {
-                for (int i = 0; i <= 19; i++) {
+            for (int j = 0; j < height ; j++) {
+                for (int i = 0; i < width; i++) {
                     tileType[i][j] = s.nextInt();
                     tiles[i][j] = new Tile(tileType[i][j], new Point(i, j));
                 }

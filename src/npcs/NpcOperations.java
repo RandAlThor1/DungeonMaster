@@ -6,6 +6,7 @@
 package npcs;
 
 import Interactable.Scene;
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,15 @@ import java.util.ArrayList;
  */
 public class NpcOperations {
     public static ArrayList<NPC> allNPCs = new ArrayList<>();
+    
     public static void addNPC(NPC npc){
         allNPCs.add(npc);
+    }
+    
+    public static NPC newNPC(PersonalityType personType, String name, Point location, Scene scene, Stats stats){
+        NPC npc = new NPC(personType, name, location, scene, stats);
+        addNPC(npc);
+        return npc;
     }
     /**
      * 

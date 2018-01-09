@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Visuals;
 
 import java.util.ArrayList;
@@ -13,13 +8,14 @@ import java.util.ArrayList;
  */
 public class DisplayHandleing {
 
-    public DisplayHandleing() {
-        maps = new ArrayList<>();
-    }
-    
-
     public static Display display;
     public ArrayList<Map> maps;
+    
+    
+    public DisplayHandleing() {
+        maps = new ArrayList<>();
+        createMainDisplay();
+    }
 
     static void leftPressed() {
         if (display.rightOff != 0) {
@@ -58,16 +54,17 @@ public class DisplayHandleing {
 
     public void setMapActive(Map map) {
         display.tiles.removeAll();
-        getActiveMap().isActiveMap = false;
+        if(getActiveMap()!=null)
+            getActiveMap().isActiveMap = false;
         map.isActiveMap = true;
         display.UpdateActive(map);
         addTilesToContain();
     }
 
     public void addTilesToContain() {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                display.tiles.add(display.activeTiles[i][j]);
+        for (int i = 0; i < display.map.width; i++) {
+            for (int j = 0; j < display.map.height; j++) {
+                display.tiles.add(display.map.tiles[i][j]);
                 display.tiles.setVisible(true);
             }
         }
@@ -98,9 +95,11 @@ public class DisplayHandleing {
     public void setIsRunning(boolean isRunning){
         display.isRunning = isRunning;
     }
+    
     public void render(){
         display.renderMap();
     }
+    
     public Map getActiveMap() throws NullPointerException{
         for (int i = 0; i < maps.size(); i++) {
             if (maps.get(i).isActiveMap) {
